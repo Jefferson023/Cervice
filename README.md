@@ -1,2 +1,2 @@
-# gerenciador-condominio
-Gerenciador de Serviços para Condomínio
+# Cervice
+Gerenciador de Serviços Autônomos para Condomínio
