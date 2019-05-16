@@ -35,6 +35,11 @@ body {
 .cadastro-mensagem {
     padding: 20px;
 }
+a {
+    position: relative;
+    left: 50%;
+    margin-top: 6px;
+}
 .row {
     position: relative;
     padding-top: 10px;
