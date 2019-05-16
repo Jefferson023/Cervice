@@ -14,6 +14,10 @@ app.get('/inscricao', function (req, res){
     res.render('inscricao.ejs');
 });
 
+app.get('/login', function (req, res){
+    res.render('login.ejs');
+});
+
 //configura a porta do servidor
 app.listen(process.env.PORT || 3000, function()
 {

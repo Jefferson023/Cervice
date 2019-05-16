@@ -1,0 +1,15 @@
+body {
+    height: 100%;
+}
+.form-container {
+    position: relative;
+    top: 230px;
+    width: 50%;
+    left: 25%;
+}
+.card {
+    height: 300px;
+}
+.text-muted {
+    margin-bottom
+}
