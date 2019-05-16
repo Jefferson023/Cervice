@@ -19,6 +19,10 @@ body {
 .fa-key {
     font-size: 22px;
 }
-.form-control, input:focus{
+*:focus {
     outline: none;
+}
+.btn-primary {
+    position: relative;
+    left: 14px;
 }
