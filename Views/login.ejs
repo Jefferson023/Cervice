@@ -6,6 +6,7 @@
         <meta name= "viewport" content= "width=device-width" inicial-scale = "1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link rel = "stylesheet" type= "text/css" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
         <link rel = "stylesheet" type= "text/css" href = "Css/login.css">
     </head>
     <body>
@@ -20,10 +21,24 @@
                         <p class = "text-muted">Acesse o sistema</p>
                         <form method = "POST">
                             <div class = "form-group">
-                                <input type = "text" name = "usuario" class = "form-control" placeholder="Nome de Usuario">
+                                <div class = "input-group">
+                                    <div class="input-group-prepend">
+                                        <i class="input-group-text far fa-envelope"></i>
+                                    </div>    
+                                    <input type = "text" name = "email" class = "form-control" placeholder="E-mail">
+                                </div>
                             </div>
                             <div class = "form-group">
-                                <input type = "text" name = "senha" class = "form-control" placeholder="Sua Senha">
+                                <div class = "input-group">
+                                    <div class="input-group-prepend">
+                                        <i class="input-group-text fas fa-key"></i>
+                                    </div>
+                                    <input type = "text" name = "senha" class = "form-control" placeholder="Senha">
+                                </div>    
+                            </div>
+                            <!-- Row para o botão de submit e esqueci senha -->
+                            <div>
+
                             </div>
                         </form>
                     </div>

@@ -13,3 +13,12 @@ body {
 .text-muted {
     margin-bottom
 }
+.fa-envelope {
+    font-size: 22px;
+}
+.fa-key {
+    font-size: 22px;
+}
+.form-control, input:focus{
+    outline: none;
+}
