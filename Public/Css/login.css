@@ -5,7 +5,7 @@ body {
 }
 .form-container {
     position: relative;
-    top: 230px;
+    top: 210px;
     width: 63%;
     left: 17%;
 }
@@ -15,11 +15,11 @@ body {
 .text-muted {
     margin-bottom
 }
-.fa-user {
+.fa-envelope {
     font-size: 22px;
 }
-.fa-key {
-    font-size: 19px;
+.fa-lock {
+    font-size: 24px;
 }
 *:focus {
     outline: none;
@@ -37,7 +37,7 @@ body {
 }
 a {
     position: relative;
-    left: 50%;
+    left: 45%;
     margin-top: 6px;
 }
 .row {

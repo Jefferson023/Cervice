@@ -10,13 +10,8 @@ app.use(express.static('Public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get('/inscricao', function (req, res){
-    res.render('inscricao.ejs');
-});
-
-app.get('/login', function (req, res){
-    res.render('login.ejs');
-});
+//configurações de rotas
+app.use('/', require('./Routes/notAuth.js'));
 
 //configura a porta do servidor
 app.listen(process.env.PORT || 3000, function()
