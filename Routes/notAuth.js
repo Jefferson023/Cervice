@@ -8,7 +8,9 @@ router.get('/login', function (req, res) {
 
 // GET cadastro.
 router.get('/cadastro', function (req, res) {
-    res.render('cadastro.ejs');
+    //pega o código do condominio e substituti
+    codigo = req.query['codigo']
+    res.render('cadastro.ejs', {codigo_condominio: codigo});
 })
 
 module.exports = router;

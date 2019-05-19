@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Login</title>
+        <title>Cadastro</title>
         <meta charset = "utf-8">
         <meta name= "viewport" content= "width=device-width" inicial-scale = "1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,8 +13,50 @@
         <div class = "form-container">
             <div class = "card">
                 <div class = "card-body">
+                    <h2 class="card-title">Cadastro</h2>
+                    <p class = "text-muted">Crie uma conta gratuitamente</p>
                     <form method = "POST">
-                        
+                        <div class = "form-group">
+                            <div class = "input-group">
+                                <div class = "input-group-prepend input-group-text">
+                                    <i class="fas fa-user-alt"></i>
+                                </div>
+                                <input type = "text" name = "nome" class = "form-control" placeholder="Nome">
+                            </div>
+                        </div>
+                        <div class = "form-group">
+                            <div class = "input-group">
+                                <div class = "input-group-prepend input-group-text">
+                                    <i class="far fa-envelope"></i>
+                                </div>
+                                <input type = "text" name = "email" class = "form-control" placeholder="E-mail">
+                            </div>
+                        </div>
+                        <div class = "form-group">
+                            <div class = "input-group">
+                                <div class="input-group-prepend input-group-text ">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <input type = "password" name = "senha" class = "form-control" placeholder="Senha">
+                            </div>
+                        </div>
+                        <div class = "form-group">
+                            <div class = "input-group">
+                                <div class = "input-group-prepend input-group-text">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <input type = "password" name = "confirm_senha" class = "form-control" placeholder="Confirme a senha">
+                            </div>
+                        </div>
+                        <div class = "form-group">
+                            <div class = "input-group">
+                                <div class = "input-group-prepend input-group-text">
+                                    <i class="far fa-building"></i>
+                                </div>
+                                <input type = "text" name = "codigo" class = "form-control" placeholder="Código do condomínio" value = <%= codigo_condominio %>>
+                            </div>
+                        </div>
+                        <input type = "submit" class = "btn btn-info" value = "Cadastrar">   
                     </form>
                 </div>
                 <div class = "card-footer bg-info text-center">
