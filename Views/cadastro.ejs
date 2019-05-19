@@ -15,13 +15,13 @@
                 <div class = "card-body">
                     <h2 class="card-title">Cadastro</h2>
                     <p class = "text-muted">Crie uma conta gratuitamente</p>
-                    <form method = "POST">
+                    <form method = "POST" onsubmit="return validar_form()">
                         <div class = "form-group">
                             <div class = "input-group">
                                 <div class = "input-group-prepend input-group-text">
                                     <i class="fas fa-user-alt"></i>
                                 </div>
-                                <input type = "text" name = "nome" class = "form-control" placeholder="Nome">
+                                <input type = "text" id = "nome" name = "nome" class = "form-control" placeholder="Nome" onfocusout = "validar_nome()" data-toggle="popover" data-placement="right">
                             </div>
                         </div>
                         <div class = "form-group">
@@ -29,7 +29,7 @@
                                 <div class = "input-group-prepend input-group-text">
                                     <i class="far fa-envelope"></i>
                                 </div>
-                                <input type = "text" name = "email" class = "form-control" placeholder="E-mail">
+                                <input type = "text" id = "email" name = "email" class = "form-control" placeholder="E-mail" onfocusout = "validar_email()" data-toggle="popover" data-placement="right">
                             </div>
                         </div>
                         <div class = "form-group">
@@ -37,7 +37,7 @@
                                 <div class="input-group-prepend input-group-text ">
                                     <i class="fas fa-lock"></i>
                                 </div>
-                                <input type = "password" name = "senha" class = "form-control" placeholder="Senha">
+                                <input type = "password" id = "senha" name = "senha" class = "form-control" placeholder="Senha" onfocusout = "validar_senha()" data-toggle="popover" data-placement="right">
                             </div>
                         </div>
                         <div class = "form-group">
@@ -45,7 +45,7 @@
                                 <div class = "input-group-prepend input-group-text">
                                     <i class="fas fa-lock"></i>
                                 </div>
-                                <input type = "password" name = "confirm_senha" class = "form-control" placeholder="Confirme a senha">
+                                <input type = "password" id = "confirm_senha" name = "confirm_senha" class = "form-control" placeholder="Confirme a senha" onfocusout = "validar_confirmSenha()" data-toggle="popover" data-placement="right">
                             </div>
                         </div>
                         <div class = "form-group">
@@ -53,7 +53,7 @@
                                 <div class = "input-group-prepend input-group-text">
                                     <i class="far fa-building"></i>
                                 </div>
-                                <input type = "text" name = "codigo" class = "form-control" placeholder="Código do condomínio" value = <%= codigo_condominio %>>
+                                <input type = "text" id = "codigo" name = "codigo" class = "form-control" placeholder="Código do condomínio" onfocusout = "validar_condominio()" data-toggle="popover" data-placement="right" value = <%= codigo_condominio %>>
                             </div>
                         </div>
                         <input type = "submit" class = "btn btn-info" value = "Cadastrar">   
@@ -64,5 +64,9 @@
                 </div>
             </div>
         </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src = "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src = "/Javascript/cadastro.js"></script>
     </body>
 </html>    
