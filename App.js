@@ -1,10 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const helmet = require('helmet');
 const app = express();
 
+//configurações principais do express
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/Views');
 app.use(express.static('Public'));
+app.use(helmet());
 
 //configura bodyparser
 app.use(bodyParser.urlencoded({ extended: false }));

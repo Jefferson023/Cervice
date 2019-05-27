@@ -1,4 +1,5 @@
 const express = require('express');
+const usuarioController = require('../Controller/usuarioController.js');
 const router = express.Router();
 
 // GET login.
@@ -6,11 +7,14 @@ router.get('/login', function (req, res) {
     res.render('login.ejs');
 })
 
+// POST login
+router.post('/login', function(req, res){
+    usuarioController.POST_login(req, res);
+})
+
 // GET cadastro.
 router.get('/cadastro', function (req, res) {
-    //pega o código do condominio e substituti
-    codigo = req.query['codigo']
-    res.render('cadastro.ejs', {codigo_condominio: codigo});
+    res.render('cadastro.ejs');
 })
 
 module.exports = router;
