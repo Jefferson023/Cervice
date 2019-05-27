@@ -9,7 +9,6 @@ class usuario {
     set id_usuario(id){
         this.id_usuario = id;
     }
-    set email
 };
 
 module.exports = usuario;
