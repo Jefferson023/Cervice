@@ -2,56 +2,66 @@
 <html>
     <head>
         <title>Login</title>
-        <meta charset = "utf-8">
-        <meta name= "viewport" content= "width=device-width" inicial-scale = "1.0">
+        <meta charset="utf-8">
+        <meta name= "viewport" content= "width=device-width" inicial-scale="1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <link rel = "stylesheet" type= "text/css" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type= "text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-        <link rel = "stylesheet" type= "text/css" href = "Css/login.css">
+        <link rel="stylesheet" type= "text/css" href="Css/login.css">
     </head>
     <body>
         <!-- Caixa de Login -->
-        <div class = "form-container">
+        <div class="form-container">
+            <% if(locals.mensagem) { %>
+                <div class="alert alert-success">
+                    <%= mensagem %>
+                </div>
+            <% } %>
+            <% if(locals.erro) { %>
+                <div class="alert alert-danger">
+                    <%= erro %>
+                </div>
+            <% } %>
             <!-- grupo de cards -->
-            <div class = "card-group">
+            <div class="card-group">
                 <!-- card do formulario -->
-                <div class = "card p-4">
-                    <div class = "card-body">
+                <div class="card p-4">
+                    <div class="card-body">
                         <h2 class="card-title">Login</h2>
-                        <p class = "text-muted">Acesse o sistema</p>
-                        <form method = "POST">
-                            <div class = "form-group">
-                                <div class = "input-group">
+                        <p class="text-muted">Acesse o sistema</p>
+                        <form method="POST">
+                            <div class="form-group">
+                                <div class="input-group">
                                     <div class="input-group-prepend">
                                         <i class="input-group-text far fa-envelope"></i>
                                     </div>    
-                                    <input type = "text" name = "email" class = "form-control" placeholder="E-mail">
+                                    <input type="text" name="email" class="form-control" placeholder="E-mail">
                                 </div>
                             </div>
-                            <div class = "form-group">
-                                <div class = "input-group">
+                            <div class="form-group">
+                                <div class="input-group">
                                     <div class="input-group-prepend">
                                         <i class="input-group-text fas fa-lock"></i>
                                     </div>
-                                    <input type = "password" name = "senha" class = "form-control" placeholder="Senha">
+                                    <input type="password" name="senha" class="form-control" placeholder="Senha">
                                 </div>    
                             </div>
                             <!-- Row para o botão de submit e esqueci senha -->
-                            <div class = "row">
-                                <input type = "submit" class = "btn btn-info" value = "Entrar">
-                                <a class = "text-info" href = "">Esqueci minha senha</a>
+                            <div class="row">
+                                <input type="submit" class="btn btn-info" value="Entrar">
+                                <a class="text-info" href="">Esqueci minha senha</a>
                             </div>
                         </form>
                     </div>
                 </div>
                 <!-- card de mensagem -->
-                <div class = "card text-white bg-primary bg-info py-5">
-                    <div class = "card-body text-center">
+                <div class="card text-white bg-primary bg-info py-5">
+                    <div class="card-body text-center">
                         <h3 class="card-title cadastro">Cadastre-se</h3>
-                        <p class = "cadastro-mensagem">
+                        <p class="cadastro-mensagem">
                             Ainda não é cadastrado? Crie agora sua conta gratuitamente e conheça os serviços disponíveis no seu condomínio.
                         </p>
-                        <button class = "btn text-white bg-dark" onclick="location.href = 'cadastro';">Quero me cadastrar!</button>
+                        <button class="btn text-white bg-dark" onclick="location.href='cadastro';">Quero me cadastrar!</button>
                     </div>
                 </div>
             </div>
