@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //configurações de rotas
-app.use('/', require('./Routes/notAuth.js'));
+app.use('/', require('./Routes/nao_autenticado.js'));
 
 //configura a porta do servidor
 app.listen(process.env.PORT || 3000, function()
