@@ -1,14 +1,11 @@
 class usuario {
-    constructor(){
-        this.id_usuario = "";
-        this.email = "";
-        this.nome = "";
-        this.senha = "";
-        this.banido = false;
+    constructor(usuario){
+        this.id_usuario = usuario.id_usuario;
+        this.email =  usuario.email;
+        this.nome =  usuario.nome;
+        this.senha = usuario.senha;
+        this.banido = usuario.banido;
     };
-    set id_usuario(id){
-        this.id_usuario = id;
-    }
 };
 
 module.exports = usuario;
