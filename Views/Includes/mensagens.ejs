@@ -1,5 +1,7 @@
-<% if(locals.message.error){ %>
-    <div class="alert alert-danger" role="alert">
-        <%=message.error%>
+<% if(error){ %>
+    <div class = "container">
+        <div class="alert alert-danger" role="alert">
+            <%=error.message%>
+        </div>
     </div>
 <% } %>
