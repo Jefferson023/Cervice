@@ -4,8 +4,9 @@ const router = express.Router();
 const passport = require('passport');
 
 function isAuthenticated(req, res, next) {
-    if (req.user.authenticated)
+    if (req.user){
         return next();
+    }  
     res.redirect('/login');
 }
 
@@ -15,8 +16,11 @@ router.get('/login', function (req, res) {
 });
 
 // POST login
-router.post('/login', passport.authenticate('local', { successRedirect: '/', 
-    failureRedirect: '/login', failureFlash: true }));
+router.post('/login', function(req, res, next){
+    passport.authenticate('local', { successRedirect: '/',
+                                   failureRedirect: '/login',
+                                   failureFlash: true })(req, res, next);
+});
 
 // GET cadastro.
 router.get('/cadastro', function (req, res) {
@@ -24,6 +28,7 @@ router.get('/cadastro', function (req, res) {
 });
 
 router.get('/', isAuthenticated, function (req, res){
+
     res.send("VOCÊ TÁ LOGADO");
 });
 
