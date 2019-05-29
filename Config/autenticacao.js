@@ -1,23 +1,23 @@
 const localStrategy = require("passport-local").Strategy;
 const crypt = require('./crypt');
-const usuarioController = require('../Controller/usuarioController.js');
+const pool = require('../Config/db.js');
 
 module.exports = function(passport) {
     //procura um usuario
     passport.use(new localStrategy({usernameField: 'email', passwordField: 'senha'}, (email, senha, done) => {
-        var usuario = usuarioController.findByEmail(email);
-        console.log(usuario)
-        if (!usuario){
-            console.log("email, falhou");
-            return done(null, false, {message: "Não existe nenhuma conta associada ao e-mail digitado"});
-        }
-        if (!comparar_senha(senha, usuario.senha)){
-            console.log("senha, falhou");
-            return done(null, false, {message: 'Senha incorreta'});
-        }
-        console.log("nada de errrado");
-        return done(null, usuario)
-        
+        pool.query('SELECT * FROM tb_usuario WHERE email=$1', [email], (err, res_bd) => {
+            if (res_bd.rows.length == 0){
+                console.log("email, falhou");
+                return done(null, false, {message: "Não existe nenhuma conta associada ao e-mail digitado"});
+            }
+            var usuario = res_bd.rows[0];
+            if (!crypt.comparar_senha(senha, usuario.senha)){
+                console.log("senha, falhou");
+                return done(null, false, {message: 'Senha incorreta'});
+            }
+            console.log("nada de errado");
+            return done(null, usuario)
+        });
     }));
 
     //renomear mais tarde
@@ -27,6 +27,8 @@ module.exports = function(passport) {
 
     //procura o usuario pelo id e retorna ele
     passport.deserializeUser(function(id, done) {
-        return done(null, findByID(id))
+        pool.query('SELECT * FROM tb_usuario WHERE id_usuario=$1', [id], (err, res_bd) => {
+            return done(null, res_bd.rows[0]);
+        });
     })
 }
