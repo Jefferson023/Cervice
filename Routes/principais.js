@@ -12,6 +12,9 @@ function isAuthenticated(req, res, next) {
 
 // GET login.
 router.get('/login', function (req, res) {
+    if (req.user){
+        res.redirect("/");
+    }
     res.render('login.ejs');
 });
 
@@ -24,17 +27,19 @@ router.post('/login', function(req, res, next){
 
 // GET cadastro.
 router.get('/cadastro', function (req, res) {
+    if(req.user){
+        res.redirect("/");
+    }
     res.render('cadastro.ejs');
 });
 
 router.get('/', isAuthenticated, function (req, res){
-
     res.send("VOCÊ TÁ LOGADO");
 });
 
 router.get('/logout', function(req, res){
     req.logout();
-    res.redirect('/');
+    res.redirect('/login');
 });
 
 module.exports = router;
