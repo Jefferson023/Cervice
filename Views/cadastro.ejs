@@ -5,7 +5,7 @@
         <meta charset = "utf-8">
         <meta name= "viewport" content= "width=device-width" inicial-scale = "1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <link rel = "stylesheet" type= "text/css" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel = "stylesheet" type= "text/css" href = "Css/bootstrap.min.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
         <link rel = "stylesheet" type= "text/css" href = "Css/cadastro.css">
     </head>
@@ -13,29 +13,29 @@
         <div class = "form-container">
             <div class = "card">
                 <div class = "card-body">
-                    <h2 class="card-title">Cadastro</h2>
+                    <h2 class="card-title"></h2>
                     <p class = "text-muted">Crie uma conta gratuitamente</p>
                     <form method = "POST" onsubmit="return validar_form()">
                         <div class = "form-group">
                             <div class = "input-group">
                                 <div class = "input-group-prepend input-group-text">
-                                    <i class="fas fa-user-alt"></i>
+                                    <i class="fa fa-user-alt"></i>
                                 </div>
-                                <input type = "text" id = "nome" name = "nome" class = "form-control" placeholder="Nome" onfocusout = "validar_nome()" data-toggle="popover" data-placement="right">
+                                <input type = "text" id = "nome" name = "nome" class = "form-control" placeholder="Nome" onfocusout = "validar_nome()" data-toggle="popover" data-placement="right"/>    
                             </div>
                         </div>
                         <div class = "form-group">
                             <div class = "input-group">
                                 <div class = "input-group-prepend input-group-text">
-                                    <i class="far fa-envelope"></i>
+                                    <i class="fa fa-envelope"></i>
                                 </div>
-                                <input type = "text" id = "email" name = "email" class = "form-control" placeholder="E-mail" onfocusout = "validar_email()" data-toggle="popover" data-placement="right">
+                                <input type = "text" id = "email" name = "email" class = "form-control" placeholder="E-mail" onfocusout = "validar_email()" data-toggle="popover" data-placement="right"/>
                             </div>
                         </div>
                         <div class = "form-group">
                             <div class = "input-group">
                                 <div class="input-group-prepend input-group-text ">
-                                    <i class="fas fa-lock"></i>
+                                    <i class="fa fa-lock"></i>
                                 </div>
                                 <input type = "password" id = "senha" name = "senha" class = "form-control" placeholder="Senha" onfocusout = "validar_senha()" data-toggle="popover" data-placement="right">
                             </div>
@@ -43,7 +43,7 @@
                         <div class = "form-group">
                             <div class = "input-group">
                                 <div class = "input-group-prepend input-group-text">
-                                    <i class="fas fa-lock"></i>
+                                    <i class="fa fa-lock"></i>
                                 </div>
                                 <input type = "password" id = "confirm_senha" name = "confirm_senha" class = "form-control" placeholder="Confirme a senha" onfocusout = "validar_confirmSenha()" data-toggle="popover" data-placement="right">
                             </div>
@@ -51,9 +51,22 @@
                         <div class = "form-group">
                             <div class = "input-group">
                                 <div class = "input-group-prepend input-group-text">
-                                    <i class="far fa-building"></i>
+                                    <i class="fa fa-building"></i>
                                 </div>
-                                <input type = "text" id = "codigo" name = "codigo" class = "form-control" placeholder="Código do condomínio" onfocusout = "validar_condominio()" data-toggle="popover" data-placement="right">
+                                <input type = "text" id = "codigo" name = "codigo" class = "form-control" placeholder="Código do condomínio" onfocusout = "validar_condominio()" data-toggle="popover" data-placement="right"/>
+                            </div>
+                        </div>
+                        <div class = "form-group">
+                            <div class = "input-group">
+                                <div class = "input-group-prepend input-group-text">
+                                    <i class="fa fa-puzzle-piece"></i>
+                                </div>
+                                <input type = "text" id = "bloco" name = "bloco" class = "form-control" placeholder="Bloco" onfocusout = "validar_condominio()" data-toggle="popover" data-placement="right" style="margin-right: 10px"/>
+                                <div></div>
+                                <div class = "input-group-prepend input-group-text">
+                                    <i class="fa fa-hashtag"></i>
+                                </div>
+                                <input type = "text" id = "numero" name = "numero" class = "form-control" placeholder="Numero" onfocusout = "validar_condominio()" data-toggle="popover" data-placement="right"/>
                             </div>
                         </div>
                         <input type = "submit" class = "btn btn-info" value = "Cadastrar">   
