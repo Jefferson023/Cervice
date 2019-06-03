@@ -33,10 +33,12 @@ router.get('/cadastro', function (req, res) {
     res.render('cadastro.ejs');
 });
 
+//página inicial
 router.get('/', isAuthenticated, function (req, res){
     res.send("VOCÊ TÁ LOGADO");
 });
 
+//logout
 router.get('/logout', function(req, res){
     req.logout();
     res.redirect('/login');

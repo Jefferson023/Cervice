@@ -21,14 +21,17 @@ app.use(function(req, res, next){
     res.locals.error = req.flash("error");
     next();
 });
+
 //configura bodyparser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //configurações de rotas
 app.use('/', require('./Routes/principais.js'));
+app.use('/consumidor', require("./Routes/consumidor.js"));
+app.use('/administrador', require('./Routes/administrador.js'));
 
-//middleware
+//middlewares
 app.use(function(req, res, next) {
     res.status(404).render('404.ejs');
 });
