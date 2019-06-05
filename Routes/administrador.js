@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const usuarioController = require('../Controller/usuarioController.js');
 
+//precisa mudar e verificar se é admin
 function isAuthenticated(req, res, next) {
     if (req.user){
         return next();
