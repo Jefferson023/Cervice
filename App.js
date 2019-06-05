@@ -27,6 +27,9 @@ app.use(bodyParser.json());
 
 //configurações de rotas
 app.use('/', require('./Routes/principais.js'));
+app.use('/', require('./Routes/fornecedor.js'));
+app.use('/', require('./Routes/administrador.js'));
+app.use('/', require('./Routes/globais.js'));
 
 //configura a porta do servidor
 app.listen(process.env.PORT || 3000, function()
