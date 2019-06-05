@@ -28,8 +28,9 @@ app.use(bodyParser.json());
 
 //configurações de rotas
 app.use('/', require('./Routes/principais.js'));
-app.use('/consumidor', require("./Routes/consumidor.js"));
-app.use('/administrador', require('./Routes/administrador.js'));
+app.use('/', require('./Routes/fornecedor.js'));
+app.use('/', require('./Routes/administrador.js'));
+app.use('/', require('./Routes/globais.js'));
 
 //middlewares
 app.use(function(req, res, next) {
