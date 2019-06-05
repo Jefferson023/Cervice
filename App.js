@@ -21,6 +21,7 @@ app.use(function(req, res, next){
     res.locals.error = req.flash("error");
     next();
 });
+
 //configura bodyparser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -30,6 +31,11 @@ app.use('/', require('./Routes/principais.js'));
 app.use('/', require('./Routes/fornecedor.js'));
 app.use('/', require('./Routes/administrador.js'));
 app.use('/', require('./Routes/globais.js'));
+
+//middlewares
+app.use(function(req, res, next) {
+    res.status(404).render('404.ejs');
+});
 
 //configura a porta do servidor
 app.listen(process.env.PORT || 3000, function()

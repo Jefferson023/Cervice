@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const usuarioController = require('../Controller/usuarioController.js');
 
 function isAuthenticated(req, res, next) {
     if (req.user){
@@ -10,12 +11,12 @@ function isAuthenticated(req, res, next) {
 }
 
 // GET administrador/usuarios.
-router.get('/administrador/usuarios', function (req, res) {
+router.get('/administrador/usuarios', isAuthenticated, function (req, res) {
     res.render('administrador/usuarios.ejs');
 });
 
 // GET administrador/condominio.
-router.get('/administrador/condominio', function (req, res) {
+router.get('/administrador/condominio', isAuthenticated, function (req, res) {
     res.render('administrador/condominio.ejs');
 });
 
