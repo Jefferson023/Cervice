@@ -5,7 +5,7 @@ const autenticacao = require('../lib/autenticacaoUtil.js');
 
 // GET administrador/usuarios.
 router.get('/administrador/usuarios', autenticacao.isAuthenticatedAdmin, function (req, res) {
-    res.render('administrador/usuarios.ejs');
+    usuarioController.usuarios_condominio(req, res);
 });
 
 // GET administrador/condominio.

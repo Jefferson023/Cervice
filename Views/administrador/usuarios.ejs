@@ -112,60 +112,8 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-sm-5">
-                  <h4 class="card-title mb-0">Pendentes</h4>
-                  <div class="small text-muted">Usuários aguardando aprovação de cadastro</div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col">
-                  <table class="table table-responsive-sm table-hover table-outline mb-0 mt-2 table-sm">
-                    <thead class="thead-light">
-                      <tr>
-                        <th>Nome</th>
-                        <th>Unidade</th>
-                        <th>E-mail</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Maria do Carmo</td>
-                        <td>Bloco 1 - Apto 309</td>
-                        <td>maria@docarmo.com</td>
-                        <td class="text-right">
-                          <button class="btn btn-primary" title="Aprovar">
-                            <i class="icon-like"></i>
-                          </button>
-                          <button class="btn btn-danger" title="Reprovar">
-                            <i class="icon-dislike"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>João Pedro</td>
-                        <td>Bloco 2 - Apto 101</td>
-                        <td>joao@pedro.com</td>
-                        <td class="text-right">
-                          <button class="btn btn-primary" title="Aprovar">
-                            <i class="icon-like"></i>
-                          </button>
-                          <button class="btn btn-danger" title="Reprovar">
-                            <i class="icon-dislike"></i>
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-sm-5">
                   <h4 class="card-title mb-0">Ativos</h4>
-                  <div class="small text-muted">Usuários ativos no sistema</div>
+                  <div class="small text-muted">Usuários ativos nos seus condominios</div>
                 </div>
               </div>
               <div class="row">
@@ -180,6 +128,18 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <% usuarios.forEach(function(usuario){ %>
+                        <tr>
+                          <td>usuario.nome</td>
+                          <td>usuario.banido</td>
+                          <td>usuario.email</td>
+                          <td class="text-right">
+                              <button class="btn btn-danger" title="Bloquear">
+                                <i class="icon-ban"></i>
+                              </button>
+                          </td>    
+                        </tr>
+                      <% }); %>
                       <tr>
                         <td>Maria do Carmo</td>
                         <td>Bloco 1 - Apto 309</td>
