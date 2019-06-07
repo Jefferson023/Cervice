@@ -2,7 +2,6 @@ const pool = require('../Config/db.js');
 const crypt = require('../Config/crypt.js');
 
 module.exports.usuarios_condominio = function (req, res) {
-    //alterar pra botar o endereco
     query_string = 'SELECT U.nome, U.email, U.banido, C.nome AS condominio, UC.numero_casa, UC.quadra_andar FROM'
     query_string = query_string + ' tb_usuario U JOIN tb_condominio_usuario UC ON U.id_usuario = UC.id_usuario JOIN';
     query_string = query_string + ' tb_condominio C ON UC.id_condominio = C.id_condominio WHERE C.id_condominio IN';
@@ -22,5 +21,18 @@ module.exports.usuarios_condominio = function (req, res) {
             }
         }
         res.render('administrador/usuarios.ejs', {usuarios_ativos: ativos, usuarios_banidos: banidos});
+    });
+}
+
+module.exports.verifica_disponibilidade_email = function (req, res){
+    pool.query("SELECT * FROM tb_usuario WHERE email=$1", [req.query.email], (err, res_bd) =>{
+        if (err){
+            //internal server error page
+        }
+        if (res_bd.rows.length >= 1){
+            res.send("false");
+        }else{
+            res.send("true");
+        }
     });
 }

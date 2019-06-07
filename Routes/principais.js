@@ -26,6 +26,14 @@ router.post('/login', function(req, res, next){
                                    failureFlash: true })(req, res, next);
 });
 
+//POST cadastro
+router.post('/cadastro', function(req, res){
+    if(req.user){
+        res.redirect("/");
+    }
+    res.send("cadastro post");
+});
+
 // GET cadastro.
 router.get('/cadastro', function (req, res) {
     if(req.user){
@@ -36,7 +44,12 @@ router.get('/cadastro', function (req, res) {
 
 router.get('/cadastro/condominio_disponivel', function (req, res){
     //valida 
-    condominioController.verifica_codigo_condominio(req, res);
+    condominioController.verifica_disponibilidade_codigo_condominio(req, res);
+});
+
+router.get('/cadastro/email_disponivel', function (req, res){
+    //valida 
+    usuarioController.verifica_disponibilidade_email(req, res);
 });
 
 //página inicial
