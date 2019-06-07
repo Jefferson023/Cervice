@@ -1,5 +1,6 @@
 const express = require('express');
 const usuarioController = require('../Controller/usuarioController.js');
+const condominioController = require('../Controller/condominioController.js');
 const router = express.Router();
 const passport = require('passport');
 
@@ -31,6 +32,11 @@ router.get('/cadastro', function (req, res) {
         res.redirect("/");
     }
     res.render('cadastro.ejs');
+});
+
+router.get('/cadastro/condominio_disponivel', function (req, res){
+    //valida 
+    condominioController.verifica_codigo_condominio(req, res);
 });
 
 //página inicial

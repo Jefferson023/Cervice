@@ -36,7 +36,6 @@ function validar_email(){
     });
     $('#email').popover('show');
   }else{
-    
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!re.test(email)){
       status_email = false;
@@ -46,6 +45,7 @@ function validar_email(){
       });
       $('#email').popover('show');
     }
+    //verificar se existe na base de dados
   };
 }
 function validar_senha(){
@@ -97,6 +97,7 @@ function validar_confirmSenha(){
     }
   }    
 };
+/**
 function validar_condominio(){
   var cod_condominio = $("#codigo").val()
   if (cod_condominio.length == 0){
@@ -107,6 +108,24 @@ function validar_condominio(){
     });
     $('#codigo').popover('show');
   }else{
-    //verifica no banco
+    //verificação com ajax
+    $.ajax({
+      url: "/cadastro/condominio_disponivel?cod_condominio="+cod_condominio,
+      type: "GET",
+      dataType: "text",
+      success: (data) =>
+      {
+          if (data != "true"){
+            status_codCondominio = false;
+            $('#codigo').popover({
+              content: "O código do condomínio digitado não existe",
+              trigger: 'manual'
+            });
+            $('#codigo').popover('show');
+          }else{
+            status_codCondominio = true;
+          }
+      }
+  }) 
   }
-};
+};*/
