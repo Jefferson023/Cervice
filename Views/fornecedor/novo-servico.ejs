@@ -29,6 +29,7 @@
 </head>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
+
   <header class="app-header navbar">
     <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
       <span class="navbar-toggler-icon"></span>
@@ -127,9 +128,10 @@
                         <div class="form-group">
                           <label for="tipo">Tipo</label>
                           <select name="tipo"class="form-control">
-                            <option value="0" name = 'op1'>Limpeza</option>
-                            <option value="1">Vestuário</option>
-                            <option value="2">Reparos/Reformas</option>
+                              <% tipo_servico.forEach(function(dat) { %>
+                            <option value=<%= dat.id_tipo%> name = 'id_tipo'><%= dat.nome%></option>
+                            
+                            <% }); %>
                           </select>
                         </div>
                       </div>
