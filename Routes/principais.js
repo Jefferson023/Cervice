@@ -31,7 +31,8 @@ router.post('/cadastro', function(req, res){
     if(req.user){
         res.redirect("/");
     }
-    res.send("cadastro post");
+    //verifica por sql injection e se os dados estão corretos
+    usuarioController.novo_usuario(req, res);
 });
 
 // GET cadastro.

@@ -1,6 +1,17 @@
 const pool = require('../Config/db.js');
 const crypt = require('../Config/crypt.js');
 
+module.exports.novo_usuario = function(req, res) {
+    values = [crypt.criptografar(req.body.senha), req.body.email, req.body.nome]
+    pool.query('BEGIN', (err) => {
+    
+    pool.query("INSERT INTO tb_usuario VALUES (DEFAULT, $1, $2, $3, false) RETURNING id_usuario", values, (err, res_bd)=>{
+        if (err){
+            //internal server error page
+        }
+    });
+
+}
 module.exports.usuarios_condominio = function (req, res) {
     query_string = 'SELECT U.nome, U.email, U.banido, C.nome AS condominio, UC.numero_casa, UC.quadra_andar FROM'
     query_string = query_string + ' tb_usuario U JOIN tb_condominio_usuario UC ON U.id_usuario = UC.id_usuario JOIN';
