@@ -21,7 +21,6 @@ app.use(function(req, res, next){
     res.locals.error = req.flash("error");
     next();
 });
-
 //configura bodyparser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
