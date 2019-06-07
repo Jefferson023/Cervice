@@ -128,11 +128,11 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <% usuarios.forEach(function(usuario){ %>
+                      <% usuarios_ativos.forEach(function(usuario){ %>
                         <tr>
-                          <td>usuario.nome</td>
-                          <td>usuario.banido</td>
-                          <td>usuario.email</td>
+                          <td><%= usuario.nome %></td>
+                          <td><%= usuario.quadra_andar %> <%= usuario.numero_andar %></td>
+                          <td><%= usuario.email %></td>
                           <td class="text-right">
                               <button class="btn btn-danger" title="Bloquear">
                                 <i class="icon-ban"></i>
@@ -140,26 +140,6 @@
                           </td>    
                         </tr>
                       <% }); %>
-                      <tr>
-                        <td>Maria do Carmo</td>
-                        <td>Bloco 1 - Apto 309</td>
-                        <td>maria@docarmo.com</td>
-                        <td class="text-right">
-                          <button class="btn btn-danger" title="Bloquear">
-                            <i class="icon-ban"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>João Pedro</td>
-                        <td>Bloco 2 - Apto 101</td>
-                        <td>joao@pedro.com</td>
-                        <td class="text-right">
-                          <button class="btn btn-danger" title="Bloquear">
-                            <i class="icon-ban"></i>
-                          </button>
-                        </td>
-                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -186,26 +166,18 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Maria do Carmo</td>
-                        <td>Bloco 1 - Apto 309</td>
-                        <td>maria@docarmo.com</td>
-                        <td class="text-right">
-                          <button class="btn btn-success" title="Desbloquear">
-                            <i class="icon-lock-open"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>João Pedro</td>
-                        <td>Bloco 2 - Apto 101</td>
-                        <td>joao@pedro.com</td>
-                        <td class="text-right">
-                          <button class="btn btn-success" title="Desbloquear">
-                            <i class="icon-lock-open"></i>
-                          </button>
-                        </td>
-                      </tr>
+                      <% usuarios_banidos.forEach(function(usuario){ %>
+                        <tr>
+                          <td><%= usuario.nome %></td>
+                          <td><%= usuario.quadra_andar %> <%= usuario.numero_andar %></td>
+                          <td><%= usuario.email %></td>
+                          <td class="text-right">
+                            <button class="btn btn-success" title="Desbloquear">
+                              <i class="icon-lock-open"></i>
+                            </button>
+                          </td>
+                        </tr>
+                      <%}) %>
                     </tbody>
                   </table>
                 </div>
