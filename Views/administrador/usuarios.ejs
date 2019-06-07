@@ -131,7 +131,7 @@
                       <% usuarios_ativos.forEach(function(usuario){ %>
                         <tr>
                           <td><%= usuario.nome %></td>
-                          <td><%= usuario.quadra_andar %> <%= usuario.numero_andar %></td>
+                          <td><%= usuario.bloco_andar %> <%= usuario.numero_casa %></td>
                           <td><%= usuario.email %></td>
                           <td class="text-right">
                               <button class="btn btn-danger" title="Bloquear">
@@ -169,7 +169,7 @@
                       <% usuarios_banidos.forEach(function(usuario){ %>
                         <tr>
                           <td><%= usuario.nome %></td>
-                          <td><%= usuario.quadra_andar %> <%= usuario.numero_andar %></td>
+                          <td><%= usuario.bloco_andar %> <%= usuario.numero_casa %></td>
                           <td><%= usuario.email %></td>
                           <td class="text-right">
                             <button class="btn btn-success" title="Desbloquear">

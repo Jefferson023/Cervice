@@ -1,19 +1,44 @@
 const pool = require('../Config/db.js');
+const client = require('../Config/clientdb.js');
 const crypt = require('../Config/crypt.js');
 
 module.exports.novo_usuario = function(req, res) {
     values = [crypt.criptografar(req.body.senha), req.body.email, req.body.nome]
-    pool.query('BEGIN', (err) => {
-    
-    pool.query("INSERT INTO tb_usuario VALUES (DEFAULT, $1, $2, $3, false) RETURNING id_usuario", values, (err, res_bd)=>{
+    client.connect();
+    client.query('BEGIN', (err) => {
         if (err){
-            //internal server error page
+            console.log(err)
+            return;
         }
+        client.query("INSERT INTO tb_usuario VALUES (DEFAULT, $1, $2, $3, false) RETURNING id_usuario", values, (err2, res_bd)=>{
+            if (err2){
+                console.log(err2)
+                client.query('ROLLBACK');
+                return;
+            }
+            client.query("SELECT * FROM tb_condominio WHERE codigo_acesso=$1", [req.body.codigo], (err3, res_bd2)=>{
+                if (err3){
+                    console.log(err3)
+                    client.query('ROLLBACK');
+                    return;
+                }
+                values = [res_bd.rows[0].id_usuario, res_bd2.rows[0].id_condominio, req.body.numero, req.body.bloco]
+                client.query("INSERT INTO tb_condominio_usuario VALUES ($1, $2, $3, $4)", values, (err4)=>{
+                    if (err4){
+                        console.log(err4)
+                        client.query('ROLLBACK');
+                        return;
+                    }
+                    client.query('COMMIT');
+                });
+            });
+        });
     });
-
+    client.end();
+    res.redirect('/login');
 }
 module.exports.usuarios_condominio = function (req, res) {
-    query_string = 'SELECT U.nome, U.email, U.banido, C.nome AS condominio, UC.numero_casa, UC.quadra_andar FROM'
+    query_string = 'SELECT U.nome, U.email, U.banido, C.nome AS condominio, UC.numero_casa, UC.bloco_andar FROM'
     query_string = query_string + ' tb_usuario U JOIN tb_condominio_usuario UC ON U.id_usuario = UC.id_usuario JOIN';
     query_string = query_string + ' tb_condominio C ON UC.id_condominio = C.id_condominio WHERE C.id_condominio IN';
     query_string = query_string + ' (SELECT AC.id_condominio FROM tb_usuario U2 JOIN tb_administrador_condominio AC ON';
@@ -21,6 +46,7 @@ module.exports.usuarios_condominio = function (req, res) {
     pool.query(query_string, [req.user.id_usuario], (err, res_bd) => {
         if (err){
             //internal server error page
+            console.log(err);
         }
         ativos = [];
         banidos = [];
