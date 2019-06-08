@@ -19,6 +19,7 @@ app.use(passport.session());
 app.use(flash());
 app.use(function(req, res, next){
     res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
     next();
 });
 

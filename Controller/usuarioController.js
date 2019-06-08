@@ -7,25 +7,25 @@ module.exports.novo_usuario = function(req, res) {
     client.connect();
     client.query('BEGIN', (err) => {
         if (err){
-            console.log(err)
+            console.log(err, '1')
             return;
         }
         client.query("INSERT INTO tb_usuario VALUES (DEFAULT, $1, $2, $3, false) RETURNING id_usuario", values, (err2, res_bd)=>{
             if (err2){
-                console.log(err2)
+                console.log(err, '2')
                 client.query('ROLLBACK');
                 return;
             }
             client.query("SELECT * FROM tb_condominio WHERE codigo_acesso=$1", [req.body.codigo], (err3, res_bd2)=>{
                 if (err3){
-                    console.log(err3)
+                    console.log(err, '3')
                     client.query('ROLLBACK');
                     return;
                 }
                 values = [res_bd.rows[0].id_usuario, res_bd2.rows[0].id_condominio, req.body.numero, req.body.bloco]
                 client.query("INSERT INTO tb_condominio_usuario VALUES ($1, $2, $3, $4)", values, (err4)=>{
                     if (err4){
-                        console.log(err4)
+                        console.log(err, '4')
                         client.query('ROLLBACK');
                         return;
                     }
@@ -35,6 +35,7 @@ module.exports.novo_usuario = function(req, res) {
         });
     });
     client.end();
+    //req.flash("success","Sua conta foi criada. Entre utilizando seu email e senha nos campos abaixo");
     res.redirect('/login');
 }
 module.exports.usuarios_condominio = function (req, res) {
