@@ -108,7 +108,7 @@
               <h2>Usuários</h2>
             </div>
             <div class = "col-sm-5">
-              <input class="form-control" id="myInput" type="text" placeholder="Buscar..">
+              <input class="form-control" id="myInput" type="text" placeholder="Buscar usuario..">
             </div>
           </div>
           <div class="card">
@@ -137,7 +137,7 @@
                           <td>Bloco <%= usuario.bloco_andar %> - Nº <%= usuario.numero_casa %></td>
                           <td><%= usuario.email %></td>
                           <td class="text-right">
-                              <button class="btn btn-danger" title="Bloquear">
+                              <button class="btn btn-danger" title="Bloquear" onclick="bloquear(this)">
                                 <i class="icon-ban"></i>
                               </button>
                           </td>    
@@ -172,10 +172,10 @@
                       <% usuarios_banidos.forEach(function(usuario){ %>
                         <tr>
                           <td><%= usuario.nome %></td>
-                          <td>Bloco/Andar <%= usuario.bloco_andar %> <%= - usuario.numero_casa %></td>
+                          <td>Bloco/Andar <%= usuario.bloco_andar %> - Nº <%= usuario.numero_casa %></td>
                           <td><%= usuario.email %></td>
                           <td class="text-right">
-                            <button class="btn btn-success" title="Desbloquear">
+                            <button class="btn btn-success" title="Desbloquear" onclick = "desbloquear(this)">
                               <i class="icon-lock-open"></i>
                             </button>
                           </td>
@@ -197,6 +197,7 @@
   <script src="/css/vendors/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
   <script src="/css/vendors/@coreui/coreui/dist/js/coreui.min.js"></script>
 
+  <!-- função para procurar nas tabelas por usuário -->
   <script>
     $(document).ready(function(){
         $("#myInput").on("keyup", function() {
@@ -209,6 +210,41 @@
           });
         });
     });
+  </script>
+  <!-- função de bloquear e desbloquear usuário -->
+  <script>
+    function bloquear(botao){
+      var linha_tabela = $(botao).parent().parent();
+      linha_tabela.remove();
+      $(botao).removeClass('btn btn-danger');
+      $(botao).addClass('btn btn-success');
+      $(botao).attr('title', "Desbloquear");
+      $(botao).attr('onclick', "desbloquear(this)");
+      var icone = $(botao).children();
+      icone.removeClass('icon-ban');
+      icone.addClass("icon-lock-open");
+      $('#bloqueados').append(linha_tabela);
+      $.ajax({
+        url: "/administrador/usuarios/banir",
+        data: {email: linha_tabela.children()[2].innerHTML}
+      });
+    }
+    function desbloquear(botao){
+      var linha_tabela = $(botao).parent().parent();
+      linha_tabela.remove();
+      $(botao).removeClass('btn btn-success');
+      $(botao).addClass('btn btn-danger');
+      $(botao).attr('title', "Bloquear");
+      $(botao).attr('onclick', "bloquear(this)");
+      var icone = $(botao).children();
+      icone.removeClass("icon-lock-open");
+      icone.addClass('icon-ban');
+      $('#ativos').append(linha_tabela);
+      $.ajax({
+        url: "/administrador/usuarios/desbanir",
+        data: {email: linha_tabela.children()[2].innerHTML}
+      });
+    }
   </script>
 </body>
 

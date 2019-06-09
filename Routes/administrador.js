@@ -8,6 +8,16 @@ router.get('/administrador/usuarios', autenticacao.isAuthenticatedAdmin, functio
     usuarioController.usuarios_condominio(req, res);
 });
 
+router.get('/administrador/usuarios/desbanir', autenticacao.isAuthenticatedAdmin, function (req, res) {
+    //validar
+    usuarioController.desbanir(req, res);
+});
+
+router.get('/administrador/usuarios/banir', autenticacao.isAuthenticatedAdmin, function (req, res) {
+    //validar
+    usuarioController.banir(req, res);
+});
+
 // GET administrador/condominio.
 router.get('/administrador/condominio', autenticacao.isAuthenticatedAdmin, function (req, res) {
     res.render('administrador/condominio.ejs');
