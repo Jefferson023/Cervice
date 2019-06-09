@@ -6,7 +6,6 @@ const app = express();
 const fornecedorController = require('../Controller/fornecedorController');
 const servicoController = require('../Controller/servicoController.js');
 const pool = require('../Config/db.js');
-var tipo_servico =  [];
 // tentativa de pegar os tipos de servicos
 
 
@@ -33,6 +32,7 @@ router.get('/fornecedor/novo-servico', function (req, res) {
 });
 // Cadastrando o servico no BD FALTA VINCULAR AO USUARIO
 router.post('/fornecedor/novo-servico',function(req, res){
+    console.log('0');
   servicoController.cadastro_servico(req,res)  
 })
 
