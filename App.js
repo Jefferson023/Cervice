@@ -22,7 +22,6 @@ app.use(function(req, res, next){
     res.locals.success = req.flash("success");
     next();
 });
-
 //configura bodyparser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

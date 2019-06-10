@@ -29,6 +29,7 @@
 </head>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
+
   <header class="app-header navbar">
     <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
       <span class="navbar-toggler-icon"></span>
@@ -115,7 +116,7 @@
             <div class="col">
               <div class="card">
                 <div class="card-body">
-                  <form action="">
+                  <form action="/fornecedor/novo-servico" method="POST">
                     <div class="row">
                       <div class="col">
                         <div class="form-group">
@@ -125,16 +126,23 @@
                       </div>
                       <div class="col">
                         <div class="form-group">
+                          <label for="descricao">Descrição</label>
+                          <input type="text" class="form-control" name="descricao">
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
                           <label for="tipo">Tipo</label>
                           <select name="tipo"class="form-control">
-                            <option value="0">Limpeza</option>
-                            <option value="1">Vestuário</option>
-                            <option value="2">Reparos/Reformas</option>
+                              <% tipo_servico.forEach(function(dat) { %>
+                            <option value=<%= dat.id_tipo%> name = 'id_tipo'><%= dat.nome%></option>
+                            
+                            <% }); %>
                           </select>
                         </div>
                       </div>
                       <div class="col">
-                          <label for="hora">Hora de abertura</label>
+                          <label for="hora" name = 'ho'>Hora de abertura</label>
                           <input type="time" class="form-control" name="hora">
                       </div>
                     </div>

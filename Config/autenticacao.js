@@ -18,8 +18,9 @@ module.exports = function(passport) {
             }
             return done(null, usuario)
         });
+       
     }));
-
+   
     passport.serializeUser(function(usuario, done){
         done(null, usuario.id_usuario);
     })
