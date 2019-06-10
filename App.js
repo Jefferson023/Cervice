@@ -19,7 +19,6 @@ app.use(passport.session());
 app.use(flash());
 app.use(function(req, res, next){
     res.locals.error = req.flash("error");
-    res.locals.user = req.user || null;
     next();
 });
 //configura bodyparser

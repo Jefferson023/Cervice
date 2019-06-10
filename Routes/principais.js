@@ -36,7 +36,6 @@ router.get('/cadastro', function (req, res) {
 //página inicial
 router.get('/', isAuthenticated, function (req, res){
     res.send("VOCÊ TÁ LOGADO");
-    console.log(req.user);
 
 });
 
