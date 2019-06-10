@@ -25,12 +25,14 @@
   "homepage": "https://github.com/Jefferson023/Cervice#readme",
   "dependencies": {
     "bcrypt": "^3.0.6",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-session": "^1.16.1",
     "helmet": "^3.18.0",
+    "nodemon": "^1.19.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pg": "^7.11.0"
