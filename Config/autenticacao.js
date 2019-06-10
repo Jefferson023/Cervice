@@ -13,10 +13,14 @@ module.exports = function(passport) {
             if (!crypt.comparar_senha(senha, usuario.senha)){
                 return done(null, false, {message: 'Senha incorreta'});
             }
+            if (usuario.banido == true){
+                return done(null, false, {message: 'Sua conta está banida do sistema'})
+            }
             return done(null, usuario)
         });
+       
     }));
-
+   
     passport.serializeUser(function(usuario, done){
         done(null, usuario.id_usuario);
     })

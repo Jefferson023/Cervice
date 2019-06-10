@@ -1,4 +1,22 @@
-var status_nome, status_email, status_senha, status_confirmSenha, status_codCondominio = false; 
+var status_nome = false;
+var status_email = false;
+var status_senha = false;
+var status_confirmSenha = false;
+var status_codCondominio = false; 
+
+function validar_form(){
+  if (status_nome == true && status_email == true && status_senha == true && status_confirmSenha == true &&
+    status_codCondominio == true){
+    return true
+  }else{
+    validar_nome();
+    validar_email();
+    validar_senha();
+    validar_confirmSenha();
+    validar_condominio();
+    return false;
+  }
+}
 
 function validar_nome(){
   var nome = $("#nome").val();
@@ -24,6 +42,7 @@ function validar_nome(){
     }
   }
 };
+
 function validar_email(){
   var email = $('#email').val();
   $('#email').popover('dispose');
@@ -36,7 +55,6 @@ function validar_email(){
     });
     $('#email').popover('show');
   }else{
-    
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!re.test(email)){
       status_email = false;
@@ -45,9 +63,30 @@ function validar_email(){
         trigger: 'manual'
       });
       $('#email').popover('show');
+    }else{
+      //verificação de email com ajax
+      $.ajax({
+        url: "/cadastro/email_disponivel?email="+email,
+        type: "GET",
+        dataType: "text",
+        success: (data) =>
+        {
+            if (data != "true"){
+              status_email = false;
+              $('#email').popover({
+                content: "O e-mail digitado já está em uso",
+                trigger: 'manual'
+              });
+              $('#email').popover('show');
+            }else{
+              status_email = true;
+            }
+        }
+      });
     }
   };
-}
+};
+
 function validar_senha(){
   var senha = $('#senha').val();
   $('#senha').popover('dispose');
@@ -72,6 +111,7 @@ function validar_senha(){
     }
   }
 };
+
 function validar_confirmSenha(){
   var confirm_senha = $('#confirm_senha').val();
   var senha = $('#senha').val();
@@ -97,7 +137,9 @@ function validar_confirmSenha(){
     }
   }    
 };
+
 function validar_condominio(){
+  $('#codigo').popover('dispose');
   var cod_condominio = $("#codigo").val()
   if (cod_condominio.length == 0){
     status_codCondominio = false;
@@ -107,6 +149,24 @@ function validar_condominio(){
     });
     $('#codigo').popover('show');
   }else{
-    //verifica no banco
+    //verificação com ajax
+    $.ajax({
+      url: "/cadastro/condominio_disponivel?cod_condominio="+cod_condominio,
+      type: "GET",
+      dataType: "text",
+      success: (data) =>
+      {
+          if (data != "true"){
+            status_codCondominio = false;
+            $('#codigo').popover({
+              content: "O código do condomínio digitado não existe",
+              trigger: 'manual'
+            });
+            $('#codigo').popover('show');
+          }else{
+            status_codCondominio = true;
+          }
+      }
+  }) 
   }
 };
