@@ -1,225 +1,103 @@
-<!DOCTYPE html>
-<!--
-* CoreUI - Free Bootstrap Admin Template
-* @version v2.1.12
-* @link https://coreui.io
-* Copyright (c) 2018 creativeLabs Łukasz Holeczek
-* Licensed under MIT (https://coreui.io/license)
--->
-
-<html lang="en">
-
-<head>
-  <base href="./">
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
-  <meta name="author" content="Łukasz Holeczek">
-  
-  <title>Trabalho BD</title>
-  <!-- Icons-->
-  <link href="/vendors/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
-  <link href="/vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
-  <link href="/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="/vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
-  <!-- Main styles for this application-->
-  <link href="/css/style.css" rel="stylesheet">
-  <link href="/vendors/pace-progress/css/pace.min.css" rel="stylesheet">
-</head>
-
-<body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
-  <header class="app-header navbar">
-    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand" href="#">
-      <img class="navbar-brand-full" src="/img/brand/logo.svg" width="89" height="25" alt="CoreUI Logo">
-      <img class="navbar-brand-minimized" src="/img/brand/sygnet.svg" width="30" height="30" alt="CoreUI Logo">
-    </a>
-    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <ul class="nav navbar-nav ml-auto">
-      <li class="nav-item dropdown">
-        <a class="nav-link" href="#" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-          aria-expanded="false">
-          <i class="icon-bell"></i>
-          <span class="badge badge-pill badge-danger">2</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right">
-          <div class="dropdown-header text-center">
-            <strong>Notificações</strong>
-          </div>
-          <a class="dropdown-item" href="perfil.html">
-            <i class="fa fa-credit-card"></i> Pagamento aprovado</a>
-          <a class="dropdown-item" href="login.html">
-            <i class="fa fa-ban"></i> Pedido 0134 cancelado</a>
+<%- include('../includes/cabecalho.ejs') -%>
+<main class="main">
+  <div class="container-fluid">
+    <div class="animated fadeIn">
+      <div class="row mt-3 mb-3">
+        <div class="col">
+          <h2>VITRINE</h2>
         </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-          <img class="img-avatar" src="/img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
-        </a>
-        <div class="dropdown-menu dropdown-menu-right">
-          <div class="dropdown-header text-center">
-            <strong>Configurações</strong>
-          </div>
-          <a class="dropdown-item" href="perfil.html">
-            <i class="fa fa-user"></i> Perfil</a>
-          <a class="dropdown-item" href="login.html">
-            <i class="fa fa-lock"></i> Sair</a>
-        </div>
-      </li>
-    </ul>
-  </header>
-  <div class="app-body">
-    <div class="sidebar">
-      <nav class="sidebar-nav">
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="/vitrine">
-              <i class="nav-icon icon-grid"></i> Vitrine
-            </a>
-          </li>
-          <li class="nav-title">Fornecedor</li>
-          <li class="nav-item">
-            <a class="nav-link" href="/fornecedor/meus-servicos">
-              <i class="nav-icon icon-briefcase"></i> Meus Serviços</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="entregas.html">
-              <i class="nav-icon icon-note"></i> Minhas Entregas</a>
-          </li>
-          <li class="nav-title">Administrador</li>
-          <li class="nav-item">
-            <a class="nav-link" href="/administrador/condominio">
-              <i class="nav-icon icon-home"></i> Condomínio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/administrador/usuarios">
-              <i class="nav-icon icon-people"></i> Usuários</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-    <main class="main">
-      <div class="container-fluid">
-        <div class="animated fadeIn">
-          <div class="row mt-3 mb-3">
-            <div class="col">
-              <h2>VITRINE</h2>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col col-sm-6 col-md-6 offset-md-3 mb-3">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control form-control-lg border-primary" placeholder="Buscar serviço" aria-label="Recipient's username" aria-describedby="button-addon2">
-                <div class="input-group-append">
-                  <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categoria</button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Limpeza</a>
-                    <a class="dropdown-item" href="#">Alimentação</a>
-                    <a class="dropdown-item" href="#">Vestuário</a>
-                  </div>
-                </div>
-                <div class="input-group-append">
-                  <button class="btn btn-outline-primary" type="button">
-                    <i class="fa fa-search"></i>
-                  </button>
-                </div>
+      </div>
+      <div class="row">
+        <div class="col col-sm-6 col-md-6 offset-md-3 mb-3">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control form-control-lg border-primary" placeholder="Buscar serviço"
+              aria-label="Recipient's username" aria-describedby="button-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">Categoria</button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Limpeza</a>
+                <a class="dropdown-item" href="#">Alimentação</a>
+                <a class="dropdown-item" href="#">Vestuário</a>
               </div>
             </div>
-          </div>
-
-          <div class="row vitrine-grid">
-            <div class="col-sm-6 col-lg-3">
-              <a href="/vitrine/detalhes-produto">
-                <div class="card mb-3">
-                  <img src="/img/services/advogado.jpg" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Eletricista</h5>
-                    <p class="card-text">Instalações e reparos elétricos em geral</p>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-              <a href="/vitrine/detalhes-produto">
-                <div class="card mb-3">
-                  <img src="/img/services/contador.jpg" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Eletricista</h5>
-                    <p class="card-text">Instalações e reparos elétricos em geral</p>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-              <a href="/vitrine/detalhes-produto">
-                <div class="card mb-3">
-                  <img src="/img/services/costura.jpg" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Eletricista</h5>
-                    <p class="card-text">Instalações e reparos elétricos em geral</p>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-              <a href="/vitrine/detalhes-produto">
-                <div class="card mb-3">
-                  <img src="/img/services/eletricista.jpg" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Eletricista</h5>
-                    <p class="card-text">Instalações e reparos elétricos em geral</p>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-              <a href="/vitrine/detalhes-produto">
-                <div class="card mb-3">
-                  <img src="/img/services/eletricista.jpg" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Eletricista</h5>
-                    <p class="card-text">Instalações e reparos elétricos em geral</p>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-              <a href="/vitrine/detalhes-produto">
-                <div class="card mb-3">
-                  <img src="/img/services/eletricista.jpg" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Eletricista</h5>
-                    <p class="card-text">Instalações e reparos elétricos em geral</p>
-                  </div>
-                </div>
-              </a>
+            <div class="input-group-append">
+              <button class="btn btn-outline-primary" type="button">
+                <i class="fa fa-search"></i>
+              </button>
             </div>
           </div>
         </div>
-    </main>
-  </div>
-  <footer class="app-footer">
-    <div>
-      <a href="https://coreui.io">CoreUI</a>
-      <span>&copy; 2018 creativeLabs.</span>
-    </div>
-    <div class="ml-auto">
-      <span>Powered by</span>
-      <a href="https://coreui.io">CoreUI</a>
-    </div>
-  </footer>
-  <!-- CoreUI and necessary plugins-->
-  <script src="/vendors/jquery/dist/jquery.min.js"></script>
-  <script src="/vendors/popper.js/dist/umd/popper.min.js"></script>
-  <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="/vendors/pace-progress/pace.min.js"></script>
-  <script src="/vendors/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
-  <script src="/vendors/@coreui/coreui/dist/js/coreui.min.js"></script>
-</body>
+      </div>
 
-</html>
+      <div class="row vitrine-grid">
+        <div class="col-sm-6 col-lg-3">
+          <a href="/vitrine/detalhes-produto">
+            <div class="card mb-3">
+              <img src="/img/services/advogado.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Eletricista</h5>
+                <p class="card-text">Instalações e reparos elétricos em geral</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <a href="/vitrine/detalhes-produto">
+            <div class="card mb-3">
+              <img src="/img/services/contador.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Eletricista</h5>
+                <p class="card-text">Instalações e reparos elétricos em geral</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <a href="/vitrine/detalhes-produto">
+            <div class="card mb-3">
+              <img src="/img/services/costura.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Eletricista</h5>
+                <p class="card-text">Instalações e reparos elétricos em geral</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <a href="/vitrine/detalhes-produto">
+            <div class="card mb-3">
+              <img src="/img/services/eletricista.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Eletricista</h5>
+                <p class="card-text">Instalações e reparos elétricos em geral</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <a href="/vitrine/detalhes-produto">
+            <div class="card mb-3">
+              <img src="/img/services/eletricista.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Eletricista</h5>
+                <p class="card-text">Instalações e reparos elétricos em geral</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <a href="/vitrine/detalhes-produto">
+            <div class="card mb-3">
+              <img src="/img/services/eletricista.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Eletricista</h5>
+                <p class="card-text">Instalações e reparos elétricos em geral</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+</main>
+<%- include('../includes/rodape.ejs') -%>

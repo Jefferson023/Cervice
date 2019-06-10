@@ -49,8 +49,7 @@ router.get('/cadastro/email_disponivel', function (req, res){
 
 //página inicial
 router.get('/', autenticacao.isAuthenticated, function (req, res){
-    res.send("VOCÊ TÁ LOGADO");
-
+    res.redirect('/vitrine');
 });
 
 //logout

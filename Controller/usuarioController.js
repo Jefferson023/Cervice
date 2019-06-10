@@ -110,7 +110,7 @@ module.exports.desbanir = function(req, res){
             if (res_bd.rows.length == 0){
                 return;
             }else{
-                pool.query("UPDATE tb_usuario SET banido=true WHERE email=$1", [req.query.email], (err) =>{
+                pool.query("UPDATE tb_usuario SET banido=false WHERE email=$1", [req.query.email], (err) =>{
         });
             } 
         }
