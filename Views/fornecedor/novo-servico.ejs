@@ -21,20 +21,19 @@
                       </div>
                     </div>
 
-                    <div class="col">
-
-                      <div class="form-group">
+                    <div class="col col-md-3">
+                      <div class="form-group ">
 
                         <label for="tipo">Tipo</label>
 
                         <select name="tipo"class="form-control">
-                            <% tipo_servico.forEach(function(dat) { %>
-                          <option value=<%= dat.id_tipo%> name = 'id_tipo'><%= dat.nome%></option>                       
-                          <% }); %>
+                          <% tipo_servico.forEach(function(dat) { %>
+                            <option value=<%= dat.id_tipo%> name = 'id_tipo'><%= dat.nome%></option>                       
+                            <% }); %>
                         </select>
                       </div>
                     </div>
-                    <div class="col">
+                    <div class="col col-md-2">
                         <label for="hora" name = 'ho'>Hora de abertura</label>
                         <input type="time" class="form-control" name="hora">
                     </div>
@@ -88,11 +87,11 @@
                   </div> 
                   <hr>  
                   <div class="row">
-                    <div class="col text-right">
-                      <button class="btn btn-primary" id="btn-add-produto">
-                        <span class="fa fa-plus"></span> ADICIONAR SERVIÇO
-                      </button></div>
-                  </div>                
+                      <div class="col text-right">
+                        <button class="btn btn-primary" id="btn-add-produto">
+                          <span class="fa fa-plus"></span> ADICIONAR SERVIÇO
+                        </button></div>
+                    </div>            
                 </form>
             </div>
           </div>
