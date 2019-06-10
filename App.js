@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
-const helmet = require('helmet');
+//const helmet = require('helmet');
 const app = express();
 require('./Config/autenticacao.js')(passport);
 
@@ -12,13 +12,14 @@ require('./Config/autenticacao.js')(passport);
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/Views');
 app.use(express.static('Public'));
-app.use(helmet());
+//app.use(helmet());
 app.use(session({secret: "cerviceimd", resave: true, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use(function(req, res, next){
     res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
     next();
 });
 

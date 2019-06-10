@@ -1,5 +1,12 @@
-<% if(error.length != 0){ %>
-    <div class="alert alert-danger" role="alert">
+<div class = "container" style = "width: 100%;">
+    <% if (success.length != 0){ %>
+        <div class="alert alert-success" role="alert">
+            <%=success%>
+        </div>    
+    <% } %>
+    <% if(error.length != 0){ %>
+        <div class="alert alert-danger" role="alert">
             <%=error%>
-    </div>
-<% } %>
+        </div>
+    <% } %>
+</div>
