@@ -7,33 +7,36 @@ module.exports.novo_usuario = function(req, res) {
     client.connect();
     client.query('BEGIN', (err) => {
         if (err){
-            console.log(err)
-            return;
+            //só saia
         }
-        client.query("INSERT INTO tb_usuario VALUES (DEFAULT, $1, $2, $3, false) RETURNING id_usuario", values, (err2, res_bd)=>{
-            if (err2){
-                console.log(err2)
-                client.query('ROLLBACK');
-                return;
-            }
-            client.query("SELECT * FROM tb_condominio WHERE codigo_acesso=$1", [req.body.codigo], (err3, res_bd2)=>{
-                if (err3){
-                    console.log(err3)
+        else{
+            client.query("INSERT INTO tb_usuario VALUES (DEFAULT, $1, $2, $3, false) RETURNING id_usuario", values, (err2, res_bd)=>{
+                if (err2){
                     client.query('ROLLBACK');
-                    return;
+                }else{
+                    client.query("SELECT * FROM tb_condominio WHERE codigo_acesso=$1", [req.body.codigo], (err3, res_bd2)=>{
+                        if (err3){
+                            client.query('ROLLBACK');
+                        }else{
+                            values = [res_bd.rows[0].id_usuario, res_bd2.rows[0].id_condominio, req.body.numero, req.body.bloco]
+                            client.query("INSERT INTO tb_condominio_usuario VALUES ($1, $2, $3, $4)", values, (err4)=>{
+                                if (err4){
+                                    client.query('ROLLBACK');
+                                }else{
+                                    client.query('COMMIT', (err)=>{
+                                        if (err){
+                                            client.query('ROLLBACK');
+                                        }else{
+                                            client.end();
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
                 }
-                values = [res_bd.rows[0].id_usuario, res_bd2.rows[0].id_condominio, req.body.numero, req.body.bloco]
-                client.query("INSERT INTO tb_condominio_usuario VALUES ($1, $2, $3, $4)", values, (err4)=>{
-                    if (err4){
-                        console.log(err4)
-                        client.query('ROLLBACK');
-                        return;
-                    }
-                    client.query('COMMIT');
-                    client.end();
-                });
             });
-        });
+        };
     });
     req.flash("success","Sua conta foi criada. Entre utilizando seu email e senha nos campos abaixo");
     res.redirect('/login');
@@ -82,14 +85,15 @@ module.exports.banir = function(req, res){
     query_string = query_string + " WHERE U2.email=$2)"
     pool.query(query_string, [req.user.id_usuario, req.query.email], (err, res_bd) =>{
         if (err){
-            console.log(err);
             return;
-        }
-        if (res_bd.rows.length == 0){
-            return;
-        }
-        pool.query("UPDATE tb_usuario SET banido=true WHERE email=$1", [req.query.email], (err) =>{
+        }else{
+            if (res_bd.rows.length == 0){
+                return;
+            }else{
+                pool.query("UPDATE tb_usuario SET banido=true WHERE email=$1", [req.query.email], (err) =>{
         });
+            } 
+        }
     });
     res.redirect('/administrador/usuarios');
 }
@@ -101,13 +105,14 @@ module.exports.desbanir = function(req, res){
     query_string = query_string + " WHERE U2.email=$2)"
     pool.query(query_string, [req.user.id_usuario, req.query.email], (err, res_bd) =>{
         if (err){
-            console.log(err);
             return;
-        }
-        if (res_bd.rows.length == 0){
-            return;
-        }
-        pool.query("UPDATE tb_usuario SET banido=false WHERE email=$1", [req.query.email], (err) =>{
+        }else{
+            if (res_bd.rows.length == 0){
+                return;
+            }else{
+                pool.query("UPDATE tb_usuario SET banido=true WHERE email=$1", [req.query.email], (err) =>{
         });
+            } 
+        }
     });
 }
