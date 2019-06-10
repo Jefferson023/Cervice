@@ -10,13 +10,15 @@ module.exports = function(passport) {
                 return done(null, false, {message: "Não existe nenhuma conta associada ao e-mail digitado"});
             }
             var usuario = res_bd.rows[0];
+            console.log(usuario)
             if (!crypt.comparar_senha(senha, usuario.senha)){
                 return done(null, false, {message: 'Senha incorreta'});
             }
             return done(null, usuario)
         });
+       
     }));
-
+   
     passport.serializeUser(function(usuario, done){
         done(null, usuario.id_usuario);
     })

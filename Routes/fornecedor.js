@@ -7,7 +7,7 @@ const fornecedorController = require('../Controller/fornecedorController');
 const servicoController = require('../Controller/servicoController.js');
 const pool = require('../Config/db.js');
 // tentativa de pegar os tipos de servicos
-
+var id ;
 
 //configura bodyparser
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -22,11 +22,13 @@ function isAuthenticated(req, res, next) {
 
 // GET meus-servicos.
 router.get('/fornecedor/meus-servicos', function (req, res) {
-    fornecedorController.lista_tipo_servico(res)
+    console.log(id)
+    fornecedorController.lista_servico_fornecedor(req,res)
 });
 
 // GET novo-servico
 router.get('/fornecedor/novo-servico', function (req, res) {
+    
     servicoController.lista_tipo_servico(res)
     
 });
@@ -35,6 +37,9 @@ router.post('/fornecedor/novo-servico',function(req, res){
     console.log('0');
   servicoController.cadastro_servico(req,res)  
 })
-
+function valor_id(valor)
+{
+    id = valor;
+}
 
 module.exports = router;

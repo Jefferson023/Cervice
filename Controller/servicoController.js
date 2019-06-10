@@ -1,9 +1,11 @@
 const pool = require('../Config/db.js');
 const client = require('../Config/clientdb.js');
+const express = require('express');
+const app = express();
 var tipo_servico = [];
 module.exports.lista_tipo_servico = function(res) {
     pool.query('SELECT * FROM tb_tipo_servico', (err, res_bd) => {
-
+    
 
         if (err) {
             console.log(err)
@@ -52,19 +54,14 @@ module.exports.cadastro_servico = function(req, res) {
             var id = res_bd.rows[0].id_servico; 
             client.query('INSERT INTO tb_fornecedor_servico(id_servico,id_usuario) values ($1,2)',[id],(err2, res_bd2) => 
             {
-                   console.log('3'); 
                    if (err2) {
                         console.log(err2, 'dentro');
                         client.query('ROLLBACK');
                         return;
                     }
-                    console.log('4');
                     client.query('COMMIT');
-                    console.log('5');
                     client.end();
-                    console.log('6');
                 });
-                console.log('7');
         });
     });
     console.log('aq');
