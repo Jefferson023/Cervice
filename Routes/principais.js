@@ -3,13 +3,7 @@ const usuarioController = require('../Controller/usuarioController.js');
 const condominioController = require('../Controller/condominioController.js');
 const router = express.Router();
 const passport = require('passport');
-
-function isAuthenticated(req, res, next) {
-    if (req.user){
-        return next();
-    }  
-    res.redirect('/login');
-}
+const autenticacao = require('../lib/autenticacaoUtil.js');
 
 // GET login.
 router.get('/login', function (req, res) {
@@ -54,7 +48,7 @@ router.get('/cadastro/email_disponivel', function (req, res){
 });
 
 //página inicial
-router.get('/', isAuthenticated, function (req, res){
+router.get('/', autenticacao.isAuthenticated, function (req, res){
     res.send("VOCÊ TÁ LOGADO");
 });
 
