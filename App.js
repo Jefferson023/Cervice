@@ -9,10 +9,8 @@ const app = express();
 require('ejs-locals');
 require('./Config/autenticacao.js')(passport);
 
-app.engine('ejs', require('ejs-locals'));
-
 //configurações principais do express
-app.set('view engine', 'ejs');
+app.engine('ejs', require('ejs-locals'));
 app.set('views', __dirname + '/Views');
 app.use(express.static('Public'));
 //app.use(helmet());
