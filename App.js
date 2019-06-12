@@ -33,9 +33,12 @@ app.use('/', require('./Routes/fornecedor.js'));
 app.use('/', require('./Routes/administrador.js'));
 app.use('/', require('./Routes/globais.js'));
 
-//middlewares
+//erro handler
 app.use(function(req, res, next) {
     res.status(404).render('404.ejs');
+});
+app.use(function(req, res, next) {
+    res.status(500).render('500.ejs');
 });
 
 //configura a porta do servidor
