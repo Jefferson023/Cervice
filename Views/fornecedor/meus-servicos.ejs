@@ -1,34 +1,83 @@
-<%- include('../includes/cabecalho.ejs') -%>
+<!DOCTYPE html>
+<!--
+* CoreUI - Free Bootstrap Admin Template
+* @version v2.1.12
+* @link https://coreui.io
+* Copyright (c) 2018 creativeLabs Łukasz Holeczek
+* Licensed under MIT (https://coreui.io/license)
+-->
 
-<main class="main">
-  <div class="container-fluid">
-    <div class="animated fadeIn">
-      <div class="row mt-3 mb-3">
-        <div class="col">
-          <h2>MEUS SERVIÇOS</h2>
-        </div>
-        <div class="col text-right">
-          <a href="/fornecedor/novo-servico" class="btn btn-primary">
-            <span class="fa fa-plus"></span> ADICIONAR SERVIÇO
-          </a>
+<html lang="en">
+
+<head>
+  <base href="./">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+  <meta name="author" content="Łukasz Holeczek">
+  
+  <title>Trabalho BD</title>
+  <!-- Icons-->
+  <link href="css/vendors/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
+  <link href="css/vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+  <link href="css/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+  <!-- Main styles for this application-->
+  <link href="/css/style.css" rel="stylesheet">
+  <link href="css/vendors/pace-progress/css/pace.min.css" rel="stylesheet">
+</head>
+
+<body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
+  <%- include('../includes/menu.ejs') %>
+    <main class="main">
+      <div class="container-fluid">
+        <div class="animated fadeIn">
+          <div class="row mt-3 mb-3">
+            <div class="col">
+              <h2>MEUS SERVIÇOS</h2>
+            </div>
+            <div class="col text-right">
+              <a href="/fornecedor/novo-servico" class="btn btn-primary">
+                <span class="fa fa-plus"></span> ADICIONAR SERVIÇO
+              </a>
+            </div>
+          </div>
+              <div class="row">
+                <% servicos.forEach(function(dat) { %>
+                <div class="col-sm-6 col-lg-3">
+                    <a href="editar.html">
+                      <div class="card mb-3">
+                        <img src="/img/services/advogado.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title"><%= dat.nome%></h5>
+                          <p class="card-text"><%=dat.descricao%></p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <% }); %>
+              </div>
         </div>
       </div>
-          <div class="row">
-            <% servicos.forEach(function(dat) { %>
-            <div class="col-sm-6 col-lg-3">
-                <a href="editar.html">
-                  <div class="card mb-3">
-                    <img src="/img/services/advogado.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title"><%= dat.nome%></h5>
-                      <p class="card-text"><%=dat.descricao%></p>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <% }); %>
-          </div>
-    </div>
+    </main>
   </div>
-</main>
-<%- include('../includes/rodape.ejs') -%>
+  <footer class="app-footer">
+    <div>
+      <a href="https://coreui.io">CoreUI</a>
+      <span>&copy; 2018 creativeLabs.</span>
+    </div>
+    <div class="ml-auto">
+      <span>Powered by</span>
+      <a href="https://coreui.io">CoreUI</a>
+    </div>
+  </footer>
+  <!-- CoreUI and necessary plugins-->
+  <script src="css/vendors/jquery/dist/jquery.min.js"></script>
+  <script src="css/vendors/popper.js/dist/umd/popper.min.js"></script>
+  <script src="css/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="css/vendors/pace-progress/pace.min.js"></script>
+  <script src="css/vendors/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
+  <script src="css/vendors/@coreui/coreui/dist/js/coreui.min.js"></script>
+</body>
+</html>
