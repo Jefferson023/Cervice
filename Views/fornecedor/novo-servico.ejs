@@ -1,157 +1,144 @@
-<!DOCTYPE html>
-<!--
-* CoreUI - Free Bootstrap Admin Template
-* @version v2.1.12
-* @link https://coreui.io
-* Copyright (c) 2018 creativeLabs Łukasz Holeczek
-* Licensed under MIT (https://coreui.io/license)
--->
+<% layout('../includes/template') -%>
 
-<html lang="en">
+<main class="main">
+  <div class="container-fluid">
+    <div class="animated fadeIn">
+      <div class="row mt-3 mb-3">
+        <div class="col">
+          <h2>NOVO SERVIÇO</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+                <form action="/fornecedor/novo-servico" method="POST">
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="titulo">Título</label>
+                        <input type="text" class="form-control" name="titulo">
+                      </div>
+                    </div>
+                    <div class="col col-md-3">
+                      <div class="form-group ">
+                        <label for="tipo">Tipo</label>
 
-<head>
-  <base href="./">
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
-  <meta name="author" content="Łukasz Holeczek">
-  
-  <title>Trabalho BD</title>
-  <!-- Icons-->
-  <link href="/vendors/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
-  <link href="/vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
-  <link href="/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="/vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
-  <!-- Main styles for this application-->
-  <link href="/css/style.css" rel="stylesheet">
-  <link href="/vendors/pace-progress/css/pace.min.css" rel="stylesheet">
-</head>
-
-<body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
-  <%- include('../includes/menu.ejs') %>
-    <main class="main">
-      <div class="container-fluid">
-        <div class="animated fadeIn">
-          <div class="row mt-3 mb-3">
-            <div class="col">
-              <h2>NOVO SERVIÇO</h2>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <div class="card">
-                <div class="card-body">
-                    <form action="/fornecedor/novo-servico" method="POST">
-                      <div class="row">
-                        <div class="col">
+                        <select name="tipo"class="form-control">
+                          <% tipo_servico.forEach(function(dat) { %>
+                            <option value=<%= dat.id_tipo%> name = 'id_tipo'><%= dat.nome%></option>                       
+                            <% }); %>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col col-md-3">
+                        <label for="hora" name = 'ho'>Hora de abertura</label>
+                        <input type="time" class="form-control" name="hora">
+                    </div>
+                  </div>
+                  <div class="row">
+                      <div class="col">
                           <div class="form-group">
-                            <label for="titulo">Título</label>
-                            <input type="text" class="form-control" name="titulo">
+                            <label for="descricaoServico">Descrição</label>
+                            <textarea class="form-control" id="descricaoServico" rows="3"></textarea>
                           </div>
                         </div>
-                        <div class="col col-md-3">
-                          <div class="form-group ">
-                            <label for="tipo">Tipo</label>
-    
-                            <select name="tipo"class="form-control">
-                              <% tipo_servico.forEach(function(dat) { %>
-                                <option value=<%= dat.id_tipo%> name = 'id_tipo'><%= dat.nome%></option>                       
-                                <% }); %>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col col-md-2">
-                            <label for="hora" name = 'ho'>Hora de abertura</label>
-                            <input type="time" class="form-control" name="hora">
-                        </div>
-                      </div>
-                      <div class="row">
-                          <div class="col">
-                              <div class="form-group">
-                                <label for="descricaoServico">Descrição</label>
-                                <textarea class="form-control" id="descricaoServico" rows="3"></textarea>
-                              </div>
-                            </div>
-                      </div>
-                      <hr>
-                      <div class="row"> 
-                          <div class="col">
-                              Novo Produto
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="col">
-                            <div class="form-group">
-                              <label for="nomeProduto">Nome</label>
-                              <input type="text"  class="form-control" name="nomeProduto">
-                            </div>
-                          </div>
-                          <div class="col col-md-2">
-                            <div class="form-group">
-                              <label for="precoProduto">Preço</label>
-                              <input type="number" step="0.01" class="form-control" name="precoProduto">
-                            </div>
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="col">
-                              <div class="form-group">
-                                <label for="descricaoproduto">Descrição </label>
-                                <textarea class="form-control" id="descricaoproduto" rows="3"></textarea>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="row">
-                        <div class="col">
-                          <button class="btn btn-primary" id="btn-add-produto">
-                            <span class="fa fa-plus"></span> ADICIONAR PRODUTO
-                          </button></div>
-                      </div> 
-                      <div class="row">
-                        <div class="col" id="div-produtos">
-    
-                        </div>
-                      </div> 
-                      <hr>  
-                      <div class="row">
-                          <div class="col text-right">
-                            <button class="btn btn-primary" id="btn-add-produto">
-                              <span class="fa fa-plus"></span> ADICIONAR SERVIÇO
-                            </button></div>
-                        </div>            
-                    </form>
-                </div>
-              </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col">
+                        <table class="table table-responsive-sm" id="tb-produtos">
+                          <thead>
+                            <tr>
+                              <th>Nome</th>
+                              <th>Descrição</th>
+                              <th>Preço</th>
+                              <th></th>
+                            </tr>
+                          </thead>
+                            <tbody>
+                              <tr id="linha-novo-produto" style="display:none">
+                                <td>
+                                  <input type="text" id="txt-titulo-produto" class="form-control" placeholder="Título">
+                                </td>
+                                <td>
+                                  <input type="text" id="txt-descricao-produto" class="form-control" placeholder="Descrição">
+                                </td>
+                                <td>
+                                  <input type="number" id="txt-preco-produto" class="form-control"placeholder="">
+                                </td>
+                                <td>
+                                    <button class="btn btn-success" id="btn-add-produto"><i class="fa fa-check"></i></button>
+                                </td>
+                              </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>                  
+                  <div class="row">
+                    <div class="col">
+                      <button class="btn btn-primary" id="btn-novo-produto" >
+                        <span class="fa fa-plus"></span> ADICIONAR PRODUTO
+                      </button></div>
+                  </div> 
+                  <div class="row">
+                    <div class="col" id="div-produtos">
+
+                    </div>
+                  </div> 
+                  <hr>  
+                  <div class="row">
+                      <div class="col text-right">
+                        <button class="btn btn-primary" id="btn-add-servico">
+                          <span class="fa fa-plus"></span> ADICIONAR SERVIÇO
+                        </button></div>
+                    </div>            
+                </form>
             </div>
           </div>
         </div>
-    </main>
+      </div>
+    </div>
+</main>
+<!--Modal-->
+<div class="modal" tabindex="-1" role="dialog" id="modal-produto">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="nomeProduto">Nome</label>
+                  <input type="text"  class="form-control" name="nomeProduto">
+                </div>
+              </div>
+              <div class="col col-md-2">
+                <div class="form-group">
+                  <label for="precoProduto">Preço</label>
+                  <input type="number" step="0.01" class="form-control" name="precoProduto">
+                </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col">
+                  <div class="form-group">
+                    <label for="descricaoproduto">Descrição </label>
+                    <textarea class="form-control" id="descricaoproduto" rows="3"></textarea>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
   </div>
-  <footer class="app-footer">
-    <div>
-      <a href="https://coreui.io">CoreUI</a>
-      <span>&copy; 2018 creativeLabs.</span>
-    </div>
-    <div class="ml-auto">
-      <span>Powered by</span>
-      <a href="https://coreui.io">CoreUI</a>
-    </div>
-  </footer>
-  <!-- CoreUI and necessary plugins-->
-  <script src="/vendors/jquery/dist/jquery.min.js"></script>
-  <script src="/vendors/popper.js/dist/umd/popper.min.js"></script>
-  <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="/vendors/pace-progress/pace.min.js"></script>
-  <script src="/vendors/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
-  <script src="/vendors/@coreui/coreui/dist/js/coreui.min.js"></script>
-  <script>
-    $(function(){
-      $("#btn-add-produto").click(function(){
-        alert("TESTE");
-      })
-    })
-  </script>
-</body>
-
-</html>
+</div>
+<% script('/javascript/novoservico.js') -%>

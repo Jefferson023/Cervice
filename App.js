@@ -6,7 +6,10 @@ const session = require('express-session');
 const passport = require('passport');
 //const helmet = require('helmet');
 const app = express();
+require('ejs-locals');
 require('./Config/autenticacao.js')(passport);
+
+app.engine('ejs', require('ejs-locals'));
 
 //configurações principais do express
 app.set('view engine', 'ejs');
