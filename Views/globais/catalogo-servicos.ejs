@@ -1,0 +1,103 @@
+<% layout('../includes/template') -%>
+<%block('title','Serviços');-%>
+<main class="main">
+  <div class="container-fluid">
+    <div class="animated fadeIn">
+      <div class="row mt-3 mb-3">
+        <div class="col">
+          <h2>CATÁLOGO DE SERVIÇOS</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-sm-6 col-md-6 offset-md-3 mb-3">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control form-control-lg border-primary" placeholder="Buscar serviço"
+              aria-label="Recipient's username" aria-describedby="button-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">Categoria</button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Limpeza</a>
+                <a class="dropdown-item" href="#">Alimentação</a>
+                <a class="dropdown-item" href="#">Vestuário</a>
+              </div>
+            </div>
+            <div class="input-group-append">
+              <button class="btn btn-outline-primary" type="button">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row catalogo-servicos-grid">
+        <div class="col-sm-6 col-lg-3">
+          <a href="/catalogo-servicos/detalhes-produto">
+            <div class="card mb-3">
+              <img src="/img/services/advogado.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Eletricista</h5>
+                <p class="card-text">Instalações e reparos elétricos em geral</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <a href="/catalogo-servicos/detalhes-produto">
+            <div class="card mb-3">
+              <img src="/img/services/contador.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Eletricista</h5>
+                <p class="card-text">Instalações e reparos elétricos em geral</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <a href="/catalogo-servicos/detalhes-produto">
+            <div class="card mb-3">
+              <img src="/img/services/costura.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Eletricista</h5>
+                <p class="card-text">Instalações e reparos elétricos em geral</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <a href="/catalogo-servicos/detalhes-produto">
+            <div class="card mb-3">
+              <img src="/img/services/eletricista.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Eletricista</h5>
+                <p class="card-text">Instalações e reparos elétricos em geral</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <a href="/catalogo-servicos/detalhes-produto">
+            <div class="card mb-3">
+              <img src="/img/services/eletricista.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Eletricista</h5>
+                <p class="card-text">Instalações e reparos elétricos em geral</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <a href="/catalogo-servicos/detalhes-produto">
+            <div class="card mb-3">
+              <img src="/img/services/eletricista.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Eletricista</h5>
+                <p class="card-text">Instalações e reparos elétricos em geral</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+</main>

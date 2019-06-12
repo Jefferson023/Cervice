@@ -49,7 +49,7 @@ router.get('/cadastro/email_disponivel', function (req, res){
 
 //página inicial
 router.get('/', autenticacao.isAuthenticated, function (req, res){
-    res.redirect('/vitrine');
+    res.redirect('/catalogo-servicos');
 });
 
 //logout

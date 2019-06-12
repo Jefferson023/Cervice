@@ -9,13 +9,13 @@ function isAuthenticated(req, res, next) {
     res.redirect('/login');
 }
 
-// GET vitrine
-router.get('/vitrine', function (req, res) {
-    res.render('globais/vitrine.ejs');
+// GET catalogo-servicos
+router.get('/catalogo-servicos', function (req, res) {
+    res.render('globais/catalogo-servicos.ejs');
 });
 
 // GET detalhes-produto
-router.get('/vitrine/detalhes-produto', function (req, res) {
+router.get('/catalogo-servicos/detalhes-produto', function (req, res) {
     res.render('globais/detalhes-produto.ejs');
 });
 
