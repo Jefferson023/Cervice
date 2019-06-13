@@ -39,5 +39,15 @@ function valor_id(valor)
 {
     id = valor;
 }
+router.get('/fornecedor/minhas-entregas', function (req, res) {
+    
+    res.render('fornecedor/minhas-entregas.ejs')
+    
+});
+router.get('/fornecedor/clickservico/um-servico', function (req, res) {
+    
+    res.render('fornecedor/um-servico.ejs')
+    
+});
 
 module.exports = router;

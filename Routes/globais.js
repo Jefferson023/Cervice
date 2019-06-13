@@ -19,4 +19,9 @@ router.get('/catalogo-servicos/detalhes-produto', function (req, res) {
     res.render('globais/detalhes-produto.ejs');
 });
 
+// GET detalhes-produto
+router.get('/perfil', function (req, res) {
+    res.render('globais/perfil.ejs');
+});
+
 module.exports = router;
