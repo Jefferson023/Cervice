@@ -15212,3 +15212,9 @@ body {
 .catalogo-servicos-grid .card .card-img-top {
   height: 180px!important;
 }
+.ativo.v{
+  display:block;
+}
+.ativo{
+  display:none;
+}

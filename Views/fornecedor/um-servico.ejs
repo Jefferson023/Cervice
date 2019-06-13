@@ -6,16 +6,21 @@
         <li class="breadcrumb-item">Um serviço</li>
     </ol>
     <div class="container-fluid">
+
         <div>
             <div class="animated fadeIn">
+                <form>
                 <div class="row">
                   <div class="col text-center">
                     <h2>NOME SERVIÇO</h2>
                   </div>                 
                 </div>
                 <div class="row">
-                    <div class="col text-right">
-                        <button class="btn btn-success" id="btn-iniciar-atendimento"><i class="fa fa-play-circle" id="icone-iniciar" style="font-size: large" ></i> Iniciar atendimento</button>
+                    <div class="col text-right ativo v">
+                        <button class="btn btn-success" id="btn-inicio-atendimento"><i class="fa fa-play-circle" id="icone-iniciar" style="font-size: large" ></i> Iniciar atendimento</button>
+                    </div>
+                    <div class="col text-right ativo" >
+                        <button class="btn btn-danger" id="btn-fim-atendimento"><i class="fa fa-pause-circle" id="icone-pausar" style="font-size: large" ></i> Finalizar atendimento</button>
                     </div>
                 </div>
                 <div class="row">
@@ -24,14 +29,43 @@
                                 <div class="card-header text-center">Descrição</div>
                             <div class="card-body">
                                 <div>
-                                    <form action="">
-                                        <div class="form-group">
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" readonly>Lorem ipsum donec eros nullam platea ut lacinia primis curae, feugiat himenaeos interdum volutpat nostra eros senectus felis rhoncus pretium, lorem volutpat semper cras ante a adipiscing sociosqu. praesent sit fusce risus pulvinar lacinia imperdiet congue dolor ligula nulla inceptos pellentesque accumsan aliquam iaculis nunc, commodo nibh a at eget magna non vivamus lacus ligula imperdiet dictumst id tortor. nullam semper magna sapien sem ut diam consectetur vehicula feugiat, pharetra pellentesque lacinia vitae praesent vehicula diam quisque faucibus, amet hac sollicitudin dui ligula platea eget mollis. </textarea>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <textarea class="form-control-plaintext" id="descricao-servico2" rows="4" readonly="true">Lorem ipsum donec eros nullam platea ut lacinia primis curae, feugiat himenaeos interdum volutpat nostra eros senectus felis rhoncus pretium, lorem volutpat semper cras ante a adipiscing sociosqu. praesent sit fusce risus pulvinar lacinia imperdiet congue dolor ligula nulla inceptos pellentesque accumsan aliquam iaculis nunc, commodo nibh a at eget magna non vivamus lacus ligula imperdiet dictumst id tortor. nullam semper magna sapien sem ut diam consectetur vehicula feugiat, pharetra pellentesque lacinia vitae praesent vehicula diam quisque faucibus, amet hac sollicitudin dui ligula platea eget mollis. </textarea>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                        <div class="row" style="display:none" id="linha-forms">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="titulo">Título</label>
+                                                    <input type="text" class="form-control" name="titulo">
+                                                </div>
                                             </div>
-                                    </form>
+                                            <div class="col col-md-3">
+                                                <div class="form-group ">
+                                                    <label for="tipo">Tipo</label>
+                                                    <select id="inputState" class="form-control">
+                                                            <option selected>Choose...</option>
+                                                            <option>...</option>
+                                                          </select>
+                                                </div>
+                                            </div>
+                                            <div class="col col-md-3">
+                                                <label for="hora" name = 'ho'>Hora de abertura</label>
+                                                <input type="time" class="form-control" name="hora">
+                                            </div>
+                                        </div>
                                 </div>
                                 <hr>
-                                
+                                <div class="row">
+                                        <div class="col">
+                                            <button class="btn btn-primary" id="btn-edit-informacoes" >
+                                            <span class="fa fa-edit"></span> EDITAR INFORMÇÕES
+                                            </button>
+                                        </div>
+                                    </div> 
                             </div>
                         </div>
                     </div>
@@ -83,6 +117,7 @@
                         </div>                        
                     </div>
                 </div>
+            </form>
             </div>
         </div>
     </div>    

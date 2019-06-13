@@ -29,5 +29,19 @@ $(function(){
             $("#tb-produtos").hide();
         }       
     })
+    //mostra as os componentes ocultos e desbloqueia a textarea
+    $("#btn-edit-informacoes").click(function(e){
+        e.preventDefault();
+        $("#linha-forms").show();
+        $('#descricao-servico2').prop('readonly', false);
+    })
+    //ativar/desativa botoes
+    $("#btn-fim-atendimento").click(function(e){
+        e.preventDefault();
+    })
+    $("#btn-inicio-atendimento").click(function(e){
+        e.preventDefault();
+        //$('.ativo').toggleClass('v');        
+    })
 });
 
