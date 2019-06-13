@@ -24,10 +24,18 @@
                           <p class="card-text"><%=dat.descricao%></p>
                         </div>
                       
-                        <div class=" card-footer bg-transparent text-center">
-                        <!--<button class="btn btn-light"><i class="fa fa-edit"></i></button> --> 
-                          <a href="/fornecedor/clickservico/um-servico"><i class="fa fa-edit" style="font-size: large"></i></a>
-                          <button class="btn btn-link"><i class="fa fa-trash-alt" style="font-size: large"></i></button>
+                        <div class=" card-footer bg-transparent ">
+                          <div class="row">
+                              <div class="col text-left">
+                                  <button class="btn btn-success" data-toggle="tooltip"  title="Iniciar Atendimento" data-placement="bottom" id="btn-iniciaratendimento"><i class="fa fa-play-circle" style="font-size: large"></i></button>
+                              </div>
+                            <div clas="col text-right"> 
+                                <a href="/fornecedor/clickservico/um-servico"  data-toggle="tooltip" title="Editar" ><i class="fa fa-edit" style="font-size: large"></i></a>
+                                <button class="btn btn-link"  data-toggle="tooltip" title="Excluir"><i class="fa fa-trash-alt" style="font-size: large"></i></button>
+                            </div>
+                            
+                          </div>                     
+                          
                         </div>
                       </div>
                   </div>
@@ -36,3 +44,4 @@
         </div>
       </div>
     </main>
+    <% script('/javascript/novoservico.js') -%>

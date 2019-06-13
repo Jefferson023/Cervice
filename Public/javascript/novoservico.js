@@ -43,5 +43,9 @@ $(function(){
         e.preventDefault();
         //$('.ativo').toggleClass('v');        
     })
+    
 });
-
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+    //$('#btn-iniciaratendimento').tooltip('show')
+})
