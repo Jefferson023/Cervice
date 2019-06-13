@@ -16,15 +16,20 @@
               <div class="row">
                 <% servicos.forEach(function(dat) { %>
                 <div class="col-sm-6 col-lg-3">
-                    <a href="/fornecedor/clickservico/um-servico">
+                    <a href="/fornecedor/clickservico/um-servico"></a>
                       <div class="card mb-3">
                         <img src="/img/services/advogado.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
                           <h5 class="card-title"><%= dat.nome%></h5>
                           <p class="card-text"><%=dat.descricao%></p>
                         </div>
+                      
+                        <div class=" card-footer bg-transparent text-center">
+                        <!--<button class="btn btn-light"><i class="fa fa-edit"></i></button> --> 
+                          <a href="/fornecedor/clickservico/um-servico"><i class="fa fa-edit" style="font-size: large"></i></a>
+                          <button class="btn btn-link"><i class="fa fa-trash-alt" style="font-size: large"></i></button>
+                        </div>
                       </div>
-                    </a>
                   </div>
                   <% }); %>
               </div>
