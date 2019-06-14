@@ -30,9 +30,9 @@
                                   <button class="btn btn-success" data-toggle="tooltip"  title="Iniciar Atendimento" data-placement="bottom" id="btn-iniciaratendimento"><i class="fa fa-play-circle" style="font-size: large"></i></button>
                               </div>
                             <div clas="col text-right"> 
-                                <form action="/fornecedor/um-servico" method="GET">
-                                <a href="/fornecedor/clickservico/um-servico"  value=<%= dat.id_servico%> name = 'id_servico' data-toggle="tooltip" title="Editar" ><i class="fa fa-edit" style="font-size: large"></i></a>
-                               
+                                <form action="/fornecedor/clickservico/um-servico" method="POST">
+                                  <button  value=<%= dat.id_servico%> name = 'id_servico' data-toggle="tooltip" title="Editar" ><i class="fa fa-edit" style="font-size: large"></i></button> 
+                                <option value=<%= dat.id_servico%> name = 'id_servico'></option> 
                                 <button class="btn btn-link"  data-toggle="tooltip" title="Excluir"><i class="fa fa-trash-alt" style="font-size: large"></i></button>
                               </form>
                             </div>

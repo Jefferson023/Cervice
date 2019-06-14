@@ -3,12 +3,9 @@ const client = require('../Config/clientdb.js');
 const express = require('express');
 const app = express();
 var tipo_servico = [];
+var lista_produtos = []
 module.exports.lista_tipo_servico = function(req, res) {
-    if (!req.user) {
-        console.log('nao  logado');
-        res.redirect('/login');
-        return;
-    }
+    console.log(req.body)
 
     pool.query('SELECT * FROM tb_tipo_servico', (err, res_bd) => {
 
@@ -24,6 +21,59 @@ module.exports.lista_tipo_servico = function(req, res) {
         });
     });
 }
+module.exports.lista_produtos = function(req, res) {
+    var id_servico = req.body.id_servico;
+    var nome = '';
+    var descricao = '';
+    client.connect();
+    client.query('BEGIN', (err) => {
+        
+
+        if (err) {
+            console.log(err, 'err');
+            return;
+        } else {
+               
+            client.query('SELECT * FROM tb_servico as ts where ts.id_servico = $1', [id_servico], (err1, res_bd1) => {
+                if (err1) {
+                    console.log('e1rr');
+                    console.log(err1,'err1');
+                    client.query('ROLLBACK');
+                    return;
+                } else {
+                    
+                    descricao = res_bd1.rows[0].descricao;
+                    nome = res_bd1.rows[0].nome;
+                    client.query('SELECT * FROM tb_servico as ts inner join tb_produto as tp ON ts.id_servico = tp.id_servico where ts.id_servico = $1', [id_servico], (err2, res_bd2) => {
+
+                        if (err2) {
+                            console.log(err2,'err2');
+                            client.query('ROLLBACK');
+                            return;
+                        } else {
+                             
+                            lista_produtos = res_bd2.rows;
+                            client.query('COMMIT', (err) => {
+                                if (err) {
+                                    client.query('ROLLBACK');
+                                } else {
+                                    client.end();
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    });
+    console.log(nome+ " "+ descricao);
+    res.render('fornecedor/um-servico.ejs', {
+        produtos:lista_produtos,
+        nome: nome,
+        descricao:descricao
+    });
+}
+
 
 function valor_tipo(valor) {
     tipo_servico = valor
@@ -51,11 +101,11 @@ module.exports.cadastro_servico = function(req, res) {
             console.log(err, 'err');
             return;
         } else {
-           
+
 
             var values1 = [req.body.titulo, req.body.tipo, req.body.hora, req.body.descricaoServico];
-            var query_s = 'INSERT INTO tb_servico(nome,hora_abertura,abertura_status,id_tipo,banido,descricao) values '
-            query_s = query_s + '($1,$3,False,$2,False,$4) RETURNING id_servico'
+            var query_s = 'INSERT INTO tb_servico(nome,hora_abertura,id_tipo,banido,descricao) values '
+            query_s = query_s + '($1,$3,$2,False,$4) RETURNING id_servico'
             client.query(query_s, values1, (err1, res_bd) => {
                 console.log('2');
                 if (err1) {
@@ -91,12 +141,12 @@ module.exports.cadastro_servico = function(req, res) {
                                                 } else {
                                                     client.end();
                                                 }
-                                            }) 
+                                            })
                                         }
                                     });
                                 }
                             });
-                        }
+                        };
                     });
                 };
             });

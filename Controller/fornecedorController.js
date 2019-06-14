@@ -3,12 +3,7 @@ const express = require('express');
 const app = express();
 module.exports.lista_servico_fornecedor = function (req,res)
 {
-  if(!req.user)
-    {
-        console.log('nao logado');
-        res.redirect('/login');
-        return;
-    }
+  console.log(req.body)
   var id = req.user.id_usuario;
   var query_sf = 'SELECT * FROM tb_usuario as tu  inner join tb_fornecedor_servico as tfs on tu.id_usuario = tfs.id_usuario'
   var query_sf = query_sf +' inner join tb_servico as ts on tfs.id_servico = ts.id_servico WHERE tu.id_usuario = $1'
