@@ -1,9 +1,9 @@
 <% layout('../includes/template') -%>
-<%block('title','Pedido');-%>
+<%block('title','Informaçoes Serviço');-%>
 <main class="main">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"> <a href="#">Meus Pedidos</a></li>
-        <li class="breadcrumb-item">Numero Pedido</li>
+        <li class="breadcrumb-item"> <a href="#">Minhas Entregas</a></li>
+        <li class="breadcrumb-item">Numero do Pedido</li>
     </ol>
     <div class="container-fluid">
 
@@ -24,9 +24,13 @@
                             </h2>
                         </div>
 
-                        <div class="col text-right ativo v">
+                        <div class="col text-right" style="display: none">
                             <button class="btn btn-danger" id="btn-fim-atendimento"><i class="fa fa-ban"
                                     id="icone-cancelar" style="font-size: large"></i> CANCELAR PEDIDO</button>
+                        </div>
+                        <div class="col text-right">
+                            <button class="btn btn-success" id="btn-fim-atendimento"><i class="fa fa-play"
+                                    id="icone-cancelar" style="font-size: large"></i> INICIAR PEDIDO</button>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -50,22 +54,12 @@
                         </div>
                     </div>
                     <div class="row mt-3">
-
                         <div class="col">
                             <div class="card ">
                                 <div class="card-header text-center">Serviço</div>
                                 <div class="card-body">
                                     <div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="titulo">Descrição do Serviço</label>
-                                                    <textarea class="form-control-plaintext" id="descricao-servico2"
-                                                        rows="4"
-                                                        readonly>Lorem ipsum donec eros nullam platea ut lacinia primis curae, feugiat himenaeos interdum volutpat nostra eros senectus felis rhoncus pretium, lorem volutpat semper cras ante a adipiscing sociosqu. praesent sit fusce risus pulvinar lacinia imperdiet congue dolor ligula nulla inceptos pellentesque accumsan aliquam iaculis nunc, commodo nibh a at eget magna non vivamus lacus ligula imperdiet dictumst id tortor. nullam semper magna sapien sem ut diam consectetur vehicula feugiat, pharetra pellentesque lacinia vitae praesent vehicula diam quisque faucibus, amet hac sollicitudin dui ligula platea eget mollis. </textarea>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
                                         <div class="row" id="linha-forms">
                                             <div class="col">
                                                 <div class="form-group">
@@ -86,7 +80,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -99,8 +92,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
-                                            <table class="table table-responsive-sm" id="tb-produtos"
-                                                style="display:none">
+                                            <table class="table table-responsive-sm" id="tb-produtos">
                                                 <thead>
                                                     <tr>
                                                         <th>Nome</th>
