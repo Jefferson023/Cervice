@@ -106,3 +106,31 @@ module.exports.cadastro_servico = function(req, res) {
     req.flash("success", "Servico" + req.body.titulo + "criado com sucesso");
     res.redirect('/fornecedor/novo-servico');
 }
+
+module.exports.listar_servicos = function (req, res){
+    var nome = req.query.nome_servico + '%';
+    var categoria = req.query.categoria + '%';
+    var query_string = "SELECT S.id_servico, S.nome, S.descricao, S.hora_abertura, S.hora_fechamento, TS.nome AS categoria, TS.link"
+    query_string = query_string + " FROM tb_servico S JOIN tb_tipo_servico TS ON S.id_tipo = TS.id_tipo";
+    query_string = query_string + " WHERE S.nome LIKE $1 AND TS.nome LIKE $2 AND S.banido=false";
+    pool.query(query_string, [nome, categoria], (err, res_bd) =>{
+        if (err){
+            res.sendStatus(500);
+        }else{
+            res.send(res_bd.rows);
+        }
+    });
+}
+module.exports.listar_categorias = function (req, res){
+    pool.query("SELECT nome FROM tb_tipo_servico", (err, res_bd) => {
+        if (err){
+            res.redirect(500, '500.ejs');
+        }else{
+            categorias = []
+            res_bd.rows.forEach(categoria => {
+                categorias.push(categoria.nome);
+            })
+            res.render('globais/catalogo-servicos.ejs', {categorias: categorias});
+        }
+    });
+}
