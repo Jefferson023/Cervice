@@ -26,8 +26,24 @@ module.exports = function(passport) {
     })
 
     passport.deserializeUser(function(id, done) {
-        pool.query('SELECT * FROM tb_usuario WHERE id_usuario=$1', [id], (err, res_bd) => {
-            return done(null, res_bd.rows[0]);
+        var query_string = "SELECT * FROM tb_usuario U LEFT JOIN tb_administrador_condominio A ON U.id_usuario=A.id_usuario";
+        query_string = query_string + " WHERE U.id_usuario=$1";
+        pool.query(query_string, [id], (err, res_bd) => {
+            if (res_bd.rows.length > 1){
+                var usuario = res_bd.rows[0];
+                usuario.admin = true;
+                return done(null, usuario);
+            }else{
+                if (res_bd.rows[0].id_condominio != null){
+                    var usuario = res_bd.rows[0];
+                    usuario.admin = true;
+                    return done(null, usuario);
+                }else{
+                    var usuario = res_bd.rows[0];
+                    usuario.admin = false;
+                    return done(null, res_bd.rows[0]);
+                }
+            }
         });
-    })
+    });
 }
