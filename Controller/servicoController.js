@@ -9,6 +9,7 @@ module.exports.lista_tipo_servico = function(req, res) {
         res.redirect('/login');
         return;
     }
+
     pool.query('SELECT * FROM tb_tipo_servico', (err, res_bd) => {
 
 
@@ -28,10 +29,7 @@ function valor_tipo(valor) {
     tipo_servico = valor
 }
 module.exports.cadastro_servico = function(req, res) {
-    if (!req.user) {
-        console.log('nao logado');
-        res.redirect('/login');
-    }
+    console.log(req.body)
     if (req.body.titulo.length == 0) // trocar por um aviso de problema igual ao da tela de cadastro
     {
         console.log('titulo não pode ser vazio');
@@ -53,7 +51,9 @@ module.exports.cadastro_servico = function(req, res) {
             console.log(err, 'err');
             return;
         } else {
-            var values1 = [req.body.titulo, req.body.tipo, req.body.hora, req.body.descricao];
+           
+
+            var values1 = [req.body.titulo, req.body.tipo, req.body.hora, req.body.descricaoServico];
             var query_s = 'INSERT INTO tb_servico(nome,hora_abertura,abertura_status,id_tipo,banido,descricao) values '
             query_s = query_s + '($1,$3,False,$2,False,$4) RETURNING id_servico'
             client.query(query_s, values1, (err1, res_bd) => {

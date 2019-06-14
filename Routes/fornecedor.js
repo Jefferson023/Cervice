@@ -21,6 +21,7 @@ function isAuthenticated(req, res, next) {
 
 // GET meus-servicos.
 router.get('/fornecedor/meus-servicos', function (req, res) {
+    
     fornecedorController.lista_servico_fornecedor(req,res)
 });
 
@@ -47,7 +48,7 @@ router.get('/fornecedor/minhas-entregas', function (req, res) {
 router.get('/fornecedor/clickservico/um-servico', function (req, res) {
     
     res.render('fornecedor/um-servico.ejs')
-    
+    console.log(res)
 });
 
 module.exports = router;
