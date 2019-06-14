@@ -38,12 +38,10 @@ module.exports = function(passport) {
                 if (res_bd.rows[0].id_condominio != null){
                     var usuario = res_bd.rows[0];
                     usuario.admin = true;
-                    console.log(usuario);
                     return done(null, usuario);
                 }else{
                     var usuario = res_bd.rows[0];
                     usuario.admin = false;
-                    console.log(usuario);
                     return done(null, res_bd.rows[0]);
                 }
             }
