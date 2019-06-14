@@ -19,6 +19,15 @@ router.get('/catalogo-servicos/detalhes-produto', function (req, res) {
     res.render('globais/detalhes-produto.ejs');
 });
 
+// GET meus-pedidos
+router.get('/meus-pedidos', function (req, res) {
+    res.render('globais/meus-pedidos.ejs');
+});
+// GET detalhe-pedido
+router.get('/meus-pedidos/detalhe-pedido', function (req, res) {
+    res.render('globais/um-pedido.ejs');
+});
+
 // GET detalhes-produto
 router.get('/perfil', function (req, res) {
     res.render('globais/perfil.ejs');

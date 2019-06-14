@@ -1,5 +1,5 @@
 <% layout('../includes/template') -%>
-<%block('title','Usuários');-%>
+<%block('title','Perfil');-%>
 <main class="main">
     <div class="container-fluid">
         <div>
@@ -13,7 +13,8 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
-                                <form>
+                                <form class="form">
+                                        
                                     <div class=" form-group row">
                                         <div class="col">
                                             <label for="nome">Nome</label>
@@ -23,7 +24,7 @@
                                                 <i class="fa fa-user"></i>
                                                 </span>
                                                 </div>
-                                                <input class="form-control" id="nome" type="text" name="input1-group1" placeholder="Nome" autocomplete="nome" readonly="true">
+                                                <input class="form-control" id="nome" type="text" name="input1-group1" placeholder="Nome" autocomplete="nome" readonly="true" value="<%= user.nome %>">
                                             </div>
                                         </div>
                                         <div class="col">
@@ -34,29 +35,7 @@
                                                 <i class="fa fa-envelope"></i>
                                                 </span>
                                                 </div>
-                                                <input class="form-control" id="email" type="email" name="input1-group1" placeholder="E-mail" autocomplete="email" readonly="true">
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <label for="senha">Senha</label>
-                                            <div class="input-group">                    
-                                                <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                <i class="fa fa-lock"></i>
-                                                </span>
-                                                </div>
-                                                <input class="form-control" id="senha" type="password" name="input1-group1" placeholder="Senha" autocomplete="senha" readonly="true">
-                                            </div>
-                                        </div>
-                                        <div class="col" style="display: none">
-                                            <label for="repsenha">Repita Senha</label>
-                                            <div class="input-group">                    
-                                                <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                <i class="fa fa-lock"></i>
-                                                </span>
-                                                </div>
-                                                <input class="form-control" id="repsenha" type="password" name="input1-group1" placeholder="Senha" autocomplete="senha">
+                                                <input class="form-control" id="email" type="email" name="input1-group1" placeholder="E-mail" autocomplete="email" readonly="true" value="<%= user.email %>">
                                             </div>
                                         </div>
                                        
@@ -87,6 +66,28 @@
                                                 <input class="form-control" id="condominio" type="text" name="input1-group1" placeholder="Nome do Condomínio" autocomplete="nomecondominio" readonly="true">
                                             </div>
                                         </div>
+                                        <div class="col">
+                                                <label for="bloco">Bloco</label>
+                                                <div class="input-group">                    
+                                                    <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                    <i class="fa fa-home"></i>
+                                                    </span>
+                                                    </div>
+                                                    <input class="form-control" id="bloco" type="text" name="input1-group1" placeholder="Bloco" autocomplete="blococondominio">
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                    <label for="apartamento">Apartamento</label>
+                                                    <div class="input-group">                    
+                                                        <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                        <i class="fa fa-hashtag"></i>
+                                                        </span>
+                                                        </div>
+                                                        <input class="form-control" id="apartamento" type="text" name="input1-group1" placeholder="Apartamento" autocomplete="apartamentocondominio">
+                                                    </div>
+                                                </div>
                                         
                                     </div>
                                     <div class="form-group row">
@@ -95,7 +96,7 @@
                                             <div class="input-group">                    
                                                 <div class="input-group-prepend">
                                                 <span class="input-group-text">
-                                                <i class="fa fa-city"></i>
+                                                <i class="fa fa-road"></i>
                                                 </span>
                                                 </div>
                                                 <input class="form-control" id="logradouro" type="text" name="input1-group1" placeholder="Logradouro" autocomplete="cidadecondominio" readonly="true">
