@@ -112,8 +112,10 @@ module.exports.listar_servicos = function (req, res){
     var categoria = req.query.categoria + '%';
     var query_string = `SELECT S.id_servico, S.nome, S.descricao, S.hora_abertura, S.hora_fechamento, 
     TS.nome AS categoria, TS.link FROM tb_servico S JOIN tb_tipo_servico TS ON S.id_tipo = TS.id_tipo 
-    WHERE S.nome LIKE $1 AND TS.nome LIKE $2 AND S.banido=false`
-    pool.query(query_string, [nome, categoria], (err, res_bd) =>{
+    JOIN tb_condominio_servicos CS ON S.id_servico = CS.id_servico JOIN tb_condominio_usuario UC ON
+    CS.id_condominio = UC.id_condominio WHERE S.nome LIKE $1 AND TS.nome LIKE $2 AND S.banido=false
+    AND UC.id_usuario = $3`
+    pool.query(query_string, [nome, categoria, req.user.id_usuario], (err, res_bd) =>{
         if (err){
             res.sendStatus(500);
         }else{
