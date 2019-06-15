@@ -110,9 +110,9 @@ module.exports.cadastro_servico = function(req, res) {
 module.exports.listar_servicos = function (req, res){
     var nome = req.query.nome_servico + '%';
     var categoria = req.query.categoria + '%';
-    var query_string = "SELECT S.id_servico, S.nome, S.descricao, S.hora_abertura, S.hora_fechamento, TS.nome AS categoria, TS.link"
-    query_string = query_string + " FROM tb_servico S JOIN tb_tipo_servico TS ON S.id_tipo = TS.id_tipo";
-    query_string = query_string + " WHERE S.nome LIKE $1 AND TS.nome LIKE $2 AND S.banido=false";
+    var query_string = `SELECT S.id_servico, S.nome, S.descricao, S.hora_abertura, S.hora_fechamento, 
+    TS.nome AS categoria, TS.link FROM tb_servico S JOIN tb_tipo_servico TS ON S.id_tipo = TS.id_tipo 
+    WHERE S.nome LIKE $1 AND TS.nome LIKE $2 AND S.banido=false`
     pool.query(query_string, [nome, categoria], (err, res_bd) =>{
         if (err){
             res.sendStatus(500);
@@ -121,6 +121,24 @@ module.exports.listar_servicos = function (req, res){
         }
     });
 }
+
+module.exports.detalhe_servico = function(req, res, pagina){
+    var query_string = `SELECT U.nome, U.email, S.descricao AS descricao_servico,S.id_servico, S.hora_abertura, 
+    S.hora_fechamento, S.nome AS nome_servico, TS.nome as categoria, TS.link, UC.bloco_andar, UC.numero_casa, 
+    P.descricao AS descricao_produto, P.disponivel AS estoque_disponivel, P.nome AS nome_produto, P.preco, 
+    P.id_produto FROM tb_fornecedor_servico FS JOIN tb_usuario U ON FS.id_usuario = U.id_usuario
+    JOIN tb_servico S ON FS.id_servico = S.id_servico JOIN tb_condominio_usuario UC ON U.id_usuario = UC.id_usuario 
+    JOIN tb_tipo_servico TS ON S.id_tipo = TS.id_tipo LEFT JOIN tb_produto P ON S.id_servico = P.id_servico
+    WHERE S.id_servico = $1`;
+    pool.query(query_string, [req.query.id_servico], (err, res_bd) =>{
+        if (err){
+            res.redirect(500, '500.ejs');
+        }else{
+            res.render(pagina, {rows: res_bd.rows});
+        }
+    });
+}
+
 module.exports.listar_categorias = function (req, res){
     pool.query("SELECT nome FROM tb_tipo_servico", (err, res_bd) => {
         if (err){

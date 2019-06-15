@@ -6,7 +6,7 @@
       <a href = "/catalogo-servicos">Serviços</a> > <a href="javascript:window.location.href=window.location.href">Detalhes Serviço</a>
       <div class="row mt-3 mb-3">
         <div class="col">
-          <h2>Detalhes de Serviço</h2>
+          <h2>Solicitação de serviço</h2>
         </div>
       </div>
       <div class="row">
@@ -14,13 +14,11 @@
           <div class="card">
             <div class="card-body">
               <div class="row">
-                <div class="col d-block d-sm-none mb-3">
-                  <img src= <%= rows[0].link %> class="img-responsive"style="width:100%"> 
-                </div>
               </div>
               <div class="row">
                 <div class="col">
-                  <h4><%= rows[0].nome_servico %></h4>
+                  <h4>Dados da Solicitação</h4>
+                  <h5>Nome do Serviço: <%= rows[0].nome_servico %></h4>
                   <p><%= rows[0].descricao_servico %></p>
                   <hr>
                   <h5>Horários de Atendimento</h5>
@@ -30,31 +28,6 @@
                   <h5>Localização</h5>
                   <p>Bloco/andar <%= rows[0].bloco_andar %>. Apto/casa <%= rows[0].numero_casa %>.</p>
                   <hr>
-                  <% if (rows.length > 1 || rows[0].id_produto != null){ %>
-                    <5>Produtos</5>
-                    <table class="table table-responsive-sm" id="tb-produtos">
-                      <thead>
-                        <tr>
-                          <th>Nome</th>
-                          <th>Descrição</th>
-                          <th>Preço</th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <% rows.forEach(function(produto){ %>
-                          <tr>
-                            <td><input type="text" readonly="" class="form-control-plaintext" value= <%= produto.nome_produto %>></td>
-                            <td><input type="text" readonly="" class="form-control-plaintext" value= <%= produto.descricao_produto %>></td>
-                            <td><input type="text" readonly="" class="form-control-plaintext" value= <%= produto.preco %>></td>
-                          </tr>
-                        <% }) %> 
-                      </tbody>
-                    </table> 
-                  <% } %> 
-                </div>
-                <div class="col d-none d-sm-block">
-                  <img src= <%= rows[0].link %> class="img-responsive" style="width:100%">
                 </div>
               </div>
             </div>
