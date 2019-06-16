@@ -30,9 +30,14 @@ router.get('/meus-pedidos/detalhe-pedido', function (req, res) {
     res.render('globais/um-pedido.ejs');
 });
 
-// GET detalhes-produto
+// GET perfil
 router.get('/perfil',  autenticacao.isAuthenticated, function (req, res) {
     usuarioController.infoperfil(req,res);
+});
+
+//POST atializar-perfil
+router.post('/atualizar-perfil',  autenticacao.isAuthenticated, function (req, res) {
+    usuarioController.atualizar_perfil(req, res);
 });
 
 module.exports = router;

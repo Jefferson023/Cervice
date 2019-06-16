@@ -2,31 +2,31 @@ const pool = require('../Config/db.js');
 const client = require('../Config/clientdb.js');
 const crypt = require('../Config/crypt.js');
 
-module.exports.novo_usuario = function(req, res) {
+module.exports.novo_usuario = function (req, res) {
     values = [crypt.criptografar(req.body.senha), req.body.email, req.body.nome]
     client.connect();
     client.query('BEGIN', (err) => {
-        if (err){
+        if (err) {
             //só saia
         }
-        else{
-            client.query("INSERT INTO tb_usuario VALUES (DEFAULT, $1, $2, $3, false) RETURNING id_usuario", values, (err2, res_bd)=>{
-                if (err2){
+        else {
+            client.query("INSERT INTO tb_usuario VALUES (DEFAULT, $1, $2, $3, false) RETURNING id_usuario", values, (err2, res_bd) => {
+                if (err2) {
                     client.query('ROLLBACK');
-                }else{
-                    client.query("SELECT * FROM tb_condominio WHERE codigo_acesso=$1", [req.body.codigo], (err3, res_bd2)=>{
-                        if (err3){
+                } else {
+                    client.query("SELECT * FROM tb_condominio WHERE codigo_acesso=$1", [req.body.codigo], (err3, res_bd2) => {
+                        if (err3) {
                             client.query('ROLLBACK');
-                        }else{
+                        } else {
                             values = [res_bd.rows[0].id_usuario, res_bd2.rows[0].id_condominio, req.body.numero, req.body.bloco]
-                            client.query("INSERT INTO tb_condominio_usuario VALUES ($1, $2, $3, $4)", values, (err4)=>{
-                                if (err4){
+                            client.query("INSERT INTO tb_condominio_usuario VALUES ($1, $2, $3, $4)", values, (err4) => {
+                                if (err4) {
                                     client.query('ROLLBACK');
-                                }else{
-                                    client.query('COMMIT', (err)=>{
-                                        if (err){
+                                } else {
+                                    client.query('COMMIT', (err) => {
+                                        if (err) {
                                             client.query('ROLLBACK');
-                                        }else{
+                                        } else {
                                             client.end();
                                         }
                                     });
@@ -38,7 +38,7 @@ module.exports.novo_usuario = function(req, res) {
             });
         };
     });
-    req.flash("success","Sua conta foi criada. Entre utilizando seu email e senha nos campos abaixo");
+    req.flash("success", "Sua conta foi criada. Entre utilizando seu email e senha nos campos abaixo");
     res.redirect('/login');
 }
 module.exports.usuarios_condominio = function (req, res) {
@@ -48,92 +48,131 @@ module.exports.usuarios_condominio = function (req, res) {
     query_string = query_string + ' (SELECT AC.id_condominio FROM tb_usuario U2 JOIN tb_administrador_condominio AC ON';
     query_string = query_string + ' U2.id_usuario=AC.id_usuario WHERE U2.id_usuario=$1)';
     pool.query(query_string, [req.user.id_usuario], (err, res_bd) => {
-        if (err){
+        if (err) {
             //internal server error page
             console.log(err);
         }
         ativos = [];
         banidos = [];
-        for (var i = 0; i < res_bd.rows.length; i++){
-            if (res_bd.rows[i].banido == false){
+        for (var i = 0; i < res_bd.rows.length; i++) {
+            if (res_bd.rows[i].banido == false) {
                 ativos.push(res_bd.rows[i])
-            }else{
+            } else {
                 banidos.push(res_bd.rows[i])
             }
         }
-        res.render('administrador/usuarios.ejs', {usuarios_ativos: ativos, usuarios_banidos: banidos});
+        res.render('administrador/usuarios.ejs', { usuarios_ativos: ativos, usuarios_banidos: banidos });
     });
 }
 
-module.exports.verifica_disponibilidade_email = function (req, res){
-    pool.query("SELECT * FROM tb_usuario WHERE email=$1", [req.query.email], (err, res_bd) =>{
-        if (err){
+module.exports.verifica_disponibilidade_email = function (req, res) {
+    pool.query("SELECT * FROM tb_usuario WHERE email=$1", [req.query.email], (err, res_bd) => {
+        if (err) {
             //internal server error page
         }
-        if (res_bd.rows.length >= 1){
+        if (res_bd.rows.length >= 1) {
             res.send("false");
-        }else{
+        } else {
             res.send("true");
         }
     });
 }
 
-module.exports.banir = function(req, res){
+module.exports.banir = function (req, res) {
     query_string = "SELECT * FROM (tb_usuario U JOIN tb_administrador_condominio A ON U.id_usuario = A.id_usuario)"
     query_string = query_string + " WHERE U.id_usuario=$1 AND A.id_condominio IN (SELECT id_condominio FROM"
     query_string = query_string + " (tb_usuario U2 JOIN tb_condominio_usuario UC ON U2.id_usuario=UC.id_usuario)"
     query_string = query_string + " WHERE U2.email=$2)"
-    pool.query(query_string, [req.user.id_usuario, req.query.email], (err, res_bd) =>{
-        if (err){
+    pool.query(query_string, [req.user.id_usuario, req.query.email], (err, res_bd) => {
+        if (err) {
             return;
-        }else{
-            if (res_bd.rows.length == 0){
+        } else {
+            if (res_bd.rows.length == 0) {
                 return;
-            }else{
-                pool.query("UPDATE tb_usuario SET banido=true WHERE email=$1", [req.query.email], (err) =>{
-        });
-            } 
+            } else {
+                pool.query("UPDATE tb_usuario SET banido=true WHERE email=$1", [req.query.email], (err) => {
+                });
+            }
         }
     });
     res.redirect('/administrador/usuarios');
 }
 
-module.exports.desbanir = function(req, res){
+module.exports.desbanir = function (req, res) {
     query_string = "SELECT * FROM (tb_usuario U JOIN tb_administrador_condominio A ON U.id_usuario = A.id_usuario)"
     query_string = query_string + " WHERE U.id_usuario=$1 AND A.id_condominio IN (SELECT id_condominio FROM"
     query_string = query_string + " (tb_usuario U2 JOIN tb_condominio_usuario UC ON U2.id_usuario=UC.id_usuario)"
     query_string = query_string + " WHERE U2.email=$2)"
-    pool.query(query_string, [req.user.id_usuario, req.query.email], (err, res_bd) =>{
-        if (err){
+    pool.query(query_string, [req.user.id_usuario, req.query.email], (err, res_bd) => {
+        if (err) {
             return;
-        }else{
-            if (res_bd.rows.length == 0){
+        } else {
+            if (res_bd.rows.length == 0) {
                 return;
-            }else{
-                pool.query("UPDATE tb_usuario SET banido=false WHERE email=$1", [req.query.email], (err) =>{
-        });
-            } 
+            } else {
+                pool.query("UPDATE tb_usuario SET banido=false WHERE email=$1", [req.query.email], (err) => {
+                });
+            }
         }
     });
 }
 //informações do usuário AINDA EM TESTE
-exports.infoperfil = function(req,res){
-    query_str ="SELECT cdu.numero_casa, cdu.bloco_andar, cd.nome as nome_condominio, cd.logradouro,cd.numero, cd.cidade, cd.estado, cd.codigo_acesso ";
-    query_str = query_str + "from tb_usuario u " ;
+exports.infoperfil = function (req, res) {
+    query_str = "SELECT cdu.numero_casa, cdu.bloco_andar, cd.nome as nome_condominio, cd.logradouro,cd.numero, cd.cidade, cd.estado, cd.codigo_acesso ";
+    query_str = query_str + "from tb_usuario u ";
     query_str = query_str + "join tb_condominio_usuario cdu on cdu.id_usuario = u.id_usuario ";
     query_str = query_str + "join tb_condominio cd on cdu.id_condominio = cd.id_condominio ";
     query_str = query_str + "where u.id_usuario = $1";
-    let id_usuario=req.user.id_usuario;
-    console.log(req.user);
-    pool.query(query_str, [id_usuario], (err, res_bd) =>{
-        if (err){
+    let id_usuario = req.user.id_usuario;
+    pool.query(query_str, [id_usuario], (err, res_bd) => {
+        if (err) {
             console.log(err);
             return;
-        }else{
+        } else {
             let dados = res_bd.rows[0];
-            // console.log(dados);
-            res.render('globais/perfil.ejs', {dados:dados});
+            res.render('globais/perfil.ejs', { dados: dados });
         }
     });
 
+}
+
+module.exports.atualizar_perfil = function (req, res) {
+    let dadosPerfil = [req.body.nome, req.user.id_usuario];
+
+    client.connect();
+    let updateSenha = "";
+    if (req.body.senha && req.body.confirmasenha) {
+        updateSenha = ", senha = $3 ";
+        dadosPerfil.push(crypt.criptografar(req.body.senha));
+    }
+
+    client.query('BEGIN', (err) => {
+        if (err) {
+            console.log(err);
+            req.flash("error", "Erro ao atualizar os dados do perfil.");
+        }
+        else {
+            client.query("UPDATE tb_usuario SET nome = $1 " + updateSenha + " WHERE id_usuario= $2", dadosPerfil, (err2, res_bd) => {
+                if (err2) {
+                    console.log(err2);
+                    client.query('ROLLBACK');
+                    req.flash("error", "Erro ao atualizar os dados do perfil.");
+                } else {
+                    client.query("UPDATE tb_condominio_usuario SET numero_casa=$1,bloco_andar=$2 WHERE id_usuario=$3", [req.body.apartamento, req.body.bloco, req.user.id_usuario], (err3, res_bd2) => {
+                        if (err3) {
+                            console.log(err3);
+                            client.query('ROLLBACK');
+                            req.flash("error", "Erro ao atualizar os dados do perfil.");
+                        } else {
+                            client.query('COMMIT', (err) => {
+                                req.flash("success", "Dados atualizados com sucesso.");
+                                client.end();
+                            });
+                        }
+                    });
+                }
+            });
+        };
+    });
+    this.infoperfil(req,res);
 }

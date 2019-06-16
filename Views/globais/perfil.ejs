@@ -22,7 +22,7 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
-                                <form class="form">
+                                <form class="form" action="/atualizar-perfil" method="post">
 
                                     <div class=" form-group row">
                                         <div class="col">
@@ -33,7 +33,7 @@
                                                         <i class="fa fa-user"></i>
                                                     </span>
                                                 </div>
-                                                <input class="form-control" id="nome" type="text" name="input-nome"
+                                                <input class="form-control" id="nome" type="text" name="nome"
                                                     placeholder="Nome" autocomplete="nome" readonly="true"
                                                     value="<%= user.nome %>">
                                             </div>
@@ -46,7 +46,7 @@
                                                         <i class="fa fa-envelope"></i>
                                                     </span>
                                                 </div>
-                                                <input class="form-control" id="email" type="email" name="input-email"
+                                                <input class="form-control" id="email" type="email" name="email"
                                                     placeholder="E-mail" autocomplete="email" readonly="true"
                                                     value="<%= user.email %>">
                                             </div>
@@ -54,10 +54,10 @@
                                     </div>
                                     <div class="form-group" id="div-editar-senha" style="display: none">
                                         <div class="row">
-                                            <div class="col"><input type="text" class="form-control"
-                                                    placeholder="Nova senha"></div>
-                                            <div class="col"><input type="text" class="form-control"
-                                                    placeholder="Confirmar nova senha"></div>
+                                            <div class="col"><input type="password" class="form-control"
+                                                    placeholder="Nova senha" name="senha"></div>
+                                            <div class="col"><input type="password" class="form-control"
+                                                    placeholder="Confirmar nova senha" name="confirmasenha"></div>
                                         </div>
                                     </div>
                                     <% if (dados) { %>
@@ -71,7 +71,7 @@
                                                     </span>
                                                 </div>
                                                 <input class="form-control" id="input1-group1" type="text"
-                                                    name="input-codcondominio" placeholder="Codigo Condominio"
+                                                    name="codcondominio" placeholder="Codigo Condominio"
                                                     readonly="true" value="<%= dados.codigo_acesso %>">
                                             </div>
                                         </div>
@@ -83,7 +83,7 @@
                                                         <i class="fa fa-home"></i>
                                                     </span>
                                                 </div>
-                                                <input class="form-control" id="bloco" type="text" name="input-bloco"
+                                                <input class="form-control" id="bloco" type="text" name="bloco"
                                                     placeholder="Bloco" autocomplete="blococondominio" readonly="true"
                                                     value="<%= dados.bloco_andar %>">
                                             </div>
@@ -97,7 +97,7 @@
                                                     </span>
                                                 </div>
                                                 <input class="form-control" id="apartamento" type="text"
-                                                    name="input-apartamento" placeholder="Apartamento"
+                                                    name="apartamento" placeholder="Apartamento"
                                                     autocomplete="apartamentocondominio" readonly="true"
                                                     value="<%= dados.numero_casa %>">
                                             </div>
@@ -130,7 +130,7 @@
                                                     </span>
                                                 </div>
                                                 <input class="form-control" id="condominio" type="text"
-                                                    name="input-nomecondominio" placeholder="Nome do Condomínio"
+                                                    placeholder="Nome do Condomínio"
                                                     autocomplete="nomecondominio" readonly="true"
                                                     value="<%= dados.nome_condominio %>">
                                             </div>
@@ -148,7 +148,7 @@
                                                     </span>
                                                 </div>
                                                 <input class="form-control" id="logradouro" type="text"
-                                                    name="input-logradouro" placeholder="Logradouro"
+                                                    placeholder="Logradouro"
                                                     autocomplete="cidadecondominio" readonly="true"
                                                     value="<%= dados.logradouro %>">
                                             </div>
@@ -161,7 +161,7 @@
                                                         <i class="fa fa-hashtag"></i>
                                                     </span>
                                                 </div>
-                                                <input class="form-control" id="numero" type="text" name="input-numero"
+                                                <input class="form-control" id="numero" type="text"
                                                     placeholder="Numero" autocomplete="numerocondominio" readonly="true"
                                                     value="<%= dados.numero %>">
                                             </div>
@@ -176,7 +176,7 @@
                                                         <i class="fa fa-city"></i>
                                                     </span>
                                                 </div>
-                                                <input class="form-control" id="cidade" type="text" name="input-cidade"
+                                                <input class="form-control" id="cidade" type="text"
                                                     placeholder="Cidade" autocomplete="cidadecondominio" readonly="true"
                                                     value="<%= dados.cidade %>">
                                             </div>
@@ -189,7 +189,7 @@
                                                         <i class="fa fa-globe-americas"></i>
                                                     </span>
                                                 </div>
-                                                <input class="form-control" id="estado" type="text" name="input-estado"
+                                                <input class="form-control" id="estado" type="text"
                                                     placeholder="Estado" autocomplete="cidadecondominio" readonly="true"
                                                     value="<%= dados.estado %>">
                                             </div>
