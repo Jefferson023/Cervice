@@ -132,7 +132,7 @@ module.exports.detalhe_servico = function(req, res, pagina){
     JOIN tb_servico S ON FS.id_servico = S.id_servico JOIN tb_condominio_usuario UC ON U.id_usuario = UC.id_usuario 
     JOIN tb_tipo_servico TS ON S.id_tipo = TS.id_tipo LEFT JOIN tb_produto P ON S.id_servico = P.id_servico
     WHERE S.id_servico = $1`;
-    pool.query(query_string, [req.query.id_servico], (err, res_bd) =>{
+    pool.query(query_string, [req.query.servico], (err, res_bd) =>{
         if (err){
             res.redirect(500, '500.ejs');
         }else{
@@ -151,6 +151,93 @@ module.exports.listar_categorias = function (req, res){
                 categorias.push(categoria.nome);
             })
             res.render('globais/catalogo-servicos.ejs', {categorias: categorias});
+        }
+    });
+}
+
+module.exports.novo_pedido = function (req, res){
+    var query_string = `SELECT S.id_servico, P.id_produto FROM tb_servico S LEFT JOIN tb_produto P 
+    ON S.id_servico = P.id_servico WHERE S.id_servico = $1`
+    pool.query(query_string, [req.body.id_servico], (err, res_bd) =>{
+        if (err || res_bd.rows.length > 1 || res_bd.rows[0].id_produto != null){
+            res.render('500.ejs');
+        }else{
+            var query_string2 = "INSERT INTO tb_pedido VALUES (DEFAULT, $1, $2, 1, $3)";
+            pool.query(query_string2, [req.user.id_usuario, req.body.id_servico, req.body.observacoes], (err) =>{
+                if (err){
+                    res.render('500.ejs');
+                }else{
+                    //mudar pra meus pedidos
+                    res.redirect('/');
+                }
+            });
+        }
+    });
+}
+module.exports.novo_pedido_produtos = function (req, res){
+    var query_string = `SELECT S.id_servico, P.id_produto FROM tb_servico S LEFT JOIN tb_produto P 
+    ON S.id_servico = P.id_servico WHERE S.id_servico = $1`;
+    client.connect();
+    client.query(query_string, [req.body.id_servico], (err, res_bd) =>{
+        if (err || (res_bd.rows.length == 1 && res_bd.rows[0].id_produto == null)){
+            console.log(err);
+            res.render('500.ejs');
+        }else{
+            client.query("BEGIN", (err2)=>{
+                if (err2){
+                    console.log(err2)
+                    client.query('ROLLBACK');
+                    res.render('500.ejs');
+                    return;
+                }else{
+                    var query_string2 = "INSERT INTO tb_pedido VALUES (DEFAULT, $1, $2, 1, $3) RETURNING id_pedido";
+                    client.query(query_string2, [req.user.id_usuario, req.body.servico, req.body.observacoes], (err3, res_bd2) =>{
+                        if (err3){
+                            console.log(err3)
+                            client.query('ROLLBACK');
+                            res.render('500.ejs');
+                            return;
+                        }else{
+                            console.log("sucesso 2");
+                            var produtos = req.body;
+                            delete produtos.servico;
+                            delete produtos.descricao;
+                            for (var i = 0; i < produtos.length; i++){
+                                registrar_produtos(client, produtos, res_bd2.rows.id_pedido, variavel);
+                            }
+                        }
+                    });
+                }
+            })
+        }
+    });
+}
+async function registrar_produtos(client, produtos, id_pedido, variavel){
+    var query_string3 = `INSERT INTO tb_produto_pedido VALUES ($1, $2, $3)`
+    await client.query(query_string3, [Object.keys(produtos)[i], id_pedido, produtos[i]], (err4) =>{
+        if (err4){
+            console.log(err4);
+            client.query('ROLLBACK');
+            res.render('500.ejs');
+            return;
+        }else{
+            if (variavel == produtos.length-1){
+                console.log("sucesso");
+                client.query('COMMIT');
+                client.end();
+            }
+        }
+    });
+}
+module.exports.listar_produtos = function (req, res){
+    var query_string = `SELECT id_produto, nome, preco FROM tb_produto 
+    WHERE id_servico = $1 AND disponivel = true`
+    pool.query(query_string,[req.query.servico], (err, res_bd) => {
+        if (err){
+            console.log(err);
+            res.render('500.ejs');
+        }else{
+            res.send(res_bd.rows);
         }
     });
 }

@@ -23,10 +23,20 @@ router.get('/catalogo-servicos/detalhes-servico/solicitar', autenticacao.isAuthe
 });
 
 router.post('/catalogo-servicos/detalhes-servico/solicitar', autenticacao.isAuthenticated,function (req, res) {
-    //TODO
+    //validar
+    if (Object.keys(req.body).length > 2){
+        servicoController.novo_pedido_produtos(req, res);
+    }else{
+        servicoController.novo_pedido(req, res);
+    }
 });
 
-// GET detalhes-produto
+router.get('/catalogo-servicos/detalhes-servico/solicitar/produtos', autenticacao.isAuthenticated, function (req, res){
+    //valida
+    servicoController.listar_produtos(req, res);
+});
+
+// GET para o perfil do usuário
 router.get('/perfil', function (req, res) {
     res.render('globais/perfil.ejs');
 });

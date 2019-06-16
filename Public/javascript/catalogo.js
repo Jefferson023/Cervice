@@ -12,7 +12,7 @@ function buscar(){
                 descricao = element.descricao == null ? "Sem descrição":element.descricao
                 servico = `
                 <div class="col-sm-6 col-lg-3">
-                    <a href="/catalogo-servicos/detalhes-servico?id_servico=` + element.id_servico+`">
+                    <a href="/catalogo-servicos/detalhes-servico?servico=` + element.id_servico+`">
                         <div class="card mb-3">
                             <img src="`+element.link+`" class="card-img-top" alt="...">
                             <div class="card-body">

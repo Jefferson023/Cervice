@@ -31,7 +31,7 @@
                   <p>Bloco/andar <%= rows[0].bloco_andar %>. Apto/casa <%= rows[0].numero_casa %>.</p>
                   <hr>
                   <% if (rows.length > 1 || rows[0].id_produto != null){ %>
-                    <5>Produtos</5>
+                    <h5>Produtos</h5>
                     <table class="table table-responsive-sm" id="tb-produtos">
                       <thead>
                         <tr>
@@ -46,7 +46,7 @@
                           <tr>
                             <td><input type="text" readonly="" class="form-control-plaintext" value= <%= produto.nome_produto %>></td>
                             <td><input type="text" readonly="" class="form-control-plaintext" value= <%= produto.descricao_produto %>></td>
-                            <td><input type="text" readonly="" class="form-control-plaintext" value= <%= produto.preco %>></td>
+                            <td><input type="text" readonly="" class="form-control-plaintext" value= <%= produto.preco + 'R$' %>></td>
                           </tr>
                         <% }) %> 
                       </tbody>
@@ -70,7 +70,7 @@
             class="fa fa-chevron-left"></i></a>
       </div>
       <div class="col text-left">
-        <a href = <%= "/catalogo-servicos/detalhes-servico/solicitar?id_servico="+ rows[0].id_servico %> class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Prosseguir"><i
+        <a href = <%= "/catalogo-servicos/detalhes-servico/solicitar?servico="+ rows[0].id_servico %> class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Prosseguir"><i
             class="fa fa-chevron-right"></i></a>
       </div>
     </div>
