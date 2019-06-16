@@ -169,7 +169,8 @@ module.exports.novo_pedido = function (req, res){
                     res.render('500.ejs');
                 }else{
                     //mudar pra meus pedidos
-                    res.redirect('/');
+                    //mensagem de sucesso
+                    res.redirect('/meus-pedidos');
                 }
             });
         }
@@ -217,7 +218,8 @@ module.exports.novo_pedido_produtos = function (req, res){
                                         }else{
                                             client.end();
                                             //mudar para meus pedidos
-                                            res.redirect('/');
+                                            //mensagem de sucesso
+                                            res.redirect('/meus-pedidos');
                                         }
                                     });
                                 }
