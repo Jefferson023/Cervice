@@ -43,7 +43,7 @@ app.use(function(req, res, next) {
 });
 
 //configura a porta do servidor
-app.listen(process.env.PORT || 3000, function()
+app.listen(process.env.PORT, function()
 {
     console.log('Rodando na porta ' + (process.env.PORT || 3000));
 });
