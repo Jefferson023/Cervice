@@ -16,8 +16,7 @@ $(function(){
         let titulo = $("#txt-titulo-produto").val();
         let descricao = $("#txt-descricao-produto").val();
         let preco = $("#txt-preco-produto").val();
-        let disponivel = $("#switch-disponivel").val() == "on";
-        console.log($("#switch-disponivel").val());
+        let disponivel = $("#switch-disponivel").prop("checked");
 
         $("#tb-produtos tbody").prepend(
             "<tr>"+
@@ -88,5 +87,11 @@ $(function(){
         $("#btn-desabilitar-servico").show();      
     })
     
-    $('[data-toggle="tooltip"]').tooltip();
+    $("#btn-cancelar-add").click(function(e){
+        e.preventDefault();
+        $("#txt-titulo-produto").val("");
+        $("#txt-descricao-produto").val("");
+        $("#txt-preco-produto").val("");
+        $("#linha-novo-produto").hide();
+    });
 });

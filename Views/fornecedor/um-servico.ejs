@@ -1,10 +1,9 @@
 <% layout('../includes/template') -%>
 <%block('title','Nome do Serviço');-%>
-<% block('stylesheets', '<link rel="stylesheet" href="/css/servico.css"/>') -%>
 <main class="main">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"> <a href="">Meus serviços</a></li>
-        <li class="breadcrumb-item">Um serviço</li>
+        <li class="breadcrumb-item"> <a href="/fornecedor/meus-servicos">Meus serviços</a></li>
+        <li class="breadcrumb-item">Nome do Serviço</li>
     </ol>
     <div class="container-fluid">
         <div>
@@ -12,22 +11,13 @@
                 <form>
                     <div class="row">
                         <div class="col text-center">
-                            <h2>NOME SERVIÇO</h2>
+                            <h2 style="text-transform: uppercase">Nome do Serviço</h2>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col text-right">
                             <button class="btn btn-success" id="btn-habilitar-servico"><i class="fa fa-play-circle" style="font-size: large" ></i> Habilitar serviço</button>
                             <button class="btn btn-danger" style="display:none" id="btn-desabilitar-servico"><i class="fa fa-pause-circle" style="font-size: large" ></i> Desabilitar serviço</button>
-                        </div>
-                    </div>
-                    <!--Toggle on/off-->
-                    <div class="row">
-                        <div class="col-sm-5 text-right">
-                            <button type="button" class="btn btn-sm btn-toggle" data-toggle="button"
-                                aria-pressed="false" autocomplete="off">
-                                <div class="handle"></div>
-                            </button>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -111,15 +101,17 @@
                                                             <input type="number" id="txt-preco-produto"
                                                                 class="form-control" placeholder="">
                                                         </td>
+                                                        <!--switch-button-->
                                                         <td>
                                                             <div class="custom-control custom-switch">
                                                                 <input type="checkbox" class="custom-control-input" id="switch-disponivel">
                                                                 <label class="custom-control-label" for="switch-disponivel">
                                                             </div>
                                                         </td>
+                                                        <!--fim switch-button-->
                                                         <td>
-                                                            <button class="btn btn-success" id="btn-add-produto"><i
-                                                                    class="fa fa-check"></i></button>
+                                                            <button class="btn btn-success" id="btn-add-produto" title="Adicionar"><i class="fa fa-check"></i></button>
+                                                            <button class="btn btn-danger" id="btn-cancelar-add" title="Cancelar"><i class="fa fa-undo"></i></button>
                                                         </td>
                                                     </tr>
                                                 </tbody>
