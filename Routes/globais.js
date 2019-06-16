@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const autenticacao = require('../lib/autenticacaoUtil.js');
 const servicoController = require('../Controller/servicoController.js');
+const usuarioController = require('../Controller/usuarioController.js');
 
 // GET catalogo-servicos
 router.get('/catalogo-servicos', autenticacao.isAuthenticated, function (req, res) {
