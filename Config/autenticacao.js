@@ -42,7 +42,7 @@ module.exports = function(passport) {
                 }else{
                     var usuario = res_bd.rows[0];
                     usuario.admin = false;
-                    return done(null, res_bd.rows[0]);
+                    return done(null, usuario);
                 }
             }
         });
