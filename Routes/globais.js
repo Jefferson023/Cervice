@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const autenticacao = require('../lib/autenticacaoUtil.js');
 const servicoController = require('../Controller/servicoController.js');
+
 // GET catalogo-servicos
 router.get('/catalogo-servicos', autenticacao.isAuthenticated, function (req, res) {
     servicoController.listar_categorias(req, res);
@@ -36,9 +37,23 @@ router.get('/catalogo-servicos/detalhes-servico/solicitar/produtos', autenticaca
     servicoController.listar_produtos(req, res);
 });
 
-// GET para o perfil do usuário
-router.get('/perfil', function (req, res) {
-    res.render('globais/perfil.ejs');
+// GET meus-pedidos
+router.get('/meus-pedidos', autenticacao.isAuthenticated, function (req, res) {
+    res.render('globais/meus-pedidos.ejs');
+});
+// GET detalhe-pedido
+router.get('/meus-pedidos/detalhe-pedido', autenticacao.isAuthenticated, function (req, res) {
+    res.render('globais/um-pedido.ejs');
+});
+
+// GET perfil
+router.get('/perfil',  autenticacao.isAuthenticated, function (req, res) {
+    usuarioController.infoperfil(req,res);
+});
+
+//POST atializar-perfil
+router.post('/atualizar-perfil',  autenticacao.isAuthenticated, function (req, res) {
+    usuarioController.atualizar_perfil(req, res);
 });
 
 module.exports = router;

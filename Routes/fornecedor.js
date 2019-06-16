@@ -50,4 +50,10 @@ router.get('/fornecedor/clickservico/um-servico', function (req, res) {
     
 });
 
+router.get('/fornecedor/minhas-entregas/info-servico', function (req, res) {
+    
+    res.render('fornecedor/info-servico.ejs')
+    
+});
+
 module.exports = router;
