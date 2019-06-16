@@ -1,40 +1,39 @@
 <% layout('../includes/template') -%>
 <%block('title','Meus Serviços');-%>
-    <main class="main">
-      <div class="container-fluid">
-        <div class="animated fadeIn">
-          <div class="row mt-3 mb-3">
-            <div class="col">
-              <h2>MEUS SERVIÇOS</h2>
-            </div>
-            <div class="col text-right">
-              <a href="/fornecedor/novo-servico" class="btn btn-primary">
-                <span class="fa fa-plus"></span> ADICIONAR SERVIÇO
-              </a>
-            </div>
-          </div>
-              <div class="row">
-                <% servicos.forEach(function(dat) { %>
-                <div class="col-sm-6 col-lg-3">
-                    <a href="/fornecedor/clickservico/um-servico"></a>
-                      <div class="card mb-3">
-                        <img src="/img/services/advogado.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title"><%= dat.nome%></h5>
-                          <p class="card-text"><%=dat.descricao%></p>
+<main class="main">
+  <div class="container-fluid">
+    <div class="animated fadeIn">
+      <div class="row mt-3 mb-3">
+        <div class="col">
+          <h2>MEUS SERVIÇOS</h2>
+        </div>
+        <div class="col text-right">
+          <a href="/fornecedor/novo-servico" class="btn btn-primary">
+            <span class="fa fa-plus"></span> ADICIONAR SERVIÇO
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <% servicos.forEach(function(dat) { %>
+        <div class="col-sm-6 col-lg-3">
+          <a href="/fornecedor/clickservico/um-servico"></a>
+          <div class="card mb-3">
+            <img src="/img/services/advogado.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><%= dat.nome%></h5>
+              <p class="card-text"><%=dat.descricao%></p>
                         </div>
                       
-                        <div class=" card-footer bg-transparent ">
-                          <div class="row">
-                              <div class="col text-left">
-                                  <button class="btn btn-success" data-toggle="tooltip"  title="Iniciar Atendimento" data-placement="bottom" id="btn-iniciaratendimento"><i class="fa fa-play-circle" style="font-size: large"></i></button>
-                              </div>
-                            <div clas="col text-right"> 
-                                <form action="/fornecedor/clickservico/um-servico" method="POST">
+                        
+            <div class=" card-footer bg-transparent ">
+                <div class="row">
+                
+                            <div class="col text-right"> 
+                                <form action="/fornecedor/clickservico/um-servico" method="GET">
                                   <button  value=<%= dat.id_servico%> name = 'id_servico' data-toggle="tooltip" title="Editar" ><i class="fa fa-edit" style="font-size: large"></i></button> 
-                                <option value=<%= dat.id_servico%> name = 'id_servico'></option> 
-                                <button class="btn btn-link"  data-toggle="tooltip" title="Excluir"><i class="fa fa-trash-alt" style="font-size: large"></i></button>
-                              </form>
+                                </form>
+                                <button class="btn btn-link"  data-toggle="tooltip" title="Excluir"onclick="remover_servico(<%= dat.id_servico%>)"><i class="fa fa-trash-alt" style="font-size: large"></i></button>
+                             
                             </div>
                             
                           </div>                     
@@ -48,3 +47,4 @@
       </div>
     </main>
     <% script('/javascript/novoservico.js') -%>
+    <% script('/javascript/meus_servicos.js') -%>

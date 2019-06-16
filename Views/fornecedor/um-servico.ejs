@@ -1,5 +1,6 @@
 <% layout('../includes/template') -%>
-<%block('title','Nome do Serviço');-%>
+<%block('title',nome);-%>
+<% block('stylesheets', '<link rel="stylesheet" href="/css/servico.css"/>') -%>
 <main class="main">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"> <a href="">Meus serviços</a></li>
@@ -9,19 +10,11 @@
 
         <div>
             <div class="animated fadeIn">
-                <form>
+                <form action="/fornecedor/clickservico/um-servico/editar" method="GET">
                 <div class="row">
                   <div class="col text-center">
                     <h2><%=nome%></h2>
                   </div>                 
-                </div>
-                <div class="row">
-                    <div class="col text-right ativo v">
-                        <button class="btn btn-success" id="btn-inicio-atendimento"><i class="fa fa-play-circle" id="icone-iniciar" style="font-size: large" ></i> Iniciar atendimento</button>
-                    </div>
-                    <div class="col text-right ativo" >
-                        <button class="btn btn-danger" id="btn-fim-atendimento"><i class="fa fa-pause-circle" id="icone-pausar" style="font-size: large" ></i> Finalizar atendimento</button>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col">
@@ -32,36 +25,41 @@
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <textarea class="form-control-plaintext" id="descricao-servico2" rows="4" readonly="true"> <%=descricao%></textarea>
+                                                    <textarea class="form-control-plaintext" id="descricao-servico2" rows="4" readonly="true" name = "descricao"> <%=descricao%></textarea>
                                                 </div>
                                             </div>                                            
                                         </div>
                                         <div class="row" style="display:none" id="linha-forms">
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label for="titulo">Título</label>
-                                                    <input type="text" class="form-control" name="titulo">
+                                                    <label for="titulo">titulo</label>
+                                                    <input type="text" class="form-control" name="titulo" value="<%=nome%>">
                                                 </div>
                                             </div>
                                             <div class="col col-md-3">
                                                 <div class="form-group ">
                                                     <label for="tipo">Tipo</label>
-                                                    <select id="inputState" class="form-control">
-                                                            <option selected>Choose...</option>
-                                                            <option>...</option>
+                                                    <select id="inputState" class="form-control" name="tipo"    >
+                                                        <% tipo_servico.forEach(function(dat) { %>
+                                                            <option value=<%= dat.id_tipo%> name = 'id_tipo'><%= dat.nome%></option>                       
+                                                            <% }); %>
                                                           </select>
                                                 </div>
                                             </div>
                                             <div class="col col-md-3">
-                                                <label for="hora" name = 'ho'>Hora de abertura</label>
-                                                <input type="time" class="form-control" name="hora">
+                                                <label for="hora_abertura" name = 'ho'>Hora de abertura</label>
+                                                <input type="time" class="form-control" name="hora_abertura" value="<%=hora_abertura%>">
+                                            </div>
+                                            <div class="col col-md-3">
+                                                <label for="hora_fechamento" name = 'ho'>Hora de fechamento</label>
+                                                <input type="time" class="form-control" name="hora_fechamento"value="<%=hora_fechamento%>">
                                             </div>
                                         </div>
                                 </div>
                                 <hr>
                                 <div class="row">
                                         <div class="col">
-                                            <button class="btn btn-primary" id="btn-edit-informacoes" >
+                                            <button class="btn btn-primary" id="btn-edit-informacoes"value=<%= id_servico%> name='id_servico' >
                                             <span class="fa fa-edit"></span> EDITAR INFORMÇÕES
                                             </button>
                                         </div>
@@ -70,6 +68,7 @@
                         </div>
                     </div>
                 </div>
+                </form>
                 <div class="row">
                     <div class="col ">
                         <div class="card">
@@ -83,13 +82,38 @@
                                                 <th>Nome</th>
                                                 <th>Descrição</th>
                                                 <th>Preço</th>
+                                                <th>Disponível</th>
+                                                <th></th>
                                                 <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                   
+                                            <% var i = 0; lista_produtos.forEach(function(dat) {  i=i+1; %>
+                                                   
+                                            <tr id="carregados">
+                                                     
+                                                        <td> <input type="text" readonly="" class="form-control-plaintext" id = "<%=i%>_titulo" name="<%=i%>_titulo" value="<%= dat.nome%>"></td>
+                                                        <td> <input type="text" readonly="" class="form-control-plaintext" id= "<%=i%>_descricao" name="<%=i%>_descricao" value="<%= dat.descricao%>"></td>
+                                                        <td> <input type="number" readonly="" step='0.10' class="form-control-plaintext" id = "<%=i%>_preco" name="<%=i%>_preco" value="<%= dat.preco%>"></td>
+                                                        <td>
+                                                                <div class="custom-control custom-switch">
+                                                                    <input type="checkbox" class="custom-control-input" id="switch-disponivel" value = '<%= dat.disponivel%>'>
+                                                                    <label class="custom-control-label" for="switch-disponivel">
+                                                                </div>
+                                                        </td>
+                                                        <td>  <button class='btn btn-primary btn-edit-produto' id = "<%= dat.id_produto%>" onclick="alterar_produto(<%= dat.id_produto%>,<%= id_servico%>,<%=i%>)"><i class='fa fa-edit'></i></button>
+                                                        </td>
+                                                            
+                                                        <td> <button class="btn btn-danger btn-drop-produto" name='id_servico_lixo' onclick="remover_produto(<%= dat.id_produto%>,<%= id_servico%>)"><i class="fa fa-trash"></i></button></td>
+                                                
+                                            </tr> 
+                                       
+                                     
+                                            <% }); %>                       
                                             <tr id="linha-novo-produto" style="display:none">
                                                 <td>
-                                                <input type="text" id="txt-titulo-produto" class="form-control" placeholder="Título">
+                                                <input type="text" id="txt-titulo-produto" class="form-control" placeholder="Título" >
                                                 </td>
                                                 <td>
                                                 <input type="text" id="txt-descricao-produto" class="form-control" placeholder="Descrição">
@@ -98,9 +122,10 @@
                                                 <input type="number" id="txt-preco-produto" class="form-control"placeholder="">
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-success" id="btn-add-produto"><i class="fa fa-check"></i></button>
+                                                    <button class="btn btn-success" id="btn-add-produto" name='id_servico' onclick="add_produto(<%= id_servico%>)"><i class="fa fa-check"  ></i></button>
                                                 </td>
                                             </tr>
+                                      
                                             </tbody>
                                         </table>
                                     </div>                                    
@@ -117,9 +142,10 @@
                         </div>                        
                     </div>
                 </div>
-            </form>
             </div>
         </div>
-    </div>    
+    </div>
+   
 </main>
 <% script('/javascript/novoservico.js') -%>
+<% script('/javascript/produtos.js') -%>
