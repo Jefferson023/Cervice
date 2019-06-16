@@ -116,3 +116,26 @@ module.exports.desbanir = function(req, res){
         }
     });
 }
+//informações do usuário AINDA EM TESTE
+exports.infoperfil = function(req,res){
+    query_str ="SELECT cdu.numero_casa, cdu.bloco_andar, cd.nome as nome_condominio, cd.logradouro,cd.numero, cd.cidade, cd.estado, cd.codigo_acesso ";
+    query_str = query_str + "from tb_usuario u " ;
+    query_str = query_str + "join tb_condominio_usuario cdu on cdu.id_usuario = u.id_usuario ";
+    query_str = query_str + "join tb_condominio cd on cdu.id_condominio = cd.id_condominio ";
+    query_str = query_str + "where u.id_usuario = $1";
+    console.log();
+    let id_usuario=req.user.id_usuario;
+    
+    pool.query(query_str, [id_usuario], (err, res_bd) =>{
+        if (err){
+            console.log(err);
+            return;
+        }else{
+            
+            let dados = res_bd.rows[0];
+            console.log();
+            res.render('globais/perfil.ejs', {dados:dados});
+        }
+    });
+
+}

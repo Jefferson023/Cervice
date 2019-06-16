@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const usuarioController = require('../Controller/usuarioController.js');
+const autenticacao = require('../lib/autenticacaoUtil.js');
 
 function isAuthenticated(req, res, next) {
     if (req.user){
@@ -29,8 +31,8 @@ router.get('/meus-pedidos/detalhe-pedido', function (req, res) {
 });
 
 // GET detalhes-produto
-router.get('/perfil', function (req, res) {
-    res.render('globais/perfil.ejs');
+router.get('/perfil',  autenticacao.isAuthenticated, function (req, res) {
+    usuarioController.infoperfil(req,res);
 });
 
 module.exports = router;

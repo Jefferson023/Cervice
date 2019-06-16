@@ -1,40 +1,49 @@
 <% layout('../includes/template') -%>
 <%block('title','Nome do Serviço');-%>
+<% block('stylesheets', '<link rel="stylesheet" href="/css/servico.css"/>') -%>
 <main class="main">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"> <a href="">Meus serviços</a></li>
         <li class="breadcrumb-item">Um serviço</li>
     </ol>
     <div class="container-fluid">
-
         <div>
             <div class="animated fadeIn">
                 <form>
-                <div class="row">
-                  <div class="col text-center">
-                    <h2>NOME SERVIÇO</h2>
-                  </div>                 
-                </div>
-                <div class="row">
-                    <div class="col text-right ativo v">
-                        <button class="btn btn-success" id="btn-inicio-atendimento"><i class="fa fa-play-circle" id="icone-iniciar" style="font-size: large" ></i> Iniciar atendimento</button>
+                    <div class="row">
+                        <div class="col text-center">
+                            <h2>NOME SERVIÇO</h2>
+                        </div>
                     </div>
-                    <div class="col text-right ativo" >
-                        <button class="btn btn-danger" id="btn-fim-atendimento"><i class="fa fa-pause-circle" id="icone-pausar" style="font-size: large" ></i> Finalizar atendimento</button>
+                    <div class="row">
+                        <div class="col text-right">
+                            <button class="btn btn-success" id="btn-habilitar-servico"><i class="fa fa-play-circle" style="font-size: large" ></i> Habilitar serviço</button>
+                            <button class="btn btn-danger" style="display:none" id="btn-desabilitar-servico"><i class="fa fa-pause-circle" style="font-size: large" ></i> Desabilitar serviço</button>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="card">
+                    <!--Toggle on/off-->
+                    <div class="row">
+                        <div class="col-sm-5 text-right">
+                            <button type="button" class="btn btn-sm btn-toggle" data-toggle="button"
+                                aria-pressed="false" autocomplete="off">
+                                <div class="handle"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <div class="card">
                                 <div class="card-header text-center">Descrição</div>
-                            <div class="card-body">
-                                <div>
+                                <div class="card-body">
+                                    <div>
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <textarea class="form-control-plaintext" id="descricao-servico2" rows="4" readonly="true">Lorem ipsum donec eros nullam platea ut lacinia primis curae, feugiat himenaeos interdum volutpat nostra eros senectus felis rhoncus pretium, lorem volutpat semper cras ante a adipiscing sociosqu. praesent sit fusce risus pulvinar lacinia imperdiet congue dolor ligula nulla inceptos pellentesque accumsan aliquam iaculis nunc, commodo nibh a at eget magna non vivamus lacus ligula imperdiet dictumst id tortor. nullam semper magna sapien sem ut diam consectetur vehicula feugiat, pharetra pellentesque lacinia vitae praesent vehicula diam quisque faucibus, amet hac sollicitudin dui ligula platea eget mollis. </textarea>
+                                                    <textarea class="form-control-plaintext" id="descricao-servico2"
+                                                        rows="4"
+                                                        readonly="true">Lorem ipsum donec eros nullam platea ut lacinia primis curae, feugiat himenaeos interdum volutpat nostra eros senectus felis rhoncus pretium, lorem volutpat semper cras ante a adipiscing sociosqu. praesent sit fusce risus pulvinar lacinia imperdiet congue dolor ligula nulla inceptos pellentesque accumsan aliquam iaculis nunc, commodo nibh a at eget magna non vivamus lacus ligula imperdiet dictumst id tortor. nullam semper magna sapien sem ut diam consectetur vehicula feugiat, pharetra pellentesque lacinia vitae praesent vehicula diam quisque faucibus, amet hac sollicitudin dui ligula platea eget mollis. </textarea>
                                                 </div>
-                                            </div>                                            
+                                            </div>
                                         </div>
                                         <div class="row" style="display:none" id="linha-forms">
                                             <div class="col">
@@ -47,79 +56,91 @@
                                                 <div class="form-group ">
                                                     <label for="tipo">Tipo</label>
                                                     <select id="inputState" class="form-control">
-                                                            <option selected>Choose...</option>
-                                                            <option>...</option>
-                                                          </select>
+                                                        <option selected>Choose...</option>
+                                                        <option>...</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col col-md-3">
-                                                <label for="hora" name = 'ho'>Hora de abertura</label>
+                                                <label for="hora" name='ho'>Hora de abertura</label>
                                                 <input type="time" class="form-control" name="hora">
                                             </div>
                                         </div>
-                                </div>
-                                <hr>
-                                <div class="row">
+                                    </div>
+                                    <hr>
+                                    <div class="row">
                                         <div class="col">
-                                            <button class="btn btn-primary" id="btn-edit-informacoes" >
-                                            <span class="fa fa-edit"></span> EDITAR INFORMÇÕES
+                                            <button class="btn btn-primary" id="btn-edit-informacoes">
+                                                <span class="fa fa-edit"></span> EDITAR INFORMÇÕES
                                             </button>
                                         </div>
-                                    </div> 
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col ">
-                        <div class="card">
-                            <div class="card-header text-center">Produtos</div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <table class="table table-responsive-sm" id="tb-produtos" style="display:none">
-                                            <thead>
-                                                <tr>
-                                                <th>Nome</th>
-                                                <th>Descrição</th>
-                                                <th>Preço</th>
-                                                <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr id="linha-novo-produto" style="display:none">
-                                                <td>
-                                                <input type="text" id="txt-titulo-produto" class="form-control" placeholder="Título">
-                                                </td>
-                                                <td>
-                                                <input type="text" id="txt-descricao-produto" class="form-control" placeholder="Descrição">
-                                                </td>
-                                                <td>
-                                                <input type="number" id="txt-preco-produto" class="form-control"placeholder="">
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-success" id="btn-add-produto"><i class="fa fa-check"></i></button>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>                                    
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col">
-                                        <button class="btn btn-primary" id="btn-novo-produto" >
-                                        <span class="fa fa-plus"></span> ADICIONAR PRODUTO
-                                        </button>
+                    <div class="row">
+                        <div class="col ">
+                            <div class="card">
+                                <div class="card-header text-center">Produtos</div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <table class="table table-responsive-sm" id="tb-produtos"
+                                                style="display:none">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Nome</th>
+                                                        <th>Descrição</th>
+                                                        <th>Preço</th>
+                                                        <th>Disponível</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr id="linha-novo-produto" style="display:none">
+                                                        <td>
+                                                            <input type="text" id="txt-titulo-produto"
+                                                                class="form-control" placeholder="Título">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" id="txt-descricao-produto"
+                                                                class="form-control" placeholder="Descrição">
+                                                        </td>
+                                                        <td>
+                                                            <input type="number" id="txt-preco-produto"
+                                                                class="form-control" placeholder="">
+                                                        </td>
+                                                        <td>
+                                                            <div class="custom-control custom-switch">
+                                                                <input type="checkbox" class="custom-control-input" id="switch-disponivel">
+                                                                <label class="custom-control-label" for="switch-disponivel">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <button class="btn btn-success" id="btn-add-produto"><i
+                                                                    class="fa fa-check"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                </div> 
-                            </div>                           
-                        </div>                        
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col">
+                                            <button class="btn btn-primary" id="btn-novo-produto">
+                                                <span class="fa fa-plus"></span> ADICIONAR PRODUTO
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
             </div>
         </div>
-    </div>    
+    </div>
 </main>
 <% script('/javascript/novoservico.js') -%>
