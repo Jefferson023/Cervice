@@ -26,7 +26,7 @@ module.exports = function(passport) {
     })
 
     passport.deserializeUser(function(id, done) {
-        var query_string = "SELECT * FROM tb_usuario U LEFT JOIN tb_administrador_condominio A ON U.id_usuario=A.id_usuario";
+        var query_string = "SELECT U.*, A.id_condominio FROM tb_usuario U LEFT JOIN tb_administrador_condominio A ON U.id_usuario=A.id_usuario";
         query_string = query_string + " WHERE U.id_usuario=$1";
         pool.query(query_string, [id], (err, res_bd) => {
             if (res_bd.rows.length > 1){
@@ -41,7 +41,7 @@ module.exports = function(passport) {
                 }else{
                     var usuario = res_bd.rows[0];
                     usuario.admin = false;
-                    return done(null, res_bd.rows[0]);
+                    return done(null, usuario);
                 }
             }
         });
