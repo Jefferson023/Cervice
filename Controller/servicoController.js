@@ -2,6 +2,7 @@ const pool = require('../Config/db.js');
 const client = require('../Config/clientdb.js');
 const express = require('express');
 const app = express();
+const format = require("pg-format");
 var tipo_servico = [];
 module.exports.lista_tipo_servico = function(req, res) {
     if (!req.user) {
@@ -180,31 +181,47 @@ module.exports.novo_pedido_produtos = function (req, res){
     client.connect();
     client.query(query_string, [req.body.id_servico], (err, res_bd) =>{
         if (err || (res_bd.rows.length == 1 && res_bd.rows[0].id_produto == null)){
-            console.log(err);
             res.render('500.ejs');
         }else{
             client.query("BEGIN", (err2)=>{
                 if (err2){
-                    console.log(err2)
                     client.query('ROLLBACK');
                     res.render('500.ejs');
                     return;
                 }else{
                     var query_string2 = "INSERT INTO tb_pedido VALUES (DEFAULT, $1, $2, 1, $3) RETURNING id_pedido";
-                    client.query(query_string2, [req.user.id_usuario, req.body.servico, req.body.observacoes], (err3, res_bd2) =>{
+                    client.query(query_string2, [req.user.id_usuario, req.body.id_servico, req.body.observacoes], (err3, res_bd2) =>{
                         if (err3){
-                            console.log(err3)
                             client.query('ROLLBACK');
                             res.render('500.ejs');
                             return;
                         }else{
-                            console.log("sucesso 2");
                             var produtos = req.body;
-                            delete produtos.servico;
-                            delete produtos.descricao;
-                            for (var i = 0; i < produtos.length; i++){
-                                registrar_produtos(client, produtos, res_bd2.rows.id_pedido, variavel);
-                            }
+                            delete produtos.id_servico;
+                            delete produtos.observacoes;
+                            var string = []
+                            Object.keys(produtos).forEach(key =>{
+                                string.push([key, res_bd2.rows[0].id_pedido, produtos[key]]);   
+                            })
+                            var query_string3 = format("INSERT INTO tb_produto_pedido VALUES %L", string);
+                            client.query(query_string3, (err4)=>{
+                                if (err4){
+                                    client.query('ROLLBACK');
+                                    res.render('500.ejs');
+                                    return;
+                                }else{
+                                    client.query("COMMIT", (err5)=>{
+                                        if (err5){
+                                            client.query('ROLLBACK');
+                                            res.render('500.ejs');
+                                        }else{
+                                            client.end();
+                                            //mudar para meus pedidos
+                                            res.redirect('/');
+                                        }
+                                    });
+                                }
+                            });
                         }
                     });
                 }
@@ -212,29 +229,12 @@ module.exports.novo_pedido_produtos = function (req, res){
         }
     });
 }
-async function registrar_produtos(client, produtos, id_pedido, variavel){
-    var query_string3 = `INSERT INTO tb_produto_pedido VALUES ($1, $2, $3)`
-    await client.query(query_string3, [Object.keys(produtos)[i], id_pedido, produtos[i]], (err4) =>{
-        if (err4){
-            console.log(err4);
-            client.query('ROLLBACK');
-            res.render('500.ejs');
-            return;
-        }else{
-            if (variavel == produtos.length-1){
-                console.log("sucesso");
-                client.query('COMMIT');
-                client.end();
-            }
-        }
-    });
-}
+
 module.exports.listar_produtos = function (req, res){
-    var query_string = `SELECT id_produto, nome, preco FROM tb_produto 
+    var query_string = `SELECT id_produto, nome, descricao, preco FROM tb_produto 
     WHERE id_servico = $1 AND disponivel = true`
     pool.query(query_string,[req.query.servico], (err, res_bd) => {
         if (err){
-            console.log(err);
             res.render('500.ejs');
         }else{
             res.send(res_bd.rows);

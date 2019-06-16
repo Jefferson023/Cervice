@@ -4,10 +4,9 @@ $.ajax({
     data: {servico: $('input[name=id_servico]').val()},
     dataType:"json",
     success: function(data){
-        produtos = data;   
+        produtos = data; 
     }
 });
-
 function adicionar_produto(){
     $("#tb-produtos").show();
     var nova_linha =`
@@ -17,7 +16,9 @@ function adicionar_produto(){
       <option selected>Escolha...</option>
     `
     produtos.forEach(produto =>{
-        nova_linha = nova_linha+ "<option>"+produto.nome+"</option>";
+        if ($('[name='+produto.id_produto+']').length == 0){
+            nova_linha = nova_linha+ "<option>"+produto.nome+"</option>";
+        }
     });
     nova_linha = nova_linha+`
       </select>
@@ -45,6 +46,7 @@ function escolher(escolha){
                 $($(linha).children()[1]).text(produto.descricao);
                 $($(linha).children()[3]).text(produto.preco+'R$');
                 $($(linha).children()[2]).children().val(1);
+                $($(linha).children()[2]).children().attr('name', produto.id_produto);
             }
         });
         atualiza_total();
@@ -91,31 +93,5 @@ function submit_form(){
     if ($('#linhas').children().length < 1){
         return;
     }
-    var dados = {}
-    dados['servico'] = $('input[name=id_servico]').val();
-    var linhas = $('#linhas').children();
-    for (var i = 0; i < linhas.length; i++){
-        produtos.forEach(produto =>{
-            if (produto.nome == $(linhas[i]).find('select').val()){
-                var id_produto = produto.id_produto;
-                var quantidade = $($(linhas[i]).children()[2]).children().val();
-                if (id_produto in dados){
-                    dados[id_produto] = parseFloat(dados[id_produto]) + parseFloat(quantidade);
-                }else{
-                    dados[id_produto] = quantidade;
-                }
-            }
-        });
-    }
-    dados["observacao"] = $("textarea[name=observacoes]").val();
-    
-    $.ajax({
-        type: 'POST',
-        url: "/catalogo-servicos/detalhes-servico/solicitar",
-        data: dados,
-        success: function(data){
-            //alterar para meus pedidos depos
-            //location.href = "/"
-        }
-    });
+    $('#solicitacao_form').submit();
 }
