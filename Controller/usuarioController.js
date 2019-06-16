@@ -123,17 +123,15 @@ exports.infoperfil = function(req,res){
     query_str = query_str + "join tb_condominio_usuario cdu on cdu.id_usuario = u.id_usuario ";
     query_str = query_str + "join tb_condominio cd on cdu.id_condominio = cd.id_condominio ";
     query_str = query_str + "where u.id_usuario = $1";
-    console.log();
     let id_usuario=req.user.id_usuario;
-    
+    console.log(req.user);
     pool.query(query_str, [id_usuario], (err, res_bd) =>{
         if (err){
             console.log(err);
             return;
         }else{
-            
             let dados = res_bd.rows[0];
-            console.log();
+            // console.log(dados);
             res.render('globais/perfil.ejs', {dados:dados});
         }
     });
