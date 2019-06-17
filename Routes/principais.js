@@ -23,6 +23,7 @@ router.post('/login', function(req, res, next){
 //POST cadastro
 router.post('/cadastro', function(req, res){
     if(req.user){
+        
         res.redirect("/");
     }
     //verifica por sql injection e se os dados estão corretos
