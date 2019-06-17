@@ -8,7 +8,7 @@ module.exports.verifica_disponibilidade_codigo_condominio = function (req, res){
             throw err;
         }
         if (res_bd.rows.length != 1){
-            res.send("false");
+            res.send("false"); 
         }else{
             res.send("true");
         }

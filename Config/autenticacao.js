@@ -1,3 +1,4 @@
+    
 const localStrategy = require("passport-local").Strategy;
 const crypt = require('./crypt');
 const pool = require('../Config/db.js');
@@ -42,9 +43,14 @@ module.exports = function(passport) {
                 }else{
                     var usuario = res_bd.rows[0];
                     usuario.admin = false;
+
                     return done(null, usuario);
+
                 }
             }
         });
     });
+
+
 }
+
