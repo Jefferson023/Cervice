@@ -145,9 +145,6 @@ module.exports.remover_servico= function(req,res)
     res.redirect('/fornecedor/meus-servicos');
 }
 
-
-
-
 function valor_tipo(valor) {
     tipo_servico = valor
 }
@@ -310,10 +307,12 @@ module.exports.novo_pedido_produtos = function (req, res){
     client.connect();
     client.query(query_string, [req.body.id_servico], (err, res_bd) =>{
         if (err || (res_bd.rows.length == 1 && res_bd.rows[0].id_produto == null)){
+            console.log(err);
             res.render('500.ejs');
         }else{
             client.query("BEGIN", (err2)=>{
                 if (err2){
+                    console.log(err2);
                     client.query('ROLLBACK');
                     res.render('500.ejs');
                     return;
@@ -321,6 +320,7 @@ module.exports.novo_pedido_produtos = function (req, res){
                     var query_string2 = "INSERT INTO tb_pedido VALUES (DEFAULT, $1, $2, 1, $3) RETURNING id_pedido";
                     client.query(query_string2, [req.user.id_usuario, req.body.id_servico, req.body.observacoes], (err3, res_bd2) =>{
                         if (err3){
+                            console.log(err3);
                             client.query('ROLLBACK');
                             res.render('500.ejs');
                             return;
@@ -335,12 +335,14 @@ module.exports.novo_pedido_produtos = function (req, res){
                             var query_string3 = format("INSERT INTO tb_produto_pedido VALUES %L", string);
                             client.query(query_string3, (err4)=>{
                                 if (err4){
+                                    console.log(err4);
                                     client.query('ROLLBACK');
                                     res.render('500.ejs');
                                     return;
                                 }else{
                                     client.query("COMMIT", (err5)=>{
                                         if (err5){
+                                            console.log(err5);
                                             client.query('ROLLBACK');
                                             res.render('500.ejs');
                                         }else{
