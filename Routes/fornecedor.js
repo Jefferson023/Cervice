@@ -79,6 +79,12 @@ router.get('/fornecedor/clickservico/um-servico/remover_produto', autenticacao.i
 
 router.get('/fornecedor/meus-servicos/remover-servico', autenticacao.isAuthenticated,function (req, res) {
     servicoController.remover_servico(req,res);
+});
+
+
+router.get('/fornecedor/minhas-entregas/info-servico', function (req, res) {
+    
+    res.render('fornecedor/info-servico.ejs')
     
 
 });

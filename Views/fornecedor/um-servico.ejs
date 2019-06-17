@@ -3,13 +3,13 @@
 <% block('stylesheets', '<link rel="stylesheet" href="/css/servico.css"/>') -%>
 <main class="main">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"> <a href="">Meus serviços</a></li>
-        <li class="breadcrumb-item">Um serviço</li>
+        <li class="breadcrumb-item"> <a href="/fornecedor/meus-servicos">Meus serviços</a></li>
+        <li class="breadcrumb-item">Nome do Serviço</li>
     </ol>
     <div class="container-fluid">
-
         <div>
             <div class="animated fadeIn">
+
                 <form action="/fornecedor/clickservico/um-servico/editar" method="GET">
                 <div class="row">
                   <div class="col text-center">
@@ -19,15 +19,18 @@
                 <div class="row">
                     <div class="col">
                         <div class="card">
+
                                 <div class="card-header text-center">Descrição</div>
-                            <div class="card-body">
-                                <div>
+                                <div class="card-body">
+                                    <div>
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
+
                                                     <textarea class="form-control-plaintext" id="descricao-servico2" rows="4" readonly="true" name = "descricao"> <%=descricao%></textarea>
+
                                                 </div>
-                                            </div>                                            
+                                            </div>
                                         </div>
                                         <div class="row" style="display:none" id="linha-forms">
                                             <div class="col">
@@ -39,6 +42,7 @@
                                             <div class="col col-md-3">
                                                 <div class="form-group ">
                                                     <label for="tipo">Tipo</label>
+
                                                     <select id="inputState" class="form-control" name="tipo"    >
                                                         <% tipo_servico.forEach(function(dat) { %>
                                                             <option value=<%= dat.id_tipo%> name = 'id_tipo'><%= dat.nome%></option>                       
@@ -53,17 +57,21 @@
                                             <div class="col col-md-3">
                                                 <label for="hora_fechamento" name = 'ho'>Hora de fechamento</label>
                                                 <input type="time" class="form-control" name="hora_fechamento"value="<%=hora_fechamento%>">
+
                                             </div>
                                         </div>
-                                </div>
-                                <hr>
-                                <div class="row">
+                                    </div>
+                                    <hr>
+                                    <div class="row">
                                         <div class="col">
+
                                             <button class="btn btn-primary" id="btn-edit-informacoes"value=<%= id_servico%> name='id_servico' >
                                             <span class="fa fa-edit"></span> EDITAR INFORMÇÕES
+
                                             </button>
                                         </div>
-                                    </div> 
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -136,16 +144,18 @@
                                         <button class="btn btn-primary" id="btn-novo-produto" >
                                         <span class="fa fa-plus"></span> ADICIONAR PRODUTO
                                         </button>
+
                                     </div>
-                                </div> 
-                            </div>                           
-                        </div>                        
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
    
+
 </main>
 <% script('/javascript/novoservico.js') -%>
 <% script('/javascript/produtos.js') -%>

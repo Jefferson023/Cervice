@@ -1,0 +1,143 @@
+<% layout('../includes/template') -%>
+<%block('title','Pedido');-%>
+<main class="main">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"> <a href="#">Meus Pedidos</a></li>
+        <li class="breadcrumb-item">Numero Pedido</li>
+    </ol>
+    <div class="container-fluid">
+
+        <div>
+            <div class="animated fadeIn">
+                <form>
+                    <div class="row">
+                        <div class="col text-center">
+                            <h2>Numero Pedido</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-left">
+                            <h2> <span class="badge badge-pill badge-secondary">Não Iniciado</span></h2>
+                            <!--badge para os demais status-->
+                            <h2 style="display: none"> <span class="badge badge-pill badge-success">Iniciado</span></h2>
+                            <h2 style="display: none"> <span class="badge badge-pill badge-danger">Finalizado</span>
+                            </h2>
+                        </div>
+
+                        <div class="col text-right ativo v">
+                            <button class="btn btn-danger" id="btn-fim-atendimento"><i class="fa fa-ban"
+                                    id="icone-cancelar" style="font-size: large"></i> CANCELAR PEDIDO</button>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header text-center">Observações sobre o pedido</div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="titulo"></label>
+                                                <textarea class="form-control-plaintext" id="descricao-servico2"
+                                                    rows="2"
+                                                    readonly>Lorem ipsum donec eros nullam platea ut lacinia primis curae, feugiat himenaeos interdum volutpat nostra eros senectus felis rhoncus pretium, lorem volutpat semper cras ante a adipiscing sociosqu. </textarea>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+
+                        <div class="col">
+                            <div class="card ">
+                                <div class="card-header text-center">Serviço</div>
+                                <div class="card-body">
+                                    <div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="titulo">Descrição do Serviço</label>
+                                                    <textarea class="form-control-plaintext" id="descricao-servico2"
+                                                        rows="4"
+                                                        readonly>Lorem ipsum donec eros nullam platea ut lacinia primis curae, feugiat himenaeos interdum volutpat nostra eros senectus felis rhoncus pretium, lorem volutpat semper cras ante a adipiscing sociosqu. praesent sit fusce risus pulvinar lacinia imperdiet congue dolor ligula nulla inceptos pellentesque accumsan aliquam iaculis nunc, commodo nibh a at eget magna non vivamus lacus ligula imperdiet dictumst id tortor. nullam semper magna sapien sem ut diam consectetur vehicula feugiat, pharetra pellentesque lacinia vitae praesent vehicula diam quisque faucibus, amet hac sollicitudin dui ligula platea eget mollis. </textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="linha-forms">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="titulo">Título</label>
+                                                    <input type="text" class="form-control" name="titulo" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col col-md-3">
+                                                <div class="form-group ">
+                                                    <label for="tipo">Tipo</label>
+                                                    <input type="text" class="form-control" name="tipo" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col col-md-3">
+                                                <div class="form-group ">
+                                                    <label for="tipo">Quantidade</label>
+                                                    <input type="number" class="form-control" name="tipo" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col ">
+                            <div class="card">
+                                <div class="card-header text-center">Produtos</div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <table class="table table-responsive-sm" id="tb-produtos"
+                                                style="display:none">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Nome</th>
+                                                        <th>Descrição</th>
+                                                        <th>Preço</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr id="linha-novo-produto" style="display:none">
+                                                        <td>
+                                                            <input type="text" id="txt-titulo-produto"
+                                                                class="form-control" placeholder="Título">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" id="txt-descricao-produto"
+                                                                class="form-control" placeholder="Descrição">
+                                                        </td>
+                                                        <td>
+                                                            <input type="number" id="txt-preco-produto"
+                                                                class="form-control" placeholder="">
+                                                        </td>
+                                                        <td>
+                                                            <button class="btn btn-success" id="btn-add-produto"><i
+                                                                    class="fa fa-check"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>

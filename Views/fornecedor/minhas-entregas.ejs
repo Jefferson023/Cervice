@@ -28,14 +28,17 @@
                                     <th scope="col">Cliente</th>
                                     <th scope="col">Serviço</th>
                                     <th scope="col">Valor</th>
+
                                     <th scope="col">produtos</th>
                                     <th scope="col">Obs</th>                                   
                                     <th scope="col"></th>
+
                                     <th scope="col">Status</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
+
                                     <% var i = 0; lista_pedidos.forEach(function(dat) {i++;  %>
                                 <tr>
                                      
@@ -69,12 +72,14 @@
                         </table>
                     </div>
                    
+
                 </div>
                 <div class="tab-pane fade" id="finalizadas" role="tabpanel" aria-labelledby="finalizadas-tab">
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
+
                                         <th scope="col">Pedido</th>
                                         <th scope="col">Cliente</th>
                                         <th scope="col">Serviço</th>
@@ -116,6 +121,7 @@
                                     </tr>
                                     <% }); %> 
                                
+
                             </tbody>
                         </table>
                     </div>
@@ -123,5 +129,7 @@
             </div>
         </div>
     </div>
+
 </main>
 <% script('/javascript/pedidos.js') -%>
+

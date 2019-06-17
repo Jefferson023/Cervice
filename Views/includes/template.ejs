@@ -28,6 +28,7 @@
     <!-- Main styles for this application-->
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/vendors/pace-progress/css/pace.min.css" rel="stylesheet">
+    <%-stylesheets%>
 </head>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
@@ -35,7 +36,7 @@
         <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
             <img class="navbar-brand-full" src="/img/brand/logo2.svg" width="90" height="30" alt="Cervice Logo">
             <img class="navbar-brand-minimized" src="/img/brand/logo1.svg" width="30" height="30" alt="Cervice Logo">
         </a>
@@ -70,7 +71,7 @@
                     </div>
                     <a class="dropdown-item" href="/perfil">
                         <i class="fas fa-user"></i> Perfil</a>
-                    <a class="dropdown-item" href="/login">
+                    <a class="dropdown-item" href="/logout">
                         <i class="fas fa-lock"></i> Sair</a>
                 </div>
             </li>
