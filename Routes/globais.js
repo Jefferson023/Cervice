@@ -40,7 +40,7 @@ router.get('/catalogo-servicos/detalhes-servico/solicitar/produtos', autenticaca
 
 // GET meus-pedidos
 router.get('/meus-pedidos', autenticacao.isAuthenticated, function (req, res) {
-    res.render('globais/meus-pedidos.ejs');
+    usuarioController.lista_pedidos(req,res);
 });
 // GET detalhe-pedido
 router.get('/meus-pedidos/detalhe-pedido', autenticacao.isAuthenticated, function (req, res) {
