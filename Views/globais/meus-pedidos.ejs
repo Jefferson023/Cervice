@@ -28,26 +28,26 @@
                                     <th scope="col">Fornedor</th>
                                     <th scope="col">Serviço</th>
                                     <th scope="col">Valor</th>
+                                    <th scope="col">produtos</th>
+                                    <th scope="col">obs</th>
+                                    <th scope="col">status</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
+                                    <% var i = 0; lista_pedidos.forEach(function(dat) {  %>
                                 <tr>
-                                    <td>333</td>
-                                    <td>João</td>
-                                    <td>Costura</td>
-                                    <td>2,50</td>
+                                    <td><%= dat.id_pedido%></td>
+                                    <td><%= dat.nome_forn%></td>
+                                    <td><%= dat.nome_servico%></td>
+                                    <td><%= dat.total%></td>
+                                    <td><%= dat.produtos%></td>
+                                    <td><%= dat.observacoes%></td>
+                                    <td><%= dat.nome_status%></td>
                                     <td class="text-right"><a class="btn btn-link"
                                             href="/meus-pedidos/detalhe-pedido"><i class="fa fa-info"></i></a> </td>
                                 </tr>
-                                <tr>
-                                    <td>444</td>
-                                    <td>Sabrina</td>
-                                    <td>Eletricista</td>
-                                    <td>100,00</td>
-                                    <td class="text-right"><a class="btn btn-link" href=""><i
-                                                class="fa fa-info"></i></a> </td>
-                                </tr>
+                                <% }); %> 
                             </tbody>
                         </table>
                     </div>
@@ -58,30 +58,30 @@
                         <table class="table table-striped table-sm">
                             <thead>
                                 <tr>
-                                    <th scope="col">Pedido</th>
-                                    <th scope="col">Fornedor</th>
-                                    <th scope="col">Serviço</th>
-                                    <th scope="col">Valor</th>
-                                    <th scope="col"></th>
+                                        <th scope="col">Pedido</th>
+                                        <th scope="col">Fornedor</th>
+                                        <th scope="col">Serviço</th>
+                                        <th scope="col">Valor</th>
+                                        <th scope="col">produtos</th>
+                                        <th scope="col">obs</th>
+                                        <th scope="col">status</th>
+                                        <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>332</td>
-                                    <td>João</td>
-                                    <td>Costura</td>
-                                    <td>2,50</td>
-                                    <td class="text-right"><a class="btn btn-link"
-                                            href="/meus-pedidos/detalhe-pedido"><i class="fa fa-info"></i></a> </td>
-                                </tr>
-                                <tr>
-                                    <td>442</td>
-                                    <td>Sabrina</td>
-                                    <td>Eletricista</td>
-                                    <td>100,00</td>
-                                    <td class="text-right"><a class="btn btn-link" href=""><i
-                                                class="fa fa-info"></i></a> </td>
-                                </tr>
+                                    <% var i = 0; lista_pedidos_finalizados.forEach(function(dat) {  %>
+                                        <tr>
+                                            <td><%= dat.id_pedido%></td>
+                                            <td><%= dat.nome_forn%></td>
+                                            <td><%= dat.nome_servico%></td>
+                                            <td><%= dat.total%></td>
+                                            <td><%= dat.produtos%></td>
+                                            <td><%= dat.observacoes%></td>
+                                            <td><%= dat.nome_status%></td>
+                                            <td class="text-right"><a class="btn btn-link"
+                                                    href="/meus-pedidos/detalhe-pedido"><i class="fa fa-info"></i></a> </td>
+                                        </tr>
+                                        <% }); %> 
                             </tbody>
                         </table>
                     </div>

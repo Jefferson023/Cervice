@@ -15,7 +15,6 @@ module.exports.lista_tipo_servico = function(req, res) {
             console.log(err)
         } else {
             valor_tipo(res_bd.rows)
-            console.log(tipo_servico)
         }
         res.render('fornecedor/novo-servico.ejs', {
             tipo_servico: tipo_servico
@@ -234,7 +233,7 @@ module.exports.cadastro_servico = function(req, res) {
         };
     });
     req.flash("success", "Servico" + req.body.titulo + "criado com sucesso");
-    res.redirect('/fornecedor/novo-servico');
+    res.redirect('/fornecedor/meus-servicos');
 }
 
 module.exports.listar_servicos = function (req, res){

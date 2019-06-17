@@ -135,7 +135,39 @@ exports.infoperfil = function (req, res) {
     });
 
 }
+module.exports.lista_pedidos = function (req, res) {
+    var query_sf = "SELECT  coalesce(sum(tp.preco* tpp.qt_produto),0) as total,coalesce(l_produtos.produtos,'') as produtos, ts.id_servico,ts.nome as nome_servico,tu.id_usuario as  id_usuario_forn,tu.nome as nome_forn,tcu.numero_casa as numero_casa_forn,tcu.bloco_andar as bloco_andar_forn,tu.email as email_forn,tpe.*,tsp.id_status,tsp.nome as nome_status,tu_cliente.id_usuario as id_usuario_cliente,tu_cliente.nome as nome_cliente,tu_cliente.email as email_cliente,  "
+    var query_sf = query_sf +' tcu_cliente.numero_casa as numero_casa_cliente,tcu_cliente.bloco_andar as bloco_andar_cliente FROM tb_usuario as tu inner join tb_fornecedor_servico as tfs on tu.id_usuario = tfs.id_usuario '
+    var query_sf = query_sf + 'inner join tb_condominio_usuario as tcu on tcu.id_usuario = tu.id_usuario inner join tb_servico as ts on tfs.id_servico = ts.id_servico inner join tb_pedido as tpe on tpe.id_servico = ts.id_servico '
+    var query_sf = query_sf + 'left join tb_produto_pedido as tpp on tpp.id_pedido = tpe.id_pedido left join tb_produto as tp on tpp.id_produto = tp.id_produto left join tb_status_pedido as tsp on tsp.id_status = tpe.id_status '
+    var query_sf = query_sf + "left join (select tpe.id_pedido, string_agg(tpp.qt_produto|| ' x '||tp.nome, ', ') as produtos from tb_pedido as tpe  left join tb_produto_pedido as tpp on tpp.id_pedido = tpe.id_pedido left join tb_produto as tp on tpp.id_produto = tp.id_produto  group by 1) as l_produtos on tpe.id_pedido = l_produtos.id_pedido "
+  
+    var query_sf1 = query_sf + 'inner join tb_usuario as tu_cliente on tu_cliente.id_usuario = tpe.id_usuario inner join tb_condominio_usuario as tcu_cliente on tcu_cliente.id_usuario = tu_cliente.id_usuario WHERE tu_cliente.id_usuario = $1 and tsp.id_status = 5 or tsp.id_status = 6 group by 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,21'
+    pool.query(query_sf1,[req.user.id_usuario],(err, res_bd) =>{
+        if (err) {
+            console.log(err)
+            return;
+          } 
+          var query_sf2 = query_sf + 'inner join tb_usuario as tu_cliente on tu_cliente.id_usuario = tpe.id_usuario inner join tb_condominio_usuario as tcu_cliente on tcu_cliente.id_usuario = tu_cliente.id_usuario WHERE tu_cliente.id_usuario = $1 and tsp.id_status <> 5 and tsp.id_status <> 6 group by 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,21'
+          lista_pedidos_finalizados = res_bd.rows;
+          pool.query(query_sf2,[req.user.id_usuario],(err1, res_bd1)=>{ 
+            if (err1) {
+                console.log(err1)
+                return;
+              } 
+              lista_pedidos = res_bd1.rows;
+                pool.query('select * from tb_status_pedido',(err2, res_bd2)=>{
+                  if (err2) {
+                    console.log(err2)
+                  }
+                  status = res_bd2.rows;
+                  res.render('globais/meus-pedidos.ejs',{lista_pedidos_finalizados:lista_pedidos_finalizados,lista_pedidos:lista_pedidos,user:req.user,status:status});
+                });   
+    
 
+    });
+});
+}
 module.exports.atualizar_perfil = function (req, res) {
     let dadosPerfil = [req.body.nome, req.user.id_usuario];
 

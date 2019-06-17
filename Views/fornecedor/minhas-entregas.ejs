@@ -26,6 +26,8 @@
                                 <tr>
                                     <th scope="col">Pedido</th>
                                     <th scope="col">Cliente</th>
+                                    <th scope="col">casa</th>
+                                    <th scope="col">bloco/andar</th>
                                     <th scope="col">Serviço</th>
                                     <th scope="col">Valor</th>
 
@@ -44,6 +46,8 @@
                                      
                                     <td><%= dat.id_pedido%></td>
                                     <td><%= dat.nome_cliente%></td>
+                                    <td><%= dat.numero_casa_cliente%></td>
+                                    <td><%= dat.numero_bloco_andar%></td>
                                     <td><%= dat.nome_servico%></td>
                                     <td><%= dat.total%></td>
                                     <td><%= dat.produtos%></td>
@@ -80,13 +84,17 @@
                             <thead>
                                 <tr>
 
-                                        <th scope="col">Pedido</th>
+                                        <<th scope="col">Pedido</th>
                                         <th scope="col">Cliente</th>
+                                        <th scope="col">casa</th>
+                                        <th scope="col">bloco/andar</th>
                                         <th scope="col">Serviço</th>
                                         <th scope="col">Valor</th>
+    
                                         <th scope="col">produtos</th>
                                         <th scope="col">Obs</th>                                   
                                         <th scope="col"></th>
+    
                                         <th scope="col">Status</th>
                                         <th scope="col"></th>
                                 </tr>
@@ -94,14 +102,14 @@
                             <tbody>
                                     <% lista_pedidos_finalizados.forEach(function(dat) {  %>
                                 <<tr>
-                                     
                                         <td><%= dat.id_pedido%></td>
                                         <td><%= dat.nome_cliente%></td>
+                                        <td><%= dat.numero_casa_cliente%></td>
+                                        <td><%= dat.numero_bloco_andar%></td>
                                         <td><%= dat.nome_servico%></td>
                                         <td><%= dat.total%></td>
                                         <td><%= dat.produtos%></td>
                                         <td><%= dat.observacoes%></td>
-                                       
                                         <td class="text-right"><a class="btn btn-link" href="/fornecedor/minhas-entregas/info-servico"><i
                                                     class="fa fa-info"></i></a> </td>
                                         <td><select name="status" id = "sel_fin_<%= i%>"class="form-control">
