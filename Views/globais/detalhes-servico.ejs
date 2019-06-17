@@ -1,12 +1,15 @@
 <% layout('../includes/template') -%>
 <%block('title','Detalhe Produto');-%>
 <main class="main">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"> <a href="/catalogo-servicos">Serviços</a></li>
+    <li class="breadcrumb-item"><%= rows[0].nome_servico %></li>
+  </ol>
   <div class="container-fluid">
     <div class="animated fadeIn">
-      <a href = "/catalogo-servicos">Serviços</a> > <a href="javascript:window.location.href=window.location.href">Detalhes Serviço</a>
       <div class="row mt-3 mb-3">
         <div class="col">
-          <h2>Detalhes de Serviço</h2>
+          <h2 style="text-transform: uppercase">Detalhes de <%= rows[0].nome_servico %></h2>
         </div>
       </div>
       <div class="row">
@@ -15,7 +18,7 @@
             <div class="card-body">
               <div class="row">
                 <div class="col d-block d-sm-none mb-3">
-                  <img src= <%= rows[0].link %> class="img-responsive"style="width:100%"> 
+                  <img src=<%= rows[0].link %> class="img-responsive" style="width:100%">
                 </div>
               </div>
               <div class="row">
@@ -31,49 +34,47 @@
                   <p>Bloco/andar <%= rows[0].bloco_andar %>. Apto/casa <%= rows[0].numero_casa %>.</p>
                   <hr>
                   <% if (rows.length > 1 || rows[0].id_produto != null){ %>
-                    <h5>Produtos</h5>
-                    <table class="table table-responsive-sm" id="tb-produtos">
-                      <thead>
-                        <tr>
-                          <th>Nome</th>
-                          <th>Descrição</th>
-                          <th>Preço</th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <% rows.forEach(function(produto){ %>
-                          <tr>
-                            <td><input type="text" readonly="" class="form-control-plaintext" value= <%= produto.nome_produto %>></td>
-                            <td><input type="text" readonly="" class="form-control-plaintext" value= <%= produto.descricao_produto %>></td>
-                            <td><input type="text" readonly="" class="form-control-plaintext" value= <%= produto.preco + 'R$' %>></td>
-                          </tr>
-                        <% }) %> 
-                      </tbody>
-                    </table> 
-                  <% } %> 
+                  <h5 class="text-center">Produtos</h5>
+                  <table class="table table-sm table-responsive" id="tb-produtos">
+                    <thead>
+                      <tr>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th class="text-right" style="width:15%;">Preço</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% rows.forEach(function(produto){ %>
+                      <tr>
+                        <td><%= produto.nome_produto %></td>
+                        <td><%= produto.descricao_produto %></td>
+                        <td class="text-right"><%= 'R$ ' + produto.preco  %></td>
+                      </tr>
+                      <% }) %>
+                    </tbody>
+                  </table>
+                  <% } %>
                 </div>
                 <div class="col d-none d-sm-block">
-                  <img src= <%= rows[0].link %> class="img-responsive" style="width:100%">
+                  <img src=<%= rows[0].link %> class="img-responsive" style="width:100%">
                 </div>
               </div>
+              <!-- Botões -->
+                <div class="col text-right">
+                  <a href=<%= "/catalogo-servicos/detalhes-servico/solicitar?servico="+ rows[0].id_servico %>
+                    class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Prosseguir">Solicitar Serviço <i
+                      class="fa fa-chevron-right"></i><i
+                      class="fa fa-chevron-right"></i></a>
+                </div>
+              </div>
+              <!-- Fim Botões -->
             </div>
+            <!--Fim card-body-->
           </div>
         </div>
       </div>
     </div>
-    </div>
-    <!-- Botões -->
-    <div class="row">
-      <div class="col text-right">
-        <a href = "javascript:history.back()" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Voltar"><i
-            class="fa fa-chevron-left"></i></a>
-      </div>
-      <div class="col text-left">
-        <a href = <%= "/catalogo-servicos/detalhes-servico/solicitar?servico="+ rows[0].id_servico %> class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Prosseguir"><i
-            class="fa fa-chevron-right"></i></a>
-      </div>
-    </div>
-    <!-- Fim Botões -->
+  </div>
+
   </div>
 </main>
