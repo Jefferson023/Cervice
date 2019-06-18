@@ -174,7 +174,7 @@ module.exports.cadastro_servico = function(req, res) {
         return;
     }
     var id_usuario = req.user.id_usuario;
-    client.connect();
+    ;
     client.query('BEGIN', (err) => {
         if (err) {
             console.log(err, 'err');
@@ -215,8 +215,6 @@ module.exports.cadastro_servico = function(req, res) {
                                             client.query('COMMIT', (err) => {
                                                 if (err) {
                                                     client.query('ROLLBACK');
-                                                } else {
-                                                    client.end();
                                                 }
                                             })
                                         }
@@ -239,8 +237,9 @@ module.exports.listar_servicos = function (req, res){
     var query_string = `SELECT S.id_servico, S.nome, S.descricao, S.hora_abertura, S.hora_fechamento, 
     TS.nome AS categoria, TS.link FROM tb_servico S JOIN tb_tipo_servico TS ON S.id_tipo = TS.id_tipo 
     JOIN tb_condominio_servicos CS ON S.id_servico = CS.id_servico JOIN tb_condominio_usuario UC ON
-    CS.id_condominio = UC.id_condominio WHERE S.nome LIKE $1 AND TS.nome LIKE $2 AND S.banido=false
-    AND UC.id_usuario = $3`
+    CS.id_condominio = UC.id_condominio JOIN tb_fornecedor_servico FS ON S.id_servico = FS.id_servico
+    WHERE S.nome LIKE $1 AND TS.nome LIKE $2 AND S.banido=false
+    AND UC.id_usuario = $3 AND FS.id_usuario <> $3`;
     pool.query(query_string, [nome, categoria, req.user.id_usuario], (err, res_bd) =>{
         if (err){
             res.sendStatus(500);
@@ -304,7 +303,7 @@ module.exports.novo_pedido = function (req, res){
 module.exports.novo_pedido_produtos = function (req, res){
     var query_string = `SELECT S.id_servico, P.id_produto FROM tb_servico S LEFT JOIN tb_produto P 
     ON S.id_servico = P.id_servico WHERE S.id_servico = $1`;
-    client.connect();
+    
     client.query(query_string, [req.body.id_servico], (err, res_bd) =>{
         if (err || (res_bd.rows.length == 1 && res_bd.rows[0].id_produto == null)){
             console.log(err);
@@ -346,7 +345,7 @@ module.exports.novo_pedido_produtos = function (req, res){
                                             client.query('ROLLBACK');
                                             res.render('500.ejs');
                                         }else{
-                                            client.end();
+                                            
                                             //mudar para meus pedidos
                                             //mensagem de sucesso
                                             res.redirect('/meus-pedidos');

@@ -4,7 +4,7 @@ const crypt = require('../Config/crypt.js');
 
 module.exports.novo_usuario = function (req, res) {
     values = [crypt.criptografar(req.body.senha), req.body.email, req.body.nome]
-    client.connect();
+    
     client.query('BEGIN', (err) => {
         if (err) {
             //só saia
@@ -27,7 +27,7 @@ module.exports.novo_usuario = function (req, res) {
                                         if (err) {
                                             client.query('ROLLBACK');
                                         } else {
-                                            client.end();
+                                            
                                         }
                                     });
                                 }
@@ -171,7 +171,7 @@ module.exports.lista_pedidos = function (req, res) {
 module.exports.atualizar_perfil = function (req, res) {
     let dadosPerfil = [req.body.nome, req.user.id_usuario];
 
-    client.connect();
+    
     let updateSenha = "";
     if (req.body.senha && req.body.confirmasenha) {
         updateSenha = ", senha = $3 ";
@@ -198,7 +198,7 @@ module.exports.atualizar_perfil = function (req, res) {
                         } else {
                             client.query('COMMIT', (err) => {
                                 req.flash("success", "Dados atualizados com sucesso.");
-                                client.end();
+                                
                             });
                         }
                     });
